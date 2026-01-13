@@ -1,0 +1,275 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[danish]{babel}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{pdflscape}
+\usepackage{fancyhdr}
+\setlength{\headheight}{14pt}
+\usepackage{titlesec}
+
+\setlist[itemize]{topsep=2pt,itemsep=2pt,parsep=0pt,leftmargin=1.2cm}
+
+% ----------------------------------------------------------------
+% Kildegrundlag (kompileres ikke; dokumentation af afsæt)
+%  - Lektionsplan (MD): :contentReference[oaicite:0]{index=0}
+%  - Kursusoversigt (MD): :contentReference[oaicite:1]{index=1}
+%  - Studieordning, national del (2019): :contentReference[oaicite:2]{index=2}
+%  - Studieordning, institutionsdel (2023): :contentReference[oaicite:3]{index=3}
+% ----------------------------------------------------------------
+
+% Header og footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{AAMS} - Teknologi \& Projektudvikling}
+\fancyhead[R]{\textit{Foreløbig Plan}}
+\fancyfoot[C]{\thepage}
+
+% Titel formattering
+\titleformat{\section}{\normalfont\Large\bfseries\color{blue!70!black}}{\thesection}{1em}{}
+
+\title{\textbf{\Huge AAMS}\\[0.5cm]
+       {\Large Aarhus Maskinmesterskole}\\[1cm]
+       {\huge\color{blue!70!black}Detaljeret Forløbsplan}\\[0.3cm]
+       {\Large\color{red!70!black}\textit{Teknologi og Projektudvikling — 12 dage (5 ECTS)}}\\[0.5cm]
+       {\large\color{gray}\textbf{FORELØBIG VERSION}}}
+\author{Underviser: Anders S. Østergaard}
+\date{Opdateret: \emph{\today}}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\clearpage
+
+\section*{Formål og kobling til studieordningen}
+Forløbet udvikler kompetencer i højniveau-programmering, datakommunikation og teknisk dokumentation samt konfiguration af mindre systemer til kommunikation mellem enheder. Læringsmålene er afledt af fagelementet \emph{Teknologi- og Projektudvikling} (5 ECTS) og indgår i 2. semesterforløbet. Se nationale og institutionelle beskrivelser i studieordningen.
+
+\section*{Læringsmål for forløbet}
+Efter forløbet kan den studerende:
+\begin{itemize}
+  \item Konfigurere datakommunikation mellem controller og eksterne enheder (ESP32, S7/PLC).
+  \item Udarbejde mindre Python-programmer til dataopsamling, behandling og visualisering.
+  \item Anvende Snap7 til aflæsning af udvalgte DB-variabler fra S7-PLC i Python.
+  \item Strukturere dokumentation signal- og blokdiagrammer, testlog mm.
+  \item Udarbejde og anvende simple sanity checks, tidsstempling og filtrering af måledata.
+  \item Fremlægge løsning, begrunde designvalg og reflektere over datakvalitet og fejlhåndtering.
+\end{itemize}
+
+\section*{Evaluering, afleveringer og organisering}
+\textbf{Afslutning:} Fremlæggelse på dag 12 med peer-review. \\
+\textbf{Software \& hardware:} Python (\texttt{pandas}, \texttt{matplotlib}, \texttt{pyserial}, \texttt{python-snap7}), ESP32 med sensorer, Siemens S7 eller simulator (Snap7).
+
+\clearpage
+
+\section{Dag 1: System, krav og data}
+
+\textbf{Emne:} Systemforståelse og kravspecifikation.\\
+\textbf{Indhold:}
+\begin{itemize}
+  \item Hvad er et teknisk system?
+  \item Systemafgrænsning.
+  \item Signal vs.\ data.
+  \item Kravspecifikation med fokus på data.
+\end{itemize}
+\textbf{Aktivitet:}
+\begin{itemize}
+  \item Udarbejdelse af systemformål.
+  \item Udarbejdelse af kravspecifikation.
+\end{itemize}
+\textbf{Output:}
+\begin{itemize}
+  \item Systemformål.
+  \item Kravspecifikation.
+\end{itemize}
+
+
+\section{Dag 2: Systembeskrivelse og datamodellering}
+
+\textbf{Emne:} Beskrivelse af systemstruktur og data.\\
+\noindent\textbf{Indhold:}
+\begin{itemize}
+  \item Systemkomponenter.
+  \item Blokdiagram og dataflow.
+  \item Klassediagram som datamodel.
+\end{itemize}
+\textbf{Aktivitet:}
+\begin{itemize}
+  \item Udarbejdelse af blokdiagram.
+  \item Udarbejdelse af klassediagram.
+\end{itemize}
+\textbf{Output:}
+\begin{itemize}
+  \item Systembeskrivelse.
+  \item Blokdiagram.
+  \item Klassediagram.
+\end{itemize}
+
+
+
+
+\section{Dag 3: Python-basics og datastruktur}
+\textbf{Emne:} Introduktion til Python som værktøj til datahåndtering.\\
+\textbf{Indhold:}
+\begin{itemize}
+\item Variabler, datatyper og simple kontrolstrukturer.
+\item Lister og dictionaries som datastrukturer.
+\item Sammenhæng mellem klassediagram og datastrukturer.
+\end{itemize}
+\textbf{Aktivitet:} Simple scripts til opbygning af datastrukturer.\
+\textbf{Output:} Python-script med strukturerede data.
+
+\section{Dag 4: CSV og pandas}
+\textbf{Emne:} Indlæsning og håndtering af datafiler.\\
+\textbf{Indhold:}
+\begin{itemize}
+\item CSV-formatet som dataudveksling.
+\item Introduktion til pandas: læsning og filtrering.
+\end{itemize}
+\textbf{Aktivitet:} Arbejde med CSV-filer i pandas.\\
+\textbf{Output:} DataFrame med rensede data.
+
+\section{Dag 5: Datavalidering og statistik}
+\textbf{Emne:} Kvalitetssikring af data.\\
+\textbf{Indhold:}
+\begin{itemize}
+\item Håndtering af manglende værdier.
+\item Simpel statistik (min, max, middelværdi).
+\end{itemize}
+\textbf{Aktivitet:} Analyse af datasæt og vurdering af datakvalitet.\
+\textbf{Output:} Valideret datasæt.
+
+\section{Dag 6: Visualisering}
+\textbf{Emne:} Præsentation af data.\\
+\textbf{Indhold:}
+\begin{itemize}
+\item Introduktion til matplotlib.
+\item Visualisering af tidsserier.
+\end{itemize}
+\textbf{Aktivitet:} Plot af måledata.\\
+\textbf{Output:} Grafer og plots.
+
+\section{Dag 7: Tidsserier og trends}
+\textbf{Emne:} Analyse af tidsafhængige data.\\
+\textbf{Indhold:}
+\begin{itemize}
+\item Sampling og tidsopløsning.
+\item Trendanalyse.
+\end{itemize}
+\textbf{Aktivitet:} Analyse af tidsseriedata.\\
+\textbf{Output:} Trendanalyse.
+
+\section{Dag 8: Eksterne datakilder}
+\textbf{Emne:} Data fra hardware.\\
+\textbf{Indhold:}
+\begin{itemize}
+\item Data fra mikrocontroller eller PLC.
+\item Integration i Python-pipeline.
+\end{itemize}
+\textbf{Aktivitet:} Indlæsning af eksterne data.\\
+\textbf{Output:} Samlet datasæt.
+
+\section{Dag 9: Dataanalyse i systemkontekst}
+\textbf{Emne:} Data som grundlag for beslutninger.\\
+\textbf{Indhold:}
+\begin{itemize}
+\item Sammenhæng mellem data og systemkrav.
+\end{itemize}
+\textbf{Aktivitet:} Analyse og fortolkning.\\
+\textbf{Output:} Analysekonklusioner.
+
+\section{Dag 10: Dokumentation af data og resultater}
+\textbf{Emne:} Dokumentation af analyser.\\
+\textbf{Indhold:}
+\begin{itemize}
+\item Strukturering af resultater.
+\end{itemize}
+\textbf{Aktivitet:} Udarbejdelse af dokumentation.\\
+\textbf{Output:} Dokumenteret analyse.
+
+\section{Dag 11: Data og arkitekturvalg}
+\textbf{Emne:} Data som input til designbeslutninger.\\
+\textbf{Indhold:}
+\begin{itemize}
+\item Hvordan data påvirker arkitektur.
+\end{itemize}
+\textbf{Aktivitet:} Vurdering af arkitekturvalg.\\
+\textbf{Output:} Arkitektur-notat.
+
+\section{Dag 12: Data science i projektet}
+\textbf{Emne:} Overførsel til semesterprojekt.\\
+\textbf{Indhold:}
+\begin{itemize}
+\item Anvendelse af data science-metoder i projektet.
+\end{itemize}
+\textbf{Aktivitet:} Mini-projekt.\\
+\textbf{Output:} Projektforberedelse.
+
+
+% ------- OVERSIGTSTABEL -------
+\clearpage
+\begin{landscape}
+\section*{Oversigt pr. dag}
+\fontsize{8}{12}\selectfont
+\begin{tabular}{|p{0.8cm}|p{1cm}|p{4.2cm}|p{6.2cm}|p{8.2cm}|}
+\hline
+\textbf{Dag} & \textbf{Lek.} & \textbf{Emne} & \textbf{Indhold} & \textbf{Output \& Materialer} \\
+\hline
+1 & 1--3 & System og krav &
+Systemafgrænsning, signal vs.\ data, kravspecifikation &
+Systemformål og kravspecifikation \\
+\hline
+2 & 4--6 & Systembeskrivelse og data &
+Blokdiagram, dataflow, klassediagram som datamodel &
+Systembeskrivelse, blokdiagram, klassediagram \\
+\hline
+3 & 7--9 & Python basics &
+Variabler, datatyper, lister, dictionaries &
+Simple Python-scripts med datastrukturer \\
+\hline
+4 & 10--12 & CSV og Pandas &
+CSV-format, \texttt{read\_csv}, filtrering &
+Indlæst og struktureret datasæt \\
+\hline
+5 & 13--15 & Datavalidering og statistik &
+Manglende værdier, grænseværdier, simpel statistik &
+Valideret datasæt \\
+\hline
+6 & 16--18 & Visualisering &
+Plots, tidsserier, præsentation af data &
+Grafer og visualiseringer \\
+\hline
+7 & 19--21 & Tidsserier og trends &
+Sampling, trends, datatolkning &
+Trendanalyse \\
+\hline
+8 & 22--24 & Eksterne datakilder &
+Data fra ESP32 eller PLC, integration i pipeline &
+Samlet datasæt med ekstern datakilde \\
+\hline
+9 & 25--27 & Dataanalyse i systemkontekst &
+Data vs.\ krav, tekniske konklusioner &
+Analyse og tekniske konklusioner \\
+\hline
+10 & 28--30 & Dokumentation af data &
+Dokumentation af data, plots og resultater &
+Dokumenteret dataanalyse klar til projekt \\
+\hline
+11 & 31--33 & Data og arkitektur &
+Hvordan data påvirker system- og arkitekturvalg &
+Arkitektur-notat \\
+\hline
+12 & 34--36 & Projektforberedelse &
+Anvendelse af metoder i semesterprojekt &
+Projekt-startpakke (krav, data, metode) \\
+\hline
+\end{tabular}
+\end{landscape}
+
+
+\end{document}
