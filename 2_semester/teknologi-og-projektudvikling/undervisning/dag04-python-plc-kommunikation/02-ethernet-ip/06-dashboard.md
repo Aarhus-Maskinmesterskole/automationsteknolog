@@ -1,4 +1,4 @@
-# 05 – Simpelt PLC-dashboard med matplotlib (FuncAnimation)
+# 06 – Simpelt PLC-dashboard med matplotlib (FuncAnimation)
 
 I denne opgave skal du lave et Python-program, der løbende læser Tank_Level fra PLC'en og viser det i et simpelt plot med matplotlibs FuncAnimation.
 

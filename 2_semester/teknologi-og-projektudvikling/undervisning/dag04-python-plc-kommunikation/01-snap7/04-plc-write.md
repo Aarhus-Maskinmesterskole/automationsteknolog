@@ -93,3 +93,16 @@ client.db_write(DB, 6, buf)
 client.disconnect()
 print("Skrev 0xFF til DBW6 og lukkede forbindelsen.")
 ```
+
+---
+
+## Opgave 5 – Forbindelse med fejl-håndtering (try/except/finally)
+
+Skriv et Python-program der forsøger at oprette forbindelse til PLC'en med snap7, men brug `try/except/finally` til at håndtere fejl. Programmet skal:
+
+- Prøve at oprette forbindelse til PLC'en (prøv evt. med forkert IP først for at fremprovokere fejl)
+- Udskrive en fejlbesked hvis forbindelsen fejler
+- Udskrive "Forbindelse oprettet" hvis det lykkes
+- Altid lukke forbindelsen korrekt i `finally`-blokken
+
+Ekstra: Udvid programmet så det også håndterer fejl hvis PLC'en taber forbindelsen undervejs (fx under skrivning).
