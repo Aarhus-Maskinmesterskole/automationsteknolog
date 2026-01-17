@@ -72,7 +72,8 @@ finally:
 ```python
 try:
     from pycomm3 import LogixDriver
-    with LogixDriver("192.168.1.209") as plc:
+    PLC_IP = "192.168.0.10"  # eksempel-IP (ret til din PLC)
+    with LogixDriver(PLC_IP) as plc:
         status = plc.read("Motor_Status")
         print("Motor status:", status.value)
 except Exception as e:

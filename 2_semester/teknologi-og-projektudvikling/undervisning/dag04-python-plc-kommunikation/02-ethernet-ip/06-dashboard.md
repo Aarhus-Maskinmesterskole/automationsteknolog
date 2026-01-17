@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from pycomm3 import LogixDriver
 
-PLC_IP = "192.168.1.209"
+PLC_IP = "192.168.0.10"
 times = []
 levels = []
 t0 = time.time()

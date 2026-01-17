@@ -1,4 +1,4 @@
-# 🧠 Dataforståelse og databehandling med Python (Pandas)
+# 🧠 README – Dag 10: Dataforståelse og databehandling med Python (Pandas)
 
 ## 🎯 Formål med dagen
 Formålet med denne øvelsesdag er at lære at arbejde med **data i Python** — fra rå sensordata til et renset og valideret datasæt, klar til analyse.

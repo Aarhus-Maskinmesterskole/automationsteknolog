@@ -1,4 +1,4 @@
-## 🧩 Opgave 3: Data Inspection
+# 🧩 03 – Data Inspection
 
 ### 🎯 Formål
 

@@ -15,7 +15,7 @@ Denne side forklarer, hvad en IP-adresse er, og hvad snap7-biblioteket bruges ti
 
 **Eksempel:**
 - PLC: `192.168.0.100`
-- Din PC: `192.168.0.10`
+- Din PC: `192.168.0.20`
 - Begge skal være på samme netværk (fx `192.168.0.xxx`)
 
 ---

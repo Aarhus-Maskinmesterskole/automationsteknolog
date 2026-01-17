@@ -1,6 +1,6 @@
-# 📘 README – Dag 06: Sanity Checks, Tidsstempling og Plausibilitetstests
+# 📘 README – Dag 09: Sanity Checks, Tidsstempling og Plausibilitetstests
 
-Velkommen til dag 06 i forløbet. I dag arbejder vi med kvalitetssikring af vores måledata. Det handler ikke kun om at registrere værdier, men om at vurdere, om de er plausible, rettidige og brugbare. Fokus er på sanity checks, tidsstempling, plausibilitetstests og overvågning af datakvalitet via softwarebaserede watchdog-mekanismer.
+Velkommen til dag 09 i forløbet. I dag arbejder vi med kvalitetssikring af vores måledata. Det handler ikke kun om at registrere værdier, men om at vurdere, om de er plausible, rettidige og brugbare. Fokus er på sanity checks, tidsstempling, plausibilitetstests og overvågning af datakvalitet via softwarebaserede watchdog-mekanismer.
 
 ---
 

@@ -1,4 +1,4 @@
-### 📘 `09-capacitive-touch.md` – Kapacitiv Touch Sensor med ESP32-WROOM-32 (MicroPython)
+# 📘 09 – Kapacitiv Touch Sensor med ESP32-WROOM-32 (MicroPython)
 
 #### 🎯 Læringsmål
 

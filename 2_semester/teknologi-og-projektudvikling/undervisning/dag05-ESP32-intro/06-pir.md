@@ -1,4 +1,4 @@
-### 📘 `06-pir.md` – PIR Sensor med ESP32 (MicroPython)
+# 📘 06 – PIR Sensor med ESP32 (MicroPython)
 
 #### 🎯 Læringsmål
 

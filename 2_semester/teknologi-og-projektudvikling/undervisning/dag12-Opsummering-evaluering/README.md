@@ -1,4 +1,4 @@
-# Dag 12 - Evaluering og opsummering
+# 🐍 README Dag 12 - Evaluering og opsummering
 
 ## Læringsmål
 I denne lektion vil vi:

@@ -9,7 +9,7 @@ Her er fire helt simple opgaver, hvor du skal skrive til forskellige tags på en
 ```python
 from pycomm3 import LogixDriver
 
-PLC_IP = "192.168.1.209"
+PLC_IP = "192.168.0.10"
 
 with LogixDriver(PLC_IP) as plc:
     result = plc.write(("Start_PB", True))
@@ -23,7 +23,7 @@ with LogixDriver(PLC_IP) as plc:
 ```python
 from pycomm3 import LogixDriver
 
-PLC_IP = "192.168.1.209"
+PLC_IP = "192.168.0.10"
 
 with LogixDriver(PLC_IP) as plc:
     result = plc.write(("Motor_Speed", 42))
@@ -37,7 +37,7 @@ with LogixDriver(PLC_IP) as plc:
 ```python
 from pycomm3 import LogixDriver
 
-PLC_IP = "192.168.1.209"
+PLC_IP = "192.168.0.10"
 
 with LogixDriver(PLC_IP) as plc:
     result = plc.write(("Tank_Level", 123.4))
@@ -46,21 +46,23 @@ with LogixDriver(PLC_IP) as plc:
 
 ---
 
-## Opgave 4 – Skriv til Temperature (STRING)
+## Opgave 4 – Skriv til Tank_Status (STRING)
 
 ```python
 from pycomm3 import LogixDriver
 
-PLC_IP = "192.168.1.209"
+PLC_IP = "192.168.0.10"
 
 with LogixDriver(PLC_IP) as plc:
-    result = plc.write(("Temperature", "74.2"))
-    print(f"Skrev '74.2' til Temperature: {result}")
-    
+    result = plc.write(("Tank_Status", "OK"))
+    print(f"Skrev 'OK' til Tank_Status: {result}")
 ```
+
+---
+
 ## Opgave 5 – Forbindelse med fejl-håndtering (try/except/finally)
 
-Skriv et Python-program der forsøger at oprette forbindelse til PLC'en med snap7, men brug `try/except/finally` til at håndtere fejl. Programmet skal:
+Skriv et Python-program der forsøger at oprette forbindelse til PLC'en med pycomm3, men brug `try/except/finally` til at håndtere fejl. Programmet skal:
 
 - Prøve at oprette forbindelse til PLC'en (prøv evt. med forkert IP først for at fremprovokere fejl)
 - Udskrive en fejlbesked hvis forbindelsen fejler

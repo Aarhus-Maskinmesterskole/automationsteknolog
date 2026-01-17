@@ -1,4 +1,4 @@
-### 📘 `10-esp32-pins.md` – ESP32-WROOM-32 Pins og Funktioner
+# 📘 10 – ESP32-WROOM-32 Pins og Funktioner
 
 #### 🎯 Oversigt
 

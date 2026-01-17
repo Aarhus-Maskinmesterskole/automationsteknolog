@@ -1,4 +1,4 @@
-# 05 – Simpelt PLC-dashboard med matplotlib (FuncAnimation)
+# 06 – Simpelt PLC-dashboard med matplotlib (FuncAnimation)
 
 I denne opgave skal du lave et Python-program, der løbende læser Tank_Level (REAL) fra PLC'en og viser det i et simpelt plot med matplotlibs FuncAnimation.
 
@@ -22,7 +22,7 @@ from matplotlib.animation import FuncAnimation
 import snap7
 from snap7.util import get_real
 
-PLC_IP = "192.168.0.1"
+PLC_IP = "192.168.0.100"
 RACK = 0
 SLOT = 1
 DB = 1
@@ -42,7 +42,7 @@ ax.legend()
 
 try:
     def update(frame):
-        data = cli.db_read(DB, 4, 4)  # DBD4 (REAL) = Tank_Level
+        data = client.db_read(DB, 4, 4)  # DBD4 (REAL) = Tank_Level
         level = get_real(data, 0)
         now = time.time() - t0
         times.append(now)
@@ -73,9 +73,9 @@ import snap7
 from snap7.util import get_real
 from datetime import datetime
 
-PLC_IP = "192.168.0.1"
+PLC_IP = "192.168.0.100"
 RACK = 0
-SLOT = 0 # sæt til 0 hvis simulering af s7-1500, sæt til 1 for s7-1200
+SLOT = 1  # typisk: S7-1200/1500 = slot 1 (hvis det ikke virker i din simulator/opsætning, prøv slot 0)
 DB = 1
 LOGFILE = "tank_level_log.csv"
 client = snap7.client.Client()

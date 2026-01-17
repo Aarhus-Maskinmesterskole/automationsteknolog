@@ -1,4 +1,4 @@
-### 📘 `08-pwm-led.md` – PWM Styring af LED med ESP32-WROOM-32 (MicroPython)
+# 📘 08 – PWM Styring af LED med ESP32-WROOM-32 (MicroPython)
 
 #### 🎯 Læringsmål
 

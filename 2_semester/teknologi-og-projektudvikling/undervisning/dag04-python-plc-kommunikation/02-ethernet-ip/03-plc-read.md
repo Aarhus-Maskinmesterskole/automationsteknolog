@@ -1,6 +1,4 @@
-<!-- File: dag09-pycomm3/02-plc-read.md -->
-
-# 02 – PLC‑Connect & Read BOOL/INT/REAL (pycomm3)
+# 03 – PLC‑Connect & Read BOOL/INT/REAL (pycomm3)
 
 ## 1. Opgave 1 – Læs en **BOOL** tag
 
@@ -20,9 +18,11 @@ PLC_IP   = "192.168.0.10"   # PLC'ens IP
 TAG_NAME = "Start_PB"      # Navnet på BOOL-tagget
 # ─────────────────────────────────────────────
 
-with LogixDriver(f'{PLC_IP}') as plc:
-  result = plc.read(TAG_NAME)
-  print(f"BOOL tag '{TAG_NAME}' = {result.value}")
+with LogixDriver(PLC_IP) as plc:
+    result = plc.read(TAG_NAME)
+    print(f"BOOL tag '{TAG_NAME}' = {result.value}")
+
+
 ```
 
 Kør i terminalen:
@@ -49,15 +49,15 @@ Når denne virker, er mønsteret identisk for INT/REAL i de næste opgaver—du 
 > **Forudsætning:** PLC'en har et INT-tag, fx `Motor_Speed`.
 
 ```python
-
+# save as opg2_read_int.py
 from pycomm3 import LogixDriver
 
 PLC_IP   = "192.168.0.10"
 TAG_NAME = "Motor_Speed"
 
-with LogixDriver(f'{PLC_IP}') as plc:
-  result = plc.read(TAG_NAME)
-  print(f"INT tag '{TAG_NAME}' = {result.value}")
+with LogixDriver(PLC_IP) as plc:
+    result = plc.read(TAG_NAME)
+    print(f"INT tag '{TAG_NAME}' = {result.value}")
 ```
 
 Kør:
@@ -79,9 +79,10 @@ from pycomm3 import LogixDriver
 PLC_IP   = "192.168.0.10"
 TAG_NAME = "Tank_Level"
 
-with LogixDriver(f'{PLC_IP}') as plc:
-  result = plc.read(TAG_NAME)
-  print(f"REAL tag '{TAG_NAME}' = {result.value}")
+with LogixDriver(PLC_IP) as plc:
+    result = plc.read(TAG_NAME)
+    print(f"REAL tag '{TAG_NAME}' = {result.value}")
+
 ```
 
 Kør:
@@ -103,9 +104,9 @@ from pycomm3 import LogixDriver
 PLC_IP   = "192.168.0.10"
 TAG_NAME = "Tank_Status"
 
-with LogixDriver(f'{PLC_IP}') as plc:
-  result = plc.read(TAG_NAME)
-  print(f"String tag '{TAG_NAME}' = {result.value}")
+with LogixDriver(PLC_IP) as plc:
+    result = plc.read(TAG_NAME)
+    print(f"String tag '{TAG_NAME}' = {result.value}")
 
 ```
 

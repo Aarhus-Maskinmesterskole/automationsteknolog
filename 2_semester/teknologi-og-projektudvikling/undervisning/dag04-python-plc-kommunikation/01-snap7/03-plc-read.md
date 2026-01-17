@@ -1,6 +1,6 @@
-<!-- File: dag09-snap7/02-plc-read.md -->
+<!-- File: dag04-python-plc-kommunikation/01-snap7/03-plc-read.md -->
 
-# 02 – PLC‑Connect & Read BOOL/INT/REAL
+# 03 – PLC‑Connect & Read BOOL/INT/REAL
 
 ### 1. Opgave 1 – Læs en **BOOL** fra et DB (DBX)
 
@@ -17,9 +17,9 @@ import snap7
 from snap7.util import get_bool
 
 # ── UDFYLD DISSE ───────────────────────────────────────────────
-PLC_IP     = "192.168.0.1"  # PLC'ens IP
+PLC_IP     = "192.168.0.100"  # PLC'ens IP
 RACK       = 0              # S7-1200/1500 = rack 0
-SLOT       = 1              # S7-1200: slot 1  |  S7-1500: slot 0
+SLOT       = 1              # typisk: S7-1200/1500 = slot 1 (hvis det ikke virker i din simulator/opsætning, prøv slot 0)
 DB_NUMBER  = 1              # DB-nummer i TIA Portal
 BOOL_BYTE  = 0              # DBX<BYTE>.<BIT>  -> byte-del (0..n)
 BOOL_BIT   = 1              # DBX<byte>.<BIT>  -> bit-del  (0..7)
@@ -69,9 +69,9 @@ Når denne virker, er mønsteret identisk for INT/REAL/WORD i de næste opgaver�
 import snap7
 from snap7.util import get_int
 
-IP   = "192.168.0.1"  # PLC IP
+IP   = "192.168.0.100"  # PLC IP
 RACK = 0              # S7-1200/1500 = rack 0
-SLOT = 1              # S7-1200 = slot 1, S7-1500 = slot 0
+SLOT = 1              # typisk: S7-1200/1500 = slot 1 (hvis det ikke virker i din simulator/opsætning, prøv slot 0)
 DB   = 1              # DB-nummer i TIA Portal
 
 INT_START_BYTE = 2    # DBW2  -> starter ved byte 2
@@ -103,7 +103,7 @@ python opg2_read_int.py
 import snap7
 from snap7.util import get_real
 
-IP   = "192.168.0.1"
+IP   = "192.168.0.100"
 RACK = 0
 SLOT = 1
 DB   = 1
@@ -137,7 +137,7 @@ python opg3_read_real.py
 import snap7
 from snap7.util import get_word
 
-IP   = "192.168.0.1"
+IP   = "192.168.0.100"
 RACK = 0
 SLOT = 1
 DB   = 1

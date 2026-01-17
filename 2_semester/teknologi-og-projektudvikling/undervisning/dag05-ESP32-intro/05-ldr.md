@@ -1,4 +1,4 @@
-### 📘 `05-ldr.md` – LDR Sensor med ESP32 (MicroPython)
+# 📘 05 – LDR Sensor med ESP32 (MicroPython)
 
 #### 🎯 Læringsmål
 

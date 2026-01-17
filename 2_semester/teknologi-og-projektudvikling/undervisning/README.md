@@ -17,18 +17,18 @@ Denne mappe indeholder kursusforløbet for automationsteknologer med fokus på P
 - [**dag04-python-plc-kommunikation**](dag04-python-plc-kommunikation/)  
   Grundlæggende kommunikation mellem Python og PLC.  
   *Læringsmål: Forstå og afprøve dataudveksling mellem PC og PLC.*
-- [**dag05-Python-CSV-Pandas-intro**](dag05-Python-CSV-Pandas-intro/)  
-  Datahåndtering og logning med CSV-filer og introduktion til Pandas.  
-  *Læringsmål: Kunne logge og gemme data fra Python til fil.*
-- [**dag06-pandas-visualisering**](dag06-pandas-visualisering/)  
-  Databehandling og visualisering med Pandas og matplotlib.  
-  *Læringsmål: Kunne analysere og visualisere måledata i Python.*
-- [**dag07-ESP32-intro**](dag07-ESP32-intro/)  
+- [**dag05-ESP32-intro**](dag05-ESP32-intro/)  
   Introduktion til ESP32 og IoT-programmering.  
   *Læringsmål: Forstå grundprincipper i IoT og opsætte ESP32 til dataopsamling.*
-- [**dag08-Python-pyserial**](dag08-Python-pyserial/)  
+- [**dag06-Python-pyserial**](dag06-Python-pyserial/)  
   Seriel kommunikation mellem Python og hardware.  
   *Læringsmål: Kunne sende/modtage data mellem PC og udstyr via seriel port.*
+- [**dag07-Python-CSV-Pandas-intro**](dag07-Python-CSV-Pandas-intro/)  
+  Datahåndtering og logning med CSV-filer og introduktion til Pandas.  
+  *Læringsmål: Kunne logge og gemme data fra Python til fil.*
+- [**dag08-pandas-visualisering**](dag08-pandas-visualisering/)  
+  Databehandling og visualisering med Pandas og matplotlib.  
+  *Læringsmål: Kunne analysere og visualisere måledata i Python.*
 - [**dag09-sanity-timestamp**](dag09-sanity-timestamp/)  
   Tidsstempling, sanity checks og datakvalitet.  
   *Læringsmål: Forstå vigtigheden af datakvalitet og tidsstempling i automation.*

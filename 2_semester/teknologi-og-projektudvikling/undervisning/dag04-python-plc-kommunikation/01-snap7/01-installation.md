@@ -1,4 +1,4 @@
-<!-- File: dag09-snap7/01-installation.md -->
+<!-- File: dag04-python-plc-kommunikation/01-snap7/01-installation.md -->
 
 # 01 – snap7‑Installation & Smoke‑test
 
@@ -26,7 +26,7 @@ At installere **python‑snap7** i et isoleret miljø på både Windows **og** L
 ### 1. Opret og aktiver virtuel env
 
 ```bash
-# vælg mappe dag09-snap7/
+# vælg mappen du arbejder i (fx dag04-python-plc-kommunikation/01-snap7/)
 python -m venv .venv
 # Windows
 .venv\Scripts\activate

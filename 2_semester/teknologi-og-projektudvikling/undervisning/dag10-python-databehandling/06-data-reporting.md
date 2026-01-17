@@ -1,4 +1,4 @@
-## 📊 Opgave 6: Data Reporting
+# 📊 06 – Data Reporting
 
 ### 🎯 Formål
 

@@ -55,16 +55,20 @@ from machine import Pin
 from time import sleep
 
 led = Pin(2, Pin.OUT)
+isOn = "On"
+isOff = "Off"
 
 while True:
     led.value(1)
+    print(isOn)
     sleep(0.5)
     led.value(0)
+    print(isOff)
     sleep(0.5)
 ```
 
 2. Tryk på **Kør** eller `Ctrl+R`
-3. LED'en på ESP32 bør blinke
+3. LED'en på ESP32 bør blinke og printe "On" og "Off" i Thonny's konsol
 
 ---
 
@@ -74,6 +78,7 @@ while True:
 * [ ] Jeg har flashed MicroPython på ESP32
 * [ ] Jeg kan vælge korrekt port og køre kode
 * [ ] Jeg har blinket LED via `Pin` og `sleep`
+* [ ] Jeg kan se output i Thonny's konsol
 
 ---
 

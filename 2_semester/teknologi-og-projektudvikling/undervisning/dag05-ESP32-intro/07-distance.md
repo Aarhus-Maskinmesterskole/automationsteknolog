@@ -1,4 +1,4 @@
-### 📘 `07-distance.md` – Distance Sensor (HC-SR04) med ESP32 (MicroPython)
+# 📘 07 – Distance Sensor (HC-SR04) med ESP32 (MicroPython)
 
 #### 🎯 Læringsmål
 

@@ -1,4 +1,4 @@
-# 03 – Skriv til PLC med snap7
+# 04 – Skriv til PLC med snap7
 
 Her er fire helt simple opgaver, hvor du skal skrive til forskellige typer i en Siemens S7-PLC med snap7.
 
@@ -10,7 +10,7 @@ Her er fire helt simple opgaver, hvor du skal skrive til forskellige typer i en 
 import snap7
 from snap7.util import set_bool
 
-PLC_IP = "192.168.0.1"
+PLC_IP = "192.168.0.100"
 RACK = 0
 SLOT = 1
 DB = 1
@@ -33,7 +33,7 @@ print("Skrev True til DBX0.0 og lukkede forbindelsen.")
 import snap7
 from snap7.util import set_int
 
-PLC_IP = "192.168.0.1"
+PLC_IP = "192.168.0.100"
 RACK = 0
 SLOT = 1
 DB = 1
@@ -56,7 +56,7 @@ print("Skrev 1234 til DBW2 og lukkede forbindelsen.")
 import snap7
 from snap7.util import set_real
 
-PLC_IP = "192.168.0.1"
+PLC_IP = "192.168.0.100"
 RACK = 0
 SLOT = 1
 DB = 1
@@ -79,7 +79,7 @@ print("Skrev 42.5 til DBD4 og lukkede forbindelsen.")
 import snap7
 from snap7.util import set_word
 
-PLC_IP = "192.168.0.1"
+PLC_IP = "192.168.0.100"
 RACK = 0
 SLOT = 1
 DB = 1

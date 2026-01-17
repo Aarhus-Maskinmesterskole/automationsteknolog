@@ -1,4 +1,4 @@
-# Dag 09 – Python til PLC 🐍🤖
+# Dag 04 – Python til PLC 🐍🤖
 
 ## Formål
 
@@ -13,13 +13,13 @@
 **01-snap7**
 - Arbejd med Siemens S7 PLC
 - Læs og skriv BOOL, INT, REAL, WORD
-- Log data til CSV
+- Log data til txt (og evt. CSV)
 - Visualiser med matplotlib
 
 **02-ethernet-ip**
 - Arbejd med Allen-Bradley PLC
 - Læs og skriv tags med pycomm3
-- Log data til CSV
+- Log data til txt (og evt. CSV)
 - Visualiser med matplotlib
 
 ---

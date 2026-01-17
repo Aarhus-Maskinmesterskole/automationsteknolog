@@ -1,7 +1,7 @@
 
 # 01 – pycomm3‑Installation & Smoke‑test
 
-> *Første opgave på Dag 09 – Python ⇄ Allen-Bradley PLC (EtherNet/IP)*
+> *Første opgave på Dag 04 – Python ⇄ Allen-Bradley PLC (EtherNet/IP)*
 
 ## 🎯 Formål
 
@@ -25,7 +25,7 @@ At installere **pycomm3** i et isoleret miljø på både Windows **og** Linux, b
 ### 1. Opret og aktiver virtuel env
 
 ```bash
-# vælg mappe dag09-pycomm3/
+# vælg mappen du arbejder i (fx dag04-python-plc-kommunikation/02-ethernet-ip/)
 python -m venv .venv
 # Windows
 .venv\Scripts\activate
@@ -62,11 +62,12 @@ Output skal vise pycomm3‑modulet uden Tracebacks.
 from pycomm3 import LogixDriver
 
 # Erstat med IP-adressen på din PLC
-PLC_IP = '192.168.1.10'
+PLC_IP = "192.168.0.10"
+TAG_NAME = "MyTag"  # erstat med et tag som findes i din controller
 
-with LogixDriver(f'192.168.1.10') as plc:
-	result = plc.read('MyTag')
-print(result.value)
+with LogixDriver(PLC_IP) as plc:
+	result = plc.read(TAG_NAME)
+	print(result.value)
 ```
 
 Hvis du får en værdi uden fejl, er forbindelsen OK!

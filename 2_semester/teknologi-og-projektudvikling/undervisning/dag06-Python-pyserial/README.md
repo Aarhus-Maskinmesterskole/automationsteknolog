@@ -1,4 +1,4 @@
-# 🐍 README – Dag 04: Python + Seriel datamodtagelse
+# 🐍 README – Dag 06: Python + Seriel datamodtagelse
 
 På denne undervisningsdag forbinder du din computer med ESP32 via seriel kommunikation. Du bruger `pyserial` i Python til at læse data, gemme det som **CSV** eller **JSONL** (én måling pr. linje), og du får værktøjer til live-visualisering og simpel realtids-behandling.
 

@@ -1,4 +1,4 @@
-### 📘 `03-dht22-simple.md` – DHT22 Sensor med ESP32 (MicroPython)
+# 📘 03 – DHT22 Sensor med ESP32 (MicroPython)
 
 #### 🎯 Læringsmål
 

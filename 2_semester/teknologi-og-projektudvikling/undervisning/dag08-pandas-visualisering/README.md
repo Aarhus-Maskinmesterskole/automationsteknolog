@@ -1,4 +1,4 @@
-# 📊 README – Dag 05: Visualisering og analyse med Pandas
+# 📊 README – Dag 08: Visualisering og analyse med Pandas
 
 Velkommen til femte undervisningsdag i Teknologi og Projektudvikling. Dagens fokus er på at give dine målinger og datalogning værdi gennem visuel formidling og statistisk bearbejdning. Du lærer at bruge Python-værktøjerne Pandas og Matplotlib til at analysere, sammenligne og præsentere data på en overskuelig og professionel måde.
 

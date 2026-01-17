@@ -1,4 +1,4 @@
-# 📘 README – Dag 02: Python + CSV + Pandas intro
+# 📘 README – Dag 07: Python + CSV + Pandas intro
 
 Velkommen til undervisningsmodulet om databehandling i Python. I dag lærer du at arbejde med CSV-filer, analysere måledata med `pandas` og visualisere resultater med `matplotlib`. Dette er fundamentet for resten af kurset, hvor vi skal arbejde med rigtige sensordata og automatisering.
 
