@@ -1,4 +1,4 @@
-# 04 – Skriv til PLC med snap7
+# 03 – Skriv til PLC med snap7
 
 Her er fire helt simple opgaver, hvor du skal skrive til forskellige typer i en Siemens S7-PLC med snap7.
 

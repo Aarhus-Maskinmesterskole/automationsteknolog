@@ -1,5 +1,5 @@
 csv_file = "log.csv"
-# 📝 03 – Logger til .txt
+# 📝 04 – Logger til .txt
 
 I denne guide lærer du at logge data fra PLC eller sensorer direkte til en tekstfil (.txt) med Python. Det er nyttigt til simpel datalogning, fejlfinding eller dokumentation.
 
