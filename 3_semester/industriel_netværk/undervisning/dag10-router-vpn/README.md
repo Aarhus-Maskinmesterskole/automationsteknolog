@@ -1,3 +1,10 @@
+Ja, selvfølgelig. Her er hele guiden samlet i ét dokument, hvor både **Sektion 1.1** (nu med DHCP) og **Sektion 7** (nu med instruktion om at finde IP'en) er rettet til.
+
+Du kan kopiere alt indholdet herunder og gemme det som din `README.md`:
+
+-----
+
+````markdown
 # WireGuard: Windows ↔ GNS3-router ↔ Linux-PC
 
 *(Ingen firewall — fuld guide i Markdown)*
@@ -9,7 +16,7 @@
 | Enhed    | Interface  | IP                         |
 | -------- | ---------- | -------------------------- |
 | Windows  | VMnet1     | 192.168.2.1/24             |
-| Router   | eth0 (WAN) | 192.168.2.2/24             |
+| Router   | eth0 (WAN) | **DHCP (Dynamisk)** |
 | Router   | eth1 (LAN) | 10.0.0.1/24                |
 | Linux-PC | eth0       | 10.0.0.10/24 (GW 10.0.0.1) |
 
@@ -24,24 +31,26 @@
 
 ## 1.1 Router (“router-nfw-1”)
 
-```sh
-# WAN mod Windows / Cloud
-ip addr add 192.168.2.2/24 dev eth0
-ip link set eth0 up
+Vi bruger DHCP på WAN-siden for at matche GNS3/VMware netværket automatisk.
 
-# LAN mod Linux-PC
+```sh
+# WAN mod Windows / Cloud (DHCP)
+udhcpc -i eth0
+
+# LAN mod Linux-PC (Statisk)
 ip addr add 10.0.0.1/24 dev eth1
 ip link set eth1 up
-```
+````
 
-Tjek:
+Tjek hvilken IP du fik på WAN (eth0):
 
 ```sh
 ip addr show eth0
-ip addr show eth1
 ```
 
----
+*(Notér denne IP – du skal bruge den i Windows WireGuard opsætningen senere).*
+
+-----
 
 ## 1.2 Linux-PC (“aams-linux-pc-1”)
 
@@ -62,26 +71,26 @@ ip route
 
 Test LAN:
 
-* Fra Linux-PC → `ping 10.0.0.1`
-* Fra router → `ping 10.0.0.10`
+  * Fra Linux-PC → `ping 10.0.0.1`
+  * Fra router → `ping 10.0.0.10`
 
----
+-----
 
 # 💾 2. Installer WireGuard på Windows
 
-1. Gå til: [https://www.wireguard.com/install](https://www.wireguard.com/install)
-2. Download **WireGuard for Windows**
-3. Installér
-4. Start programmet → "Add Tunnel" → **Add empty tunnel**
+1.  Gå til: [https://www.wireguard.com/install](https://www.wireguard.com/install)
+2.  Download **WireGuard for Windows**
+3.  Installér
+4.  Start programmet → "Add Tunnel" → **Add empty tunnel**
 
 Windows genererer automatisk:
 
-* **PrivateKey**
-* **PublicKey**
+  * **PrivateKey**
+  * **PublicKey**
 
 *Gem Windows PublicKey – den skal ind på routeren.*
 
----
+-----
 
 # 🔐 3. Generér nøgler på routeren
 
@@ -98,10 +107,10 @@ cat /etc/wireguard/router_public.key
 
 Gem:
 
-* Router **private key**
-* Router **public key**
+  * Router **private key**
+  * Router **public key**
 
----
+-----
 
 # 📄 4. Opret `/etc/wireguard/wg0.conf` på routeren
 
@@ -119,10 +128,10 @@ AllowedIPs = 10.10.10.2/32
 
 Erstat:
 
-* `<ROUTER_PRIVATE_KEY>` → fra `router_private.key`
-* `<WINDOWS_PUBLIC_KEY>` → fra Windows GUI
+  * `<ROUTER_PRIVATE_KEY>` → fra `router_private.key`
+  * `<WINDOWS_PUBLIC_KEY>` → fra Windows GUI
 
----
+-----
 
 # 🔁 5. Slå IP-forwarding til (nødvendigt for at nå LAN)
 
@@ -144,7 +153,7 @@ Indlæs igen:
 sysctl -p
 ```
 
----
+-----
 
 # 🚀 6. Start WireGuard på routeren
 
@@ -169,10 +178,20 @@ interface: wg0
 
 Peer står som “(not connected)” indtil Windows forbinder.
 
----
+-----
 
 # 🪟 7. Konfigurer WireGuard på Windows
 
+**Find routerens WAN-IP først:**
+Hvis du ikke allerede har noteret den fra trin 1.1, så gå til routerens konsol og kør:
+
+```sh
+udhcpc
+```
+
+*Notér den IP-adresse, som tildeles (eller bekræftes) på eth0.*
+
+**Opsætning i Windows:**
 Åbn WireGuard → vælg din tomme tunnel → indsæt:
 
 ```ini
@@ -182,19 +201,21 @@ Address = 10.10.10.2/32
 
 [Peer]
 PublicKey = <ROUTER_PUBLIC_KEY>
-Endpoint = 192.168.2.2:51820
+# Indsæt IP'en fundet via udhcpc herunder
+Endpoint = <ROUTER_WAN_IP>:51820
 AllowedIPs = 10.0.0.0/24, 10.10.10.1/32
 PersistentKeepalive = 25
 ```
 
-Erstat:
+**Erstat:**
 
-* `<WINDOWS_PRIVATE_KEY>` → Windows’ private key
-* `<ROUTER_PUBLIC_KEY>` → router_public.key
+  * `<WINDOWS_PRIVATE_KEY>` → Windows’ private key
+  * `<ROUTER_PUBLIC_KEY>` → router\_public.key
+  * `<ROUTER_WAN_IP>` → IP-adressen du fik fra routeren (f.eks. 192.168.x.x)
 
 Klik **Activate**.
 
----
+-----
 
 # 🧪 8. Test tunnelen
 
@@ -206,7 +227,7 @@ ping 10.10.10.1
 
 Hvis du får svar, er WireGuard-tunnelen aktiv.
 
----
+-----
 
 # 🧭 9. Test adgang til LAN bag routeren
 
@@ -225,13 +246,21 @@ Windows → WireGuard → Router → LAN → Linux-PC
 
 … virker.
 
----
+-----
 
 # 🎉 Resultat
 
 Når alle trin er fulgt:
 
-* Windows har en WireGuard-tunnel ind i GNS3
-* Routeren rout’er trafik ind i LAN
-* Linux-PC’en kan nås **direkte** via VPN
-* Ingen firewall eller NAT er nødvendige
+  * Windows har en WireGuard-tunnel ind i GNS3
+  * Routeren rout’er trafik ind i LAN
+  * Linux-PC’en kan nås **direkte** via VPN
+  * Ingen firewall eller NAT er nødvendige
+
+<!-- end list -->
+
+```
+
+### Hvad er næste skridt?
+Er du klar til at teste det i GNS3 nu, eller mangler du hjælp til fejlfinding, hvis ping ikke virker?
+```
