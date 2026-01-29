@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.10)  13 JAN 2026 20:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.10)  29 JAN 2026 09:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -448,11 +448,43 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 [4]
 
 [5]
+
+[6]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 219.
+(Font)              <5> on input line 327.
+
+Underfull \hbox (badness 10000) in paragraph at lines 332--332
+[]|\T1/cmr/m/n/8 Kravspecifikation, do-ku-men-ta-tions-struk-tur,
+ []
 
 
-[6
+Underfull \hbox (badness 3312) in paragraph at lines 336--336
+[]|\T1/cmr/m/n/8 Clone/commit/push, branch/merge, Python-
+ []
+
+
+Underfull \hbox (badness 1824) in paragraph at lines 348--348
+[]|\T1/cmr/m/n/8 MicroPython/Thonny, sta-bilt se-ri-elt out-put,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 352--352
+[]|\T1/cmr/m/n/8 Seriel mod-ta-gel-se/parsing, log-ging til
+ []
+
+
+Underfull \hbox (badness 7576) in paragraph at lines 364--364
+[]|\T1/cmr/m/n/8 Datavalidering, plau-si-bi-li-tet-stests, sam-pling,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 376--376
+[]|\T1/cmr/m/n/8 Opsamling, re-flek-sion, mini-
+ []
+
+
+
+[7
 
 
 ] (forløbsplan-forår-2026.aux)
@@ -462,16 +494,16 @@ L3 programming layer <2025-08-13>
  ***********
 Package rerunfilecheck Info: File `forløbsplan-forår-2026.out' has not change
 d.
-(rerunfilecheck)             Checksum: B6514F5E569D096791AF66D63FD41CED;2534.
+(rerunfilecheck)             Checksum: 82E499C7042222AFF662988FF8CBFE26;2958.
  ) 
 Here is how much of TeX's memory you used:
- 11766 strings out of 468133
- 188080 string characters out of 5431680
- 628560 words of memory out of 5000000
- 40219 multiletter control sequences out of 15000+600000
+ 11768 strings out of 468133
+ 188103 string characters out of 5431680
+ 629560 words of memory out of 5000000
+ 40220 multiletter control sequences out of 15000+600000
  642155 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 89i,11n,95p,571b,570s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,11n,95p,571b,580s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\aso\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt08
 00.pk> <C:\Users\aso\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ec
 rm0800.pk> <C:\Users\aso\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
@@ -489,9 +521,9 @@ MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1440.pk> <C:\Users\aso\AppData\Lo
 cal\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm2074.pk> <C:\Users\aso\AppDat
 a\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\aso\Ap
 pData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk>
-Output written on forløbsplan-forår-2026.pdf (6 pages, 160515 bytes).
+Output written on forløbsplan-forår-2026.pdf (7 pages, 180750 bytes).
 PDF statistics:
- 546 PDF objects out of 1000 (max. 8388607)
- 19 named destinations out of 1000 (max. 500000)
+ 599 PDF objects out of 1000 (max. 8388607)
+ 20 named destinations out of 1000 (max. 500000)
  97 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -67,148 +67,256 @@ Efter forløbet kan den studerende:
 
 \clearpage
 
-\section{Dag 1: System, krav og data}
+\section{Dag 1: Teknisk dokumentation og tests}
 
-\textbf{Emne:} Systemforståelse og kravspecifikation.\\
+\textbf{Emne:} Dokumentation, krav og test i projektarbejde.\\
 \textbf{Indhold:}
 \begin{itemize}
-  \item Hvad er et teknisk system?
-  \item Systemafgrænsning.
-  \item Signal vs.\ data.
-  \item Kravspecifikation med fokus på data.
+  \item Kravspecifikation (formål, omfang, krav og acceptkriterier).
+  \item Teknisk dokumentation (struktur, skabelon, kvalitet).
+  \item Tests: testplan, testcases og sporbarhed.
+  \item Diagrammer til design/overblik (flowchart, block diagram, state machine).
 \end{itemize}
 \textbf{Aktivitet:}
 \begin{itemize}
-  \item Udarbejdelse af systemformål.
-  \item Udarbejdelse af kravspecifikation.
+  \item Udarbejd en kort kravspecifikation til jeres case.
+  \item Start en teknisk dokumentation (evt. ud fra skabelon).
+  \item Skriv 3--5 testcases med tydelige acceptkriterier.
 \end{itemize}
 \textbf{Output:}
 \begin{itemize}
-  \item Systemformål.
   \item Kravspecifikation.
+  \item Dokumentationsskitse/skabelon.
+  \item Testplan/testcases.
 \end{itemize}
 
 
-\section{Dag 2: Systembeskrivelse og datamodellering}
+\section{Dag 2: Intro til GitHub og Python}
 
-\textbf{Emne:} Beskrivelse af systemstruktur og data.\\
-\noindent\textbf{Indhold:}
+\textbf{Emne:} Versionsstyring og Python-grundforløb.\\
+\textbf{Indhold:}
 \begin{itemize}
-  \item Systemkomponenter.
-  \item Blokdiagram og dataflow.
-  \item Klassediagram som datamodel.
+  \item GitHub-workflow: clone, commit, push, branch og merge.
+  \item Python intro: køre scripts, datatyper, kontrolstrukturer og fejlfinding.
 \end{itemize}
 \textbf{Aktivitet:}
 \begin{itemize}
-  \item Udarbejdelse af blokdiagram.
-  \item Udarbejdelse af klassediagram.
+  \item Klon/opret et repository og lav små commits.
+  \item Arbejd i en branch og merge til \texttt{main}.
+  \item Skriv og kør simple Python-programmer.
 \end{itemize}
 \textbf{Output:}
 \begin{itemize}
-  \item Systembeskrivelse.
-  \item Blokdiagram.
-  \item Klassediagram.
+  \item Repo med historik (commits) og branch/merge.
+  \item Python-scripts (grundøvelser).
 \end{itemize}
 
 
+\section{Dag 3: Arbejd videre med dag 02}
 
-
-\section{Dag 3: Python-basics og datastruktur}
-\textbf{Emne:} Introduktion til Python som værktøj til datahåndtering.\\
+\textbf{Emne:} Rutine i GitHub og Python + mini-case.\\
 \textbf{Indhold:}
 \begin{itemize}
-\item Variabler, datatyper og simple kontrolstrukturer.
-\item Lister og dictionaries som datastrukturer.
-\item Sammenhæng mellem klassediagram og datastrukturer.
+  \item Repetition af GitHub-workflow (små commits, branch/merge).
+  \item Repetition/fordybelse i Python (datastrukturer, funktioner, error handling).
+  \item Mini-automation case: simulér sensor, log data, timestamp og simple sanity checks.
 \end{itemize}
-\textbf{Aktivitet:} Simple scripts til opbygning af datastrukturer.\
-\textbf{Output:} Python-script med strukturerede data.
+\textbf{Aktivitet:}
+\begin{itemize}
+  \item Vælg 1--3 fokusområder og arbejd målrettet.
+  \item Byg et lille Python-script der logger data struktureret (txt/CSV).
+\end{itemize}
+\textbf{Output:}
+\begin{itemize}
+  \item Repo med tydelig historik og en gennemført branch/merge.
+  \item Python-script der logger data med timestamp og validering.
+\end{itemize}
 
-\section{Dag 4: CSV og pandas}
-\textbf{Emne:} Indlæsning og håndtering af datafiler.\\
+
+\section{Dag 4: Python til PLC-kommunikation}
+
+\textbf{Emne:} PLC-kommunikation fra Python (Siemens S7 + Allen-Bradley).\\
 \textbf{Indhold:}
 \begin{itemize}
-\item CSV-formatet som dataudveksling.
-\item Introduktion til pandas: læsning og filtrering.
+  \item Snap7: læs/skriv data til Siemens S7 (BOOL, INT, REAL, WORD).
+  \item EtherNet/IP: læs/skriv tags til Allen-Bradley (\texttt{pycomm3}).
+  \item Logging (txt/CSV), simple plots/dashboards og fejlhåndtering.
 \end{itemize}
-\textbf{Aktivitet:} Arbejde med CSV-filer i pandas.\\
-\textbf{Output:} DataFrame med rensede data.
+\textbf{Aktivitet:}
+\begin{itemize}
+  \item Implementér læs/skriv for udvalgte variabler/tags.
+  \item Log målinger med tidsstempel og visualisér udvalgte signaler.
+\end{itemize}
+\textbf{Output:}
+\begin{itemize}
+  \item Python-værktøj til PLC-læs/skriv.
+  \item Logfil(er) og simple plots/dashboards.
+\end{itemize}
 
-\section{Dag 5: Datavalidering og statistik}
-\textbf{Emne:} Kvalitetssikring af data.\\
+
+\section{Dag 5: ESP32 intro (MicroPython)}
+
+\textbf{Emne:} ESP32 som sensor-/I/O-enhed og stabilt serielt output.\\
 \textbf{Indhold:}
 \begin{itemize}
-\item Håndtering af manglende værdier.
-\item Simpel statistik (min, max, middelværdi).
+  \item Opsætning af MicroPython på ESP32 (Thonny).
+  \item Stabilt output i CSV-lignende format til senere Python-logning.
+  \item Afprøvning af sensorer/inputs (fx DHT22, MQ-2, LDR, PIR, distance, PWM, touch).
 \end{itemize}
-\textbf{Aktivitet:} Analyse af datasæt og vurdering af datakvalitet.\
-\textbf{Output:} Valideret datasæt.
+\textbf{Aktivitet:}
+\begin{itemize}
+  \item Flash MicroPython og verificér forbindelse i Thonny.
+  \item Lav serielt output i et stabilt, parsebart format.
+  \item Afprøv mindst én sensor og udskriv værdier stabilt.
+\end{itemize}
+\textbf{Output:}
+\begin{itemize}
+  \item Kørende ESP32-script og stabil seriel datastrøm.
+\end{itemize}
 
-\section{Dag 6: Visualisering}
-\textbf{Emne:} Præsentation af data.\\
+
+\section{Dag 6: Python + pyserial (seriel datamodtagelse)}
+
+\textbf{Emne:} Seriel kommunikation mellem PC og ESP32.\\
 \textbf{Indhold:}
 \begin{itemize}
-\item Introduktion til matplotlib.
-\item Visualisering af tidsserier.
+  \item Installation og test af \texttt{pyserial}.
+  \item Læsning og parsing af serielle målinger (én linje pr. måling).
+  \item Logging til CSV og/eller JSONL med tidsstempel.
+  \item (Valgfrit) live-visualisering og simpel realtime processing.
 \end{itemize}
-\textbf{Aktivitet:} Plot af måledata.\\
-\textbf{Output:} Grafer og plots.
+\textbf{Aktivitet:}
+\begin{itemize}
+  \item Byg et Python-script der læser stabilt fra ESP32.
+  \item Log data til fil og verificér format og datakvalitet.
+\end{itemize}
+\textbf{Output:}
+\begin{itemize}
+  \item Modtager-script + logfil (CSV/JSONL) med timestamp.
+  \item (Valgfrit) live-plot og/eller simpel alarmlogik.
+\end{itemize}
 
-\section{Dag 7: Tidsserier og trends}
-\textbf{Emne:} Analyse af tidsafhængige data.\\
+
+\section{Dag 7: Python + CSV + Pandas intro}
+
+\textbf{Emne:} Datahåndtering med \texttt{pandas} og \texttt{matplotlib}.\\
 \textbf{Indhold:}
 \begin{itemize}
-\item Sampling og tidsopløsning.
-\item Trendanalyse.
+  \item Pandas basics: DataFrames.
+  \item Import/eksport af CSV.
+  \item Datarensning (NaN, outliers, dubletter) og simple tidsserier.
+  \item Visualisering af måledata.
 \end{itemize}
-\textbf{Aktivitet:} Analyse af tidsseriedata.\\
-\textbf{Output:} Trendanalyse.
+\textbf{Aktivitet:}
+\begin{itemize}
+  \item Indlæs et datasæt, rens det, og lav grafer med tydelige akser/titler.
+\end{itemize}
+\textbf{Output:}
+\begin{itemize}
+  \item Renset datasæt + Python-script til analyse.
+  \item Min. 2 grafer klar til dokumentation.
+\end{itemize}
 
-\section{Dag 8: Eksterne datakilder}
-\textbf{Emne:} Data fra hardware.\\
+
+\section{Dag 8: Pandas-visualisering og analyse}
+
+\textbf{Emne:} Professionelle grafer og statistisk bearbejdning.\\
 \textbf{Indhold:}
 \begin{itemize}
-\item Data fra mikrocontroller eller PLC.
-\item Integration i Python-pipeline.
+  \item Glidende gennemsnit (\texttt{.rolling()}).
+  \item Flere sensorer i én DataFrame og sammenstilling af måleserier.
+  \item Annotering og eksport af figurer i høj kvalitet.
+  \item Filtrering, outliers og fejlhåndtering.
 \end{itemize}
-\textbf{Aktivitet:} Indlæsning af eksterne data.\\
-\textbf{Output:} Samlet datasæt.
+\textbf{Aktivitet:}
+\begin{itemize}
+  \item Udarbejd mindst én figur med glidende gennemsnit og annotering.
+  \item Eksportér figurer til brug i rapport/dokumentation.
+\end{itemize}
+\textbf{Output:}
+\begin{itemize}
+  \item Figurer (PNG/PDF) klar til teknisk dokumentation.
+\end{itemize}
 
-\section{Dag 9: Dataanalyse i systemkontekst}
-\textbf{Emne:} Data som grundlag for beslutninger.\\
+
+\section{Dag 9: Sanity checks, tidsstempling og plausibilitet}
+
+\textbf{Emne:} Datakvalitet i sensor- og automationsdata.\\
 \textbf{Indhold:}
 \begin{itemize}
-\item Sammenhæng mellem data og systemkrav.
+  \item Sanity checks vs. plausibilitetstests.
+  \item Tidsstempling og vurdering af samplingfrekvens.
+  \item Outliers, dubletter og fejlformat.
+  \item Software-watchdog til overvågning af datakvalitet.
 \end{itemize}
-\textbf{Aktivitet:} Analyse og fortolkning.\\
-\textbf{Output:} Analysekonklusioner.
+\textbf{Aktivitet:}
+\begin{itemize}
+  \item Implementér en valideringspipeline (sensor \textrightarrow{} check \textrightarrow{} log/visning).
+  \item Afprøv watchdog-logik på datastrøm eller testdata.
+\end{itemize}
+\textbf{Output:}
+\begin{itemize}
+  \item Sanity/plausibilitet-script og dokumenteret datakvalitet.
+\end{itemize}
 
-\section{Dag 10: Dokumentation af data og resultater}
-\textbf{Emne:} Dokumentation af analyser.\\
+
+\section{Dag 10: Dataforståelse og databehandling (Pandas)}
+
+\textbf{Emne:} Fra rå data til renset og valideret datasæt.\\
 \textbf{Indhold:}
 \begin{itemize}
-\item Strukturering af resultater.
+  \item Datastruktur og datakilder (CSV).
+  \item Data inspection (find fejl uden at ændre data).
+  \item Data cleaning (NaN, datatyper, dubletter, outliers).
+  \item Data validation og mini-rapport (før/efter).
 \end{itemize}
-\textbf{Aktivitet:} Udarbejdelse af dokumentation.\\
-\textbf{Output:} Dokumenteret analyse.
+\textbf{Aktivitet:}
+\begin{itemize}
+  \item Generér/brug \texttt{raw\_data.csv} og gennemfør inspection, cleaning og validation.
+  \item Skriv en kort rapport med metode og resultater.
+\end{itemize}
+\textbf{Output:}
+\begin{itemize}
+  \item Renset/valideret datasæt + mini-rapport.
+\end{itemize}
 
-\section{Dag 11: Data og arkitekturvalg}
-\textbf{Emne:} Data som input til designbeslutninger.\\
+
+\section{Dag 11: Realtime plotting}
+
+\textbf{Emne:} Live-visualisering af serielle sensordata i Python.\\
 \textbf{Indhold:}
 \begin{itemize}
-\item Hvordan data påvirker arkitektur.
+  \item Opsætning af miljø (\texttt{matplotlib}, \texttt{pyserial}) og valg af seriel port.
+  \item Live plot med \texttt{FuncAnimation}.
+  \item Single-sensor plots (temperatur, humidity, LDR, gas, distance).
+  \item Multiple plots (samme figur eller subplots) og rullende vindue.
 \end{itemize}
-\textbf{Aktivitet:} Vurdering af arkitekturvalg.\\
-\textbf{Output:} Arkitektur-notat.
+\textbf{Aktivitet:}
+\begin{itemize}
+  \item Byg et realtime plot fra ESP32 og udvid til flere sensorer.
+\end{itemize}
+\textbf{Output:}
+\begin{itemize}
+  \item Realtime plotting-script(s) til live data.
+\end{itemize}
 
-\section{Dag 12: Data science i projektet}
-\textbf{Emne:} Overførsel til semesterprojekt.\\
+
+\section{Dag 12: Opsummering og evaluering}
+
+\textbf{Emne:} Opsamling, refleksion og mini-projekt/fremlæggelse.\\
 \textbf{Indhold:}
 \begin{itemize}
-\item Anvendelse af data science-metoder i projektet.
+  \item Opsummering af centrale begreber og workflow (GitHub, ESP32, seriel, data, kvalitet, visualisering).
+  \item Evaluering, peer-review og næste skridt mod semesterprojekt.
 \end{itemize}
-\textbf{Aktivitet:} Mini-projekt.\\
-\textbf{Output:} Projektforberedelse.
+\textbf{Aktivitet:}
+\begin{itemize}
+  \item Mini-projekt eller fremlæggelse med refleksion over løsning og datakvalitet.
+\end{itemize}
+\textbf{Output:}
+\begin{itemize}
+  \item Mini-projekt/fremlæggelse + feedback/opsamling.
+\end{itemize}
 
 
 % ------- OVERSIGTSTABEL -------
@@ -220,53 +328,53 @@ Efter forløbet kan den studerende:
 \hline
 \textbf{Dag} & \textbf{Lek.} & \textbf{Emne} & \textbf{Indhold} & \textbf{Output \& Materialer} \\
 \hline
-1 & 1--3 & System og krav &
-Systemafgrænsning, signal vs.\ data, kravspecifikation &
-Systemformål og kravspecifikation \\
+1 & 1--3 & Teknisk dokumentation \& tests &
+Kravspecifikation, dokumentationsstruktur, testcases, acceptkriterier, diagrammer &
+Kravspecifikation + testplan/testcases (skitse) \\
 \hline
-2 & 4--6 & Systembeskrivelse og data &
-Blokdiagram, dataflow, klassediagram som datamodel &
-Systembeskrivelse, blokdiagram, klassediagram \\
+2 & 4--6 & GitHub \& Python intro &
+Clone/commit/push, branch/merge, Python-basics og fejlfinding &
+Repo med historik + Python-grundøvelser \\
 \hline
-3 & 7--9 & Python basics &
-Variabler, datatyper, lister, dictionaries &
-Simple Python-scripts med datastrukturer \\
+3 & 7--9 & Arbejd videre med dag 2 &
+Repetition GitHub/Python + mini-case (logning, timestamp, sanity checks) &
+Repo med branch/merge + log-script \\
 \hline
-4 & 10--12 & CSV og Pandas &
-CSV-format, \texttt{read\_csv}, filtrering &
-Indlæst og struktureret datasæt \\
+4 & 10--12 & Python til PLC &
+Snap7 (S7) og EtherNet/IP (AB): læs/skriv, logging, simple plots &
+PLC-værktøj + logfiler/plots \\
 \hline
-5 & 13--15 & Datavalidering og statistik &
-Manglende værdier, grænseværdier, simpel statistik &
-Valideret datasæt \\
+5 & 13--15 & ESP32 intro (MicroPython) &
+MicroPython/Thonny, stabilt serielt output, sensorer/inputs &
+ESP32-script + stabil datastrøm \\
 \hline
-6 & 16--18 & Visualisering &
-Plots, tidsserier, præsentation af data &
-Grafer og visualiseringer \\
+6 & 16--18 & Python + pyserial &
+Seriel modtagelse/parsing, logging til CSV/JSONL, (valgfrit) live plot &
+Modtager-script + logfil(er) \\
 \hline
-7 & 19--21 & Tidsserier og trends &
-Sampling, trends, datatolkning &
-Trendanalyse \\
+7 & 19--21 & CSV + Pandas intro &
+DataFrames, import/eksport, cleaning, time series, visualisering &
+Renset datasæt + min. 2 grafer \\
 \hline
-8 & 22--24 & Eksterne datakilder &
-Data fra ESP32 eller PLC, integration i pipeline &
-Samlet datasæt med ekstern datakilde \\
+8 & 22--24 & Pandas visualisering &
+Rolling mean, flere sensorer, annotering, eksport, outliers &
+Figurer klar til dokumentation \\
 \hline
-9 & 25--27 & Dataanalyse i systemkontekst &
-Data vs.\ krav, tekniske konklusioner &
-Analyse og tekniske konklusioner \\
+9 & 25--27 & Sanity + timestamp &
+Datavalidering, plausibilitetstests, sampling, watchdog &
+Validerings-script + datakvalitetsnoter \\
 \hline
-10 & 28--30 & Dokumentation af data &
-Dokumentation af data, plots og resultater &
-Dokumenteret dataanalyse klar til projekt \\
+10 & 28--30 & Databehandling (Pandas) &
+Inspection, cleaning, validation og mini-rapport (før/efter) &
+Renset/valideret datasæt + rapport \\
 \hline
-11 & 31--33 & Data og arkitektur &
-Hvordan data påvirker system- og arkitekturvalg &
-Arkitektur-notat \\
+11 & 31--33 & Realtime plotting &
+Live plot med \texttt{FuncAnimation}, single/multiple sensor plots &
+Realtime plotting-script(s) \\
 \hline
-12 & 34--36 & Projektforberedelse &
-Anvendelse af metoder i semesterprojekt &
-Projekt-startpakke (krav, data, metode) \\
+12 & 34--36 & Opsummering \& evaluering &
+Opsamling, refleksion, mini-projekt/fremlæggelse, peer-review &
+Mini-projekt/fremlæggelse + feedback \\
 \hline
 \end{tabular}
 \end{landscape}
