@@ -27,6 +27,7 @@ Brug standard-elementer: Start/Stop, Process, Decision.
 ```
 
 **Eksempel**
+
 ![alt text](image.png)
 
 *Du kan tegne diagrammet i hånden og indsætte et billede, eller bruge et værktøj som draw.io, PowerPoint, eller mermaid (se ovenfor).* 
