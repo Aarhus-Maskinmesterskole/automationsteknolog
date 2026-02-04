@@ -29,7 +29,7 @@ Dette er en essentiel grundkompetence for at kunne fejlfinde og konfigurere indu
 ---
 
 ## Noter
-
+it 
 Skriv dine IP- og MAC-adresser her:
 - Min IPv4-adresse: `_____________`
 - Min MAC-adresse (fysisk adresse): `_____________`
