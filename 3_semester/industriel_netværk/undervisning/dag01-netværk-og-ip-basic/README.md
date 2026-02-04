@@ -1,8 +1,9 @@
+
 # 🌐 Dag 01 – IT-Netværk: Grundlæggende begreber & praksis
 
 Velkommen til første undervisningsdag i Industrielt Netværk!
 
-> I dag får du hænderne ned i netværkets byggesten: IP-adresser, MAC-adresser, netværksudstyr, netværksbeskrivelser og dit første netværk i GNS3.
+> I dag arbejder du praktisk med IP-adresser, MAC-adresser, ARP, ping, netværksanalyse og PLC-konfiguration i industrielle netværk.
 
 ---
 
@@ -10,9 +11,8 @@ Velkommen til første undervisningsdag i Industrielt Netværk!
 
 - Forstå, hvad et netværk er – og hvorfor det er vigtigt i industrien
 - Kunne identificere og forklare forskel på IP- og MAC-adresser
-- Få hands-on erfaring med at finde/ændre IP og MAC på egen pc
-- Opsætte og teste et basalt netværk i GNS3
-- Forklare med egne ord, hvad hub, switch og router gør (og hvad LAN, MAN, WAN, P2P, M2M er)
+- Få hands-on erfaring med netværksanalyse, ARP, ping og PLC-konfiguration
+- Forstå og anvende begreber som DHCP, statisk IP, NAT og netværksdiagnosticering
 - Dokumentere og reflektere over din læring
 
 ---
@@ -22,11 +22,16 @@ Velkommen til første undervisningsdag i Industrielt Netværk!
 - **Intro-case:** Hvorfor netværk på en fabrik? (kort diskussion eller slides)
 - **Mini-forelæsning:** Netværksudstyr, IP, MAC, subnet, VLAN (kun det vigtigste)
 - **Opgaver:**
-    1. [Find din IP- og MAC-adresse](find-din-ip-og-mac.md)
-    2. [Byg dit første netværk i GNS3](byg-netvaerk-i-gns3-ubuntu.md)
-    3. [Tildel IP og test ping mellem PC’er](tildel-og-test-ip-kommunikation.md)
-    4. [Beskriv hub, switch, router, LAN, MAN, WAN, P2P, M2M](beskriv-netvaerksudstyr-og-typer.md)
-    5. [Reflekter over dagens netværksopgaver](reflekter-over-netvaerksopgaver.md)
+    1. [Find din IP- og MAC-adresse](01-find-din-ip-og-mac.md)
+    2. [ARP mellem to PC’er](02-arp-mellem-to-pcer.md)
+    3. [ARP med PLC og flere PC’er](03-arp-med-plc-og-flere-pcer.md)
+    4. [Traceroute – følg pakkens vej](04-traceroute.md)
+    5. [Accessible devices i TIA Portal](05-accessible-devices.md)
+    6. [Tildel ny IP-adresse til PLC](06-assign-ip-til-plc.md)
+    7. [Fabriksindstil PLC og ISO-adresse](07-fabriksindstil-plc-og-iso-adresse.md)
+    8. [Download til PLC med direkte IP](08-download-til-plc-direkte-ip.md)
+    9. [PLCsim Advanced og VMware DHCP](09-plcsim-adv-vmware-dhcp.md)
+   10. [Download til PLC med DHCP](10-download-til-plc-dhcp.md)
 - **Fælles opsamling:** Hvad var sværest? Hvad undrer du dig over?
 
 ---
@@ -36,19 +41,23 @@ Velkommen til første undervisningsdag i Industrielt Netværk!
 | #   | Titel                                            | Type        | Aflevering          |
 |-----|--------------------------------------------------|-------------|---------------------|
 | 1   | Find din IP- og MAC-adresse                      | Individuel  | `.md` + screenshot  |
-| 2   | Byg netværk i GNS3 med Ubuntu-container          | Individuel  | `.md` + screenshot  |
-| 3   | Tildel IP og test ping mellem PC’er og Ubuntu    | Individuel  | `.md` + screenshot  |
-| 4   | Ping google                                      | Individuel  | `.md` + screenshot  |
-| 5   | Beskriv hub, switch, router, LAN, MAN, WAN, P2P, M2M | Individuel/Gruppe | `.md`           |
-| 6   | Reflekter over dagens netværksopgaver            | Individuel  | `.md`               |
+| 2   | ARP mellem to PC’er                              | Individuel  | `.md` + screenshot  |
+| 3   | ARP med PLC og flere PC’er                       | Individuel  | `.md` + screenshot  |
+| 4   | Traceroute – følg pakkens vej                    | Individuel  | `.md` + screenshot  |
+| 5   | Accessible devices i TIA Portal                  | Individuel  | `.md` + screenshot  |
+| 6   | Tildel ny IP-adresse til PLC                     | Individuel  | `.md` + screenshot  |
+| 7   | Fabriksindstil PLC og ISO-adresse                | Individuel  | `.md` + screenshot  |
+| 8   | Download til PLC med direkte IP                  | Individuel  | `.md` + screenshot  |
+| 9   | PLCsim Advanced og VMware DHCP                   | Individuel  | `.md` + screenshot  |
+| 10  | Download til PLC med DHCP                        | Individuel  | `.md` + screenshot  |
 
-Alle besvarelser skal dokumenteres og lægges i en undermappe med dit navn (eller gruppe) her i `dag01-it-netvaerk`.
+Alle besvarelser skal dokumenteres og lægges i en undermappe med dit navn (eller gruppe) her i `dag01-netværk`.
 
 ---
 
+
 ## 💾 Ressourcer
 
-- [GNS3 download og intro](https://www.gns3.com/software/download)
 - [Hurtig guide: IP-adresser (Cloudflare)](https://www.cloudflare.com/learning/network-layer/what-is-an-ip-address/)
 - [YouTube: Netværk på 5 minutter](https://www.youtube.com/watch?v=3QhU9jd03a0)
 
@@ -56,14 +65,14 @@ Alle besvarelser skal dokumenteres og lægges i en undermappe med dit navn (elle
 
 ## 📝 Afleveringsguide
 
+
 1. Opret en mappe: `dag01-ditnavn` eller `dag01-gruppeX`
 2. Svar på opgaverne i de relevante `.md`-filer (brug opgaveskabelonerne)
-3. Indsæt screenshots med:  
-```
+3. Indsæt screenshots med:
 
-![billednavn](billede.png)
-
-```
+    ```
+    ![billednavn](billede.png)
+    ```
 4. Push til GitHub senest før næste undervisningsgang
 
 > Husk: Korte refleksionsspørgsmål skal altid besvares!
