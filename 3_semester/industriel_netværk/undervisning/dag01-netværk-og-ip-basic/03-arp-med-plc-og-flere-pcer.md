@@ -13,11 +13,14 @@ Formålet er at undersøge, hvordan ARP fungerer, når der kommunikeres mellem P
 
 ---
 
+
 ## Del 1: 1 PC og 1 PLC
 
 ### Forudsætninger
 
 * Din PC og en Siemens PLC er forbundet til samme netværk
+* **PLC’en skal have en statisk og unik IP-adresse, som ikke bruges af andre enheder på netværket.**
+  - Indstil PLC’ens IP-adresse via TIA Portal eller direkte på enheden, så der ikke opstår IP-konflikter.
 * Du kender PLC’ens IP-adresse
 * Ping mellem PC og PLC virker
 
