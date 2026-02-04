@@ -1,4 +1,4 @@
-# Find din IP- og MAC-adresse
+# 01 - Find din IP- og MAC-adresse
 
 ## 📝 Formål
 
@@ -30,8 +30,12 @@ Dette er en essentiel grundkompetence for at kunne fejlfinde og konfigurere indu
 
 ## Noter
 
-- Min IPv4-adresse: `_______`
-- Min MAC-adresse (fysisk adresse): `_______`
+Skriv dine IP- og MAC-adresser her:
+- Min IPv4-adresse: `_____________`
+- Min MAC-adresse (fysisk adresse): `_____________`
+- Min subnetmaske: `_____________`
+- Min standard gateway: `_____________`
+- Statisk eller dynamisk IP-adresse (DHCP): `_____________`
 
 ---
 
