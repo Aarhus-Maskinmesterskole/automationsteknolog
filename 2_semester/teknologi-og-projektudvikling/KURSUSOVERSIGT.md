@@ -8,81 +8,84 @@ Node-RED indgår ikke i dette forløb for at sikre fokus på kernekompetencer in
 
 Kursusplanen følger mappestrukturen i projektmappen:
 
+
 ```
 📂 teknologi-og-projektudvikling/
 ├── undervisning/
-│   ├── dag01_intro-github-python.md
-│   ├── dag02_python-csv-pandas.md
-│   ├── dag03_esp32-intro.md
-│   ├── dag04_python-serial.md
-│   ├── dag05_pandas-visualisering.md
-│   ├── dag06_sanity-timestamp.md
-│   ├── dag07_miniprojekt-1.md
-│   ├── dag08_python-databehandling.md
-│   ├── dag09_snap7-plc.md
-│   ├── dag10_dokumentation-test.md
-│   ├── dag11_miniprojekt-2.md
-│   └── dag12_praesentation.md
+│   ├── dag01-teknisk-dokumentation-og-tests/
+│   ├── dag02-intro-github-python/
+│   ├── dag03-arbejde-med-dag02/
+│   ├── dag04-python-plc-kommunikation/
+│   ├── dag05-ESP32-intro/
+│   ├── dag06-Python-pyserial/
+│   ├── dag07-Python-CSV-Pandas-intro/
+│   ├── dag08-pandas-visualisering/
+│   ├── dag09-sanity-timestamp/
+│   ├── dag10-python-databehandling/
+│   ├── dag11-realtime-plotting/
+│   └── dag12-Opsummering-evaluering/
 ```
 
 ## 📅 Kursusforløb med fokusområder
 
-| Dag | Emne                          | Hovedtema                                          |
-| --- | ----------------------------- | -------------------------------------------------- |
-| 1   | GitHub + Python intro         | Kursusintro, versionsstyring, Python-basics        |
-| 2   | Python + CSV + Pandas intro   | Dataimport og analyse                              |
-| 3   | ESP32 intro                   | Sensoropsætning og seriel dataudgang               |
-| 4   | Python + pyserial             | Modtagelse og lagring af seriel data               |
-| 5   | Pandas visualisering          | Glidende gennemsnit og plots                       |
-| 6   | Sanity checks + tidsstempling | Datavalidering, grænseværdier, fejlhåndtering, tid |
-| 7   | Mini-projekt 1                | Simpelt system fra sensor til CSV                  |
-| 8   | Python databehandling         | Rensning og strukturering af ESP32-data            |
-| 9   | Snap7 + PLC-integration       | Data fra S7-PLC via Python                         |
-| 10  | Dokumentation og test         | Blokdiagram, testlog, kravopfyldelse               |
-| 11  | Mini-projekt 2                | Fuldt system og dokumentation                      |
-| 12  | Præsentation og evaluering    | Formidling og peer feedback                        |
+
+| Dag | Emne                                      | Hovedtema                                                      |
+|-----|--------------------------------------------|----------------------------------------------------------------|
+| 1   | Teknisk dokumentation og tests             | Kravspec, blokdiagram, flowchart, state machine, testplan      |
+| 2   | Intro til GitHub og Python                 | GitHub-workflow, Python intro, commits, branches, merge        |
+| 3   | Arbejde med dag 2                         | Repetition af GitHub og Python, mini-automation case           |
+| 4   | Python-PLC kommunikation                   | Snap7, Ethernet/IP, læs/skriv PLC-data i Python                |
+| 5   | ESP32 intro og sensorer                    | Opsætning af ESP32, seriel output, simple sensorer             |
+| 6   | Python + pyserial                         | Modtag seriel data, gem som CSV, real-time visualisering       |
+| 7   | Python-CSV-Pandas intro                   | Pandas basics, import/export, data cleaning, time series, vis. |
+| 8   | Pandas visualisering                      | Rolling average, flere sensorer, annotering, dashboards        |
+| 9   | Sanity checks og timestamp                | Sanity checks, plausibilitetstest, watchdog, visualisering     |
+| 10  | Python databehandling                     | Data import, cleaning, validation, reporting                   |
+| 11  | Realtime plotting                         | Opsætning af real-time plots, flere sensorer, multiple plots   |
+| 12  | Opsummering og evaluering                 | Fremlæggelse, peer-review, opsamling                          |
 
 Forstået – her er den justerede version med "studerende" i stedet for "elever":
 
 ---
 
+
 ### 📆 Dag-for-dag beskrivelse
 
-**🛠️ Dag 1 – GitHub + Python intro**
-Kursusstart med fokus på versionsstyring og samarbejde. De studerende opretter deres første GitHub-repository, lærer at bruge GitHub CLI og skriver simple Python-programmer for at få grundlæggende styr på syntaks, variabler og kontrolstrukturer.
+**📘 Dag 1 – Teknisk dokumentation og tests**
+Fokus på kravspecifikation, blokdiagram, flowchart, state machine og testplan. De studerende lærer at dokumentere og teste et simpelt system, og får skabeloner til teknisk dokumentation.
 
-**📊 Dag 2 – Python + CSV + Pandas intro**
-Introduktion til databehandling i Python. De studerende lærer at læse og skrive CSV-filer, og bruger `pandas` til at analysere datasæt med funktioner som `read_csv()`, `head()` og `describe()`.
+**💻 Dag 2 – Intro til GitHub og Python**
+Introduktion til versionsstyring med GitHub og grundlæggende Python-programmering. De studerende opretter et repo, laver commits og branches, og skriver simple scripts.
 
-**📡 Dag 3 – ESP32 intro**
-Fokus på hardware: sensorvalg, forbindelser og brug af `analogRead()`. ESP32 programmeres med Arduino IDE og sender data ud via seriel kommunikation, som vises i Serial Monitor.
+**🔁 Dag 3 – Arbejde med dag 2**
+Repetition og fordybelse i GitHub-workflow og Python. Dagen bruges på at færdiggøre og uddybe opgaverne fra dag 2, så alle får styr på versionsstyring og grundlæggende Python.
 
-**🔌 Dag 4 – Python + pyserial**
-ESP32 kobles sammen med Python via `pyserial`. De studerende opsætter et script, der læser data i realtid, gemmer det i CSV-filer og forbereder det til videre analyse.
+**🔌 Dag 4 – Python-PLC kommunikation**
+Snap7 og Ethernet/IP: Læs/skriv PLC-data i Python. Fokus på integration mellem Python og Siemens PLC.
 
-**📈 Dag 5 – Pandas visualisering**
-Python-data visualiseres med `matplotlib`. Fokus på filtrering, glidende gennemsnit og hvordan man præsenterer målinger i overskuelige grafer.
+**📡 Dag 5 – ESP32 intro og sensorer**
+Opsætning af ESP32, seriel output og simple sensorer. Målinger logges og visualiseres.
 
-**🧠 Dag 6 – Sanity checks + tidsstempling**
-Validering af måledata med Python. De studerende implementerer grænseværdier, outlier-filtrering og fejlhåndtering. `datetime` bruges til at tidsstemple data for at sikre sporbarhed.
+**🔗 Dag 6 – Python + pyserial**
+Modtag seriel data fra ESP32, gem som CSV, real-time visualisering i Python.
 
-**🔧 Dag 7 – Mini-projekt 1**
-Grupperne anvender de første seks dages viden til at opbygge et simpelt system fra sensor til CSV og visualisering – med fokus på struktur og klar dokumentation.
+**📊 Dag 7 – Python-CSV-Pandas intro**
+Pandas basics, import/export, data cleaning, time series og visualisering. Fokus på databehandling og analyse.
 
-**🧹 Dag 8 – Python databehandling**
-Fokus på dataoprensning: fjernelse af fejlmålinger, brug af rullende gennemsnit og eksport af færdige datasæt. Data gøres klar til præsentation og dokumentation.
+**📈 Dag 8 – Pandas visualisering**
+Rolling average, flere sensorer, annotering, dashboards og avanceret visualisering.
 
-**🏭 Dag 9 – Snap7 + PLC-integration**
-Python forbindes til en Siemens S7 PLC via Snap7. De studerende læser én variabel fra en datablock og visualiserer data, som alternativ til ESP32-input.
+**🧠 Dag 9 – Sanity checks og timestamp**
+Sanity checks, plausibilitetstest, watchdog og visualisering af måledata.
 
-**🗂️ Dag 10 – Dokumentation og tests**
-Fokus på projektafslutning: signalbeskrivelser, blokdiagrammer og testlogs. Grupperne arbejder i `docs/` og bruger deres GitHub-repo som afleveringsplatform.
+**🧹 Dag 10 – Python databehandling**
+Data import, cleaning, validation og reporting. Rensning og strukturering af datasæt.
 
-**🔬 Dag 11 – Mini-projekt 2**
-Grupperne laver en samlet løsning: sensor- eller PLC-input → Python-analyse → dokumentation. GitHub-strukturen færdiggøres og kvalitetssikres.
+**📉 Dag 11 – Realtime plotting**
+Opsætning af real-time plots, flere sensorer og multiple plots i Python.
 
-**🎤 Dag 12 – Fremlæggelse og evaluering**
-Mundtlig præsentation af projekterne. Hver gruppe fremlægger deres løsning, modtager feedback og evalueres på funktion, dokumentation og refleksion.
+**🎤 Dag 12 – Opsummering og evaluering**
+Fremlæggelse, peer-review og opsamling. Projekter præsenteres og evalueres på funktion, dokumentation og refleksion.
 
 ## 🧰 Brugte teknologier
 

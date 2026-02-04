@@ -1,3 +1,4 @@
+
 # 📆 LEKTIONSPLAN – Teknologi og Projektudvikling (5 ECTS)
 
 **Uddannelse:** Automationsteknolog
@@ -9,20 +10,20 @@
 
 ## 📅 Oversigt over lektionsindhold og progression
 
-| Dag | Tema                          | Indhold                                                                     | Output                                 |
-| --- | ----------------------------- | --------------------------------------------------------------------------- | -------------------------------------- |
-| 1   | GitHub + Python intro         | Introduktion til kurset, opstart af GitHub-repo, basis Python-programmering | README.md, `basis.py`, `.gitignore`    |
-| 2   | Python + CSV + Pandas intro   | Læs/skriv CSV, Pandas `read_csv`, `head()`, `describe()`                    | Simpel CSV-analyse                     |
-| 3   | ESP32 intro                   | analogRead, Serial output struktur, sensorvalg                              | `sensor.ino`, debug via Serial Monitor |
-| 4   | Python + pyserial             | Læs ESP32-seriel data, gem som CSV, vis i `matplotlib`                      | Real-time datalogger i Python          |
-| 5   | Pandas visualisering          | `matplotlib`, filtrering, glidende gennemsnit                               | Grafer og renset data                  |
-| 6   | Sanity checks + tidsstempling | Validering af måledata, grænseværdier, fejlhåndtering, `datetime`-modulet   | `sanity.py`, `timestamp_logger.py`     |
-| 7   | Mini-projekt 1                | Sensor → CSV → visualisering i Python                                       | Projektstruktur og dokumentation       |
-| 8   | Python databehandling         | Databehandling af ESP32-målinger i Pandas, visualisering og eksport         | Renset datasæt til dokumentation       |
-| 9   | Snap7 + PLC-integration       | Læs én DB-variabel fra S7 PLC i Python                                      | `plc_read.py`, datavisualisering       |
-| 10  | Dokumentation og tests        | Blokdiagram, testlog, signalbeskrivelse                                     | `docs/` komplet til projekt            |
-| 11  | Mini-projekt 2                | Sensor → Python → Analyse → Dokumentation                                   | Klar GitHub-projektmappe               |
-| 12  | Fremlæggelse og evaluering    | Mundtlig præsentation, peer-review og opsamling                             | Projektfeedback                        |
+| Dag | Tema                                      | Indhold                                                                                 | Output                                 |
+|-----|--------------------------------------------|-----------------------------------------------------------------------------------------|----------------------------------------|
+| 1   | Teknisk dokumentation og tests             | Kravspecifikation, blokdiagram, flowchart, state machine, testplan                      | Kravspec, diagrammer, testplan         |
+| 2   | Intro til GitHub og Python                 | GitHub-workflow, Python intro, commits, branches, merge                                 | Repo med commits, Python-scripts       |
+| 3   | Arbejde med dag 2                         | Repetition af GitHub og Python, mini-automation case                                    | Repo med historik, Python-øvelser      |
+| 4   | Python-PLC kommunikation                   | Snap7, Ethernet/IP, læs/skriv PLC-data i Python                                         | PLC-read/write scripts                 |
+| 5   | ESP32 intro og sensorer                    | Opsætning af ESP32, seriel output, simple sensorer                                      | Sensor-målinger, seriel data           |
+| 6   | Python + pyserial                         | Modtag seriel data, gem som CSV, real-time visualisering                                | Python datalogger, CSV-filer           |
+| 7   | Python-CSV-Pandas intro                   | Pandas basics, import/export, data cleaning, time series, visualisering                  | Pandas scripts, visualiseringer         |
+| 8   | Pandas visualisering                      | Rolling average, flere sensorer, annotering, streamlit dashboard                        | Grafer, dashboards                     |
+| 9   | Sanity checks og timestamp                | Sanity checks, plausibilitetstest, watchdog, visualisering                              | Sanity scripts, visualisering           |
+| 10  | Python databehandling                     | Data import, cleaning, validation, reporting                                            | Renset datasæt, rapport                 |
+| 11  | Realtime plotting                         | Opsætning af real-time plots, flere sensorer, multiple plots                            | Realtime plot scripts                   |
+| 12  | Opsummering og evaluering                 | Fremlæggelse, peer-review, opsamling                                                    | Projektfeedback, dokumentation          |
 
 ---
 
@@ -35,7 +36,7 @@
 
 ## 📂 Ressourcer og værktøjer
 
-* Python (VS Code eller Jupyter)
+* Python (VS Code eller Google Antigravity)
 * ESP32 med sensorer (DHT22, potmeter, etc.)
 * Siemens S7 PLC eller simulator (Snap7)
 * Git + GitHub til versionsstyring og dokumentation
