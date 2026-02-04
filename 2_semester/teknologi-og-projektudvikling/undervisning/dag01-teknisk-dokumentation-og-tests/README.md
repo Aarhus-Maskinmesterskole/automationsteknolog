@@ -2,6 +2,8 @@
 
 Denne mappe indeholder dag 1-materiale (PDF’er) til at komme i gang med teknisk dokumentation og test i et projekt.
 
+Github-repo: ![https://github.com/Aarhus-Maskinmesterskole/automationsteknolog.git]
+
 ## 🎯 Formål
 
 - Forstå hvad en kravspecifikation er, og hvordan den bruges
