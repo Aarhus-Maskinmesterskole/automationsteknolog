@@ -1,4 +1,4 @@
-# Opgave: Kravspecifikation for simpelt system
+# Opgave 1: Kravspecifikation for simpelt system
 
 ## Beskrivelse
 Lav en kort kravspecifikation til et simpelt system (fx LED + knap eller temperaturmåling + blæser).
