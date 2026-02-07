@@ -212,7 +212,7 @@ Start-Service ssh-agent
 **2) Opret nøgle**
 
 ```powershell
-ssh-keygen -t ed25519 -C "din-email@skole.dk"
+ssh-keygen -t ed25519 -C "github mail"
 ```
 
 Tryk Enter for standard placering.

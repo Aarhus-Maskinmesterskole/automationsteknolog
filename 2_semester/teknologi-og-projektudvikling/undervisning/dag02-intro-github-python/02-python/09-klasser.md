@@ -20,7 +20,7 @@ En klasse er en skabelon for objekter. Objekter har data (variabler) og funktion
 
 ```python
 class Motor:
-    def sig_hej(self):
+    def start(self):
         print("Motoren er startet!")
 
     m = Motor()
@@ -71,11 +71,8 @@ Hver instans har sin egen version af variabler og metoder.
 
 ```python
 class Pumpe:
-    def __init__(self, radius):
-        self.radius = radius
-
     def __init__(self, effekt):
-        self.effekt = effekt  # kW
+        self.effekt = effekt
 
     def status(self):
         if self.effekt > 5:
