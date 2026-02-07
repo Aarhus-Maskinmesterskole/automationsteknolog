@@ -1,4 +1,4 @@
-# 🧭 Guide til opgave: Opret og klon et GitHub-repository (uden `gh`)
+# 🧭 Guide til opgave: Opret og klon et GitHub-repository
 
 Denne vejledning hjælper dig gennem en typisk GitHub-opgave, hvor du opretter et repository og henter det ned lokalt med **git**. Det er den mest udbredte metode og fungerer på alle platforme.
 
