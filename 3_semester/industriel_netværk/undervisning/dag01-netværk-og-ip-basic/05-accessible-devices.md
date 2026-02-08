@@ -54,9 +54,9 @@ Vent til listen over fundne enheder vises.
 
 For hver fundet enhed kan du se:
 * Enhedstype (fx S7-1200, S7-1500, HMI)
-* IP-adresse
-* MAC-adresse
-* Navn (hvis konfigureret)
+* IP-adresse `______________`
+* MAC-adresse `______________`
+* Navn (hvis konfigureret) `______________`
 
 ---
 

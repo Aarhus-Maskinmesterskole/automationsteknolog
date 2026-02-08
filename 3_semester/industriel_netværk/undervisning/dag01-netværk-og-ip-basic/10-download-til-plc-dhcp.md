@@ -88,7 +88,7 @@ Beskriv kort, hvad der sker, når du downloader til PLC’en med denne indstilli
 
 ## Refleksion
 
-* Hvilke fordele og ulemper er der ved at bruge DHCP til simulerede PLC’er?
+* Hvilke fordele og ulemper er der ved at bruge DHCP til PLC’er?
 * Hvordan kan du bruge denne viden i fejlfinding og netværksopsætning?
 
 *(Skriv dine svar herunder)*
