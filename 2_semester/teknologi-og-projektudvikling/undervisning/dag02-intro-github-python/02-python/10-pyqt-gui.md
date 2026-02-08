@@ -19,7 +19,7 @@ PyQt gør det muligt at lave grafiske brugerflader (GUI) i Python. Det bruges of
 PyQt er en samling Python-moduler, der gør det let at lave vinduer, knapper, tekstfelter osv. Det kræver installation af pakken:
 
 ```bash
-pip install pyqt5
+pip install pyqt6
 ```
 
 ---
@@ -27,7 +27,7 @@ pip install pyqt5
 ## 📘 2. Simpelt vindue
 
 ```python
-from PyQt5.QtWidgets import QApplication, QLabel, QWidget
+from PyQt6.QtWidgets import QApplication, QLabel, QWidget
 import sys
 
 app = QApplication(sys.argv)
@@ -35,7 +35,7 @@ vindue = QWidget()
 vindue.setWindowTitle('Automation GUI')
 label = QLabel('Velkommen til overvågning!', parent=vindue)
 vindue.show()
-app.exec_()
+app.exec()
 ```
 
 ---
@@ -43,26 +43,29 @@ app.exec_()
 ## 📘 3. Knap og label
 
 ```python
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLabel
+from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QLabel
 import sys
 
 def start_motor():
     label.setText('Motoren er startet!')
+    label.adjustSize()
 
 app = QApplication(sys.argv)
 vindue = QWidget()
 vindue.setWindowTitle('Motorstyring')
+vindue.adjustSize()
 
 label = QLabel('Status: Klar', parent=vindue)
 label.move(20, 20)
 
 knap = QPushButton('Start motor', parent=vindue)
+knap.adjustSize()
 knap.move(20, 60)
 knap.clicked.connect(start_motor)
 
-vindue.resize(200, 120)
+vindue.resize(1000, 600)
 vindue.show()
-app.exec_()
+app.exec()
 ```
 
 ---
@@ -70,12 +73,13 @@ app.exec_()
 ## 📘 4. Inputfelt og opdatering
 
 ```python
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton
+from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton
 import sys
 
 def opdater_sensor():
     vaerdi = inputfelt.text()
     label.setText(f'Sensorværdi: {vaerdi}')
+    label.adjustSize()  # Juster label-størrelsen efter tekstændring
 
 app = QApplication(sys.argv)
 vindue = QWidget()
@@ -93,7 +97,8 @@ knap.clicked.connect(opdater_sensor)
 
 vindue.resize(220, 150)
 vindue.show()
-app.exec_()
+app.exec()
+
 ```
 
 ---
