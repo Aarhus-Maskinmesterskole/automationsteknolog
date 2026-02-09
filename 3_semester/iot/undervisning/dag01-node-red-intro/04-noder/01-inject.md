@@ -89,6 +89,7 @@ return msg;
 
 Dette vil sende tallet 42, 43, 44, osv. til debug-panelet hvert 5. sekund.
 
+
 ### Eksempel 3: JSON objekt
 
 ```
@@ -100,6 +101,10 @@ Konfiguration:
 - Værdi: `{"sensorId": "temp1", "value": 22.5, "unit": "C"}`
 
 Dette vil sende et JSON-objekt der repræsenterer en sensoraflæsning.
+
+---
+
+![alt text](image-1.png)
 
 ---
 
@@ -128,25 +133,51 @@ Dette vil sende en besked med disse tre egenskaber på én gang.
 
 ---
 
-## 🏋️ Øvelser
+## 🏋️ Øvelser (begynder)
 
-### Øvelse 1: Timestamp med formatering
+Start med et tomt flow i Node-RED. Efter hver øvelse: klik Deploy og tryk på inject-knappen for at se resultatet i Debug-panelet.
 
-1. Placer en inject-node konfigureret med timestamp
-2. Tilføj en function-node med følgende kode:
+### Øvelse 1: Timestamp til læselig tid
+
+**Hvad du lærer:** Inject med timestamp og formatering i en function-node.
+
+**Trin:**
+
+1. Træk en **Inject-node** ind på dit flow og dobbeltklik på den
+2. Sæt Payload til `timestamp` (det er standard, så det er nok allerede valgt)
+3. Klik Done
+4. Træk en **Debug-node** ind
+5. Forbind Inject → Debug (træk fra prikken på højre side af Inject til venstre side af Debug)
+6. Træk nu en **Function-node** ind *mellem* de to noder
+7. Dobbeltklik på Function-noden og indsæt denne kode:
    ```javascript
-   // Formater tidsstempel pænt
+   // Formater tidsstempel til lokal tid
    var date = new Date(msg.payload);
    msg.payload = date.toLocaleTimeString();
    return msg;
    ```
-3. Forbind til en debug-node
-4. Deploy og test
+8. Klik Done
+9. Klik på den røde **Deploy**-knap øverst til højre
+10. Klik på knappen til venstre for Inject-noden
+11. Åbn Debug-panelet til højre og se et klokkeslæt som fx `14:23:05`
 
-### Øvelse 2: Gentagende tæller
+![alt text](image-2.png)
 
-1. Opret en inject-node der sender 0 som payload hvert 2. sekund
-2. Tilføj en function-node der bruger context til at tælle:
+---
+
+### Øvelse 2: Simpel tæller hvert 2. sekund
+
+**Hvad du lærer:** Gem og opdater tal i node-context, så værdier huskes mellem kørsler.
+
+**Trin:**
+
+1. Træk en **Inject-node** ind og dobbeltklik på den
+2. Sæt disse indstillinger:
+   - Payload: Vælg `number` og skriv `0`
+   - Repeat: Vælg `interval` og sæt den til `2` sekunder
+3. Klik Done
+4. Træk en **Function-node** ind og dobbeltklik på den
+5. Indsæt denne kode:
    ```javascript
    // Tæl op for hver injektion
    var count = context.get('count') || 0;
@@ -155,15 +186,57 @@ Dette vil sende en besked med disse tre egenskaber på én gang.
    msg.payload = count;
    return msg;
    ```
-3. Tilføj en debug-node til at vise resultatet
+6. Klik Done
+7. Træk en **Debug-node** ind
+8. Forbind: Inject → Function → Debug
+9. Klik **Deploy**
+10. Se Debug-panelet tælle: 1, 2, 3, 4, ... hvert 2. sekund
 
-### Øvelse 3: Daily Report Trigger
+**Stop tælleren:** Dobbeltklik på Inject-noden, sæt Repeat til `none` og Deploy igen.
 
-1. Opsæt en inject-node til at udløses én gang om dagen kl. 8:00
-   - Brug cron-indstillingen: `0 8 * * *`
-2. Indstil topic til "daily_report"
-3. Indstil payload til en streng: "Generér daglig rapport"
-4. Tilslut til en debug-node
+![alt text](image-3.png)
+
+---
+
+### Øvelse 3: Periodisk beskedgenerator
+
+**Hvad du lærer:** Send beskeder med topic og string payload i interval.
+
+**Trin:**
+
+1. Træk en **Inject-node** ind og dobbeltklik på den
+2. Sæt disse indstillinger:
+   - Payload: Vælg `string` og skriv `Systemet kører som det skal`
+   - Topic: Skriv `status_check`
+   - Repeat: Vælg `interval` og sæt til `10` sekunder
+3. Klik Done
+4. Træk en **Debug-node** ind
+5. Forbind Inject → Debug
+6. Klik **Deploy**
+7. Vent 10 sekunder eller klik manuelt på Inject-knappen
+8. Se i Debug-panelet at både topic og payload vises
+
+**Forventet i Debug:**
+```
+status_check : msg.payload : string[27]
+"Systemet kører som det skal"
+```
+
+**Ekstra:** Stop inject'en ved at dobbeltklik på noden, sæt Repeat til `none` og Deploy igen.
+
+---
+
+### 💡 Bonus: Planlagt daglig kørsel
+
+Vil du køre noget hver dag kl. 08:00? Brug disse indstillinger i Inject-noden:
+
+1. Dobbeltklik på Inject-noden
+2. Under "Repeat": Vælg `at a specific time`
+3. Vælg klokkeslæt `08:00:00` i dropdown-menuen
+4. Vælg hvilke dage (standard er alle dage)
+5. Klik Done og Deploy
+
+Nu vil noden automatisk køre hver morgen kl. 08:00.
 
 ---
 
