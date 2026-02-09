@@ -1,0 +1,1 @@
+print("min alder 38")
