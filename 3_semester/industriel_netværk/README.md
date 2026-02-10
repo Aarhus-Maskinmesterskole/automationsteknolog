@@ -71,20 +71,22 @@ industrielt-netvaerk/
 
 ## 🧩 Moduloversigt
 
-| Modul  | Fokus                        | Centrale teknologier/værktøjer     |
-| ------ | ---------------------------- | ---------------------------------- |
-| **01** | IT-netværk & IP              | GNS3, ipconfig, netværkstopologi   |
-| **02** | Subnet, VLAN, segmentering   | GNS3, routing, ping/traceroute     |
-| **03** | Profibus & IO-Link (teori)   | Slides, quiz, case-eksempler       |
-| **04** | Rotationsøvelser 1           | Fysisk Profibus/IO-Link/Modbus     |
-| **05** | Siemens Opgaver              | Siemens kommunikation              |
-| **06** | Profinet & EtherNet/IP       | TIA Portal, GNS3, video/quiz       |
-| **07** | Rotationsøvelser 2           | Fysisk/virtuel PLC, UR/AUBO, tags  |
-| **08** | Fejlfinding & sikkerhed      | GNS3 firewall/ACL, fejlscenarier   |
-| **09** | Integration & dokumentation  | PLC/robot/HMI samspil, rapport     |
-| **10** | Visualisering (Node-RED)     | Node-RED dashboard, Modbus, OPC UA |
-| **11** | Projektdag                   | Eget projekt, dokumentation        |
-| **12** | Opsamling & ekstraopgaver    | Repetition, refleksion             |
+| Dag    | Fokus                                    | Centrale teknologier/værktøjer                |
+| ------ | ---------------------------------------- | --------------------------------------------- |
+| **01** | [Netværk og IP Basic](undervisning/dag01-netværk-og-ip-basic/) | IP/MAC-adresser, ARP, ping, TIA Portal |
+| **02** | [Profinet og Protokoller](undervisning/dag02-profinet-og-protokoller/) | S7comm, OUC (TCON/TDISCON), Web Server, WebSocket |
+| **03** | [Profibus & IO-Link Teori](undervisning/dag03-profibus-io-link-teori/) | Bus-principper, master/slave, feltbus-topologi |
+| **04** | [Rotationsøvelse 1: Profibus](undervisning/dag04-rotationsøvelse-1-profibus/) | Fysisk Profibus opsætning, fejlfinding |
+| **05** | [Modbus TCP & Universal Robots](undervisning/dag05-modbus-tcp-universial-robots/) | Modbus TCP/RTU, UR robot integration |
+| **06** | [Rockwell](undervisning/dag06-rockwell/) | Allen-Bradley PLC, EtherNet/IP, Studio 5000 |
+| **07** | [KEPServerEX (OPC UA Gateway)](undervisning/dag07-kepserverex-(opc-ua-gateway)/) | OPC UA, protocol translation, data gateway |
+| **08** | [GNS3: Ping, ARP og Traceroute](undervisning/dag08-gns3-ping-arp-og-traceroute/) | GNS3 simulation, netværksdiagnostik |
+| **09** | [GNS3: Subnet, VLAN, Segmentering](undervisning/dag09-gns3-subnet-vlan-segmentering/) | VLAN configuration, subnetting, routing |
+| **10** | _(Pause eller projektarbejde)_ | - |
+| **11** | [Rotationsøvelse 2: GNS3 Firewall](undervisning/dag11-rotationsøvelse-2-gns3-firewall/) | Firewall rules, ACL, sikkerhed i OT |
+| **12** | [VPN](undervisning/dag12-vpn/) | VPN setup, remote access, sikker forbindelse |
+
+> **💡 Tip:** Klik på dagene ovenfor for at gå direkte til undervisningsmaterialet!
 
 ---
 
