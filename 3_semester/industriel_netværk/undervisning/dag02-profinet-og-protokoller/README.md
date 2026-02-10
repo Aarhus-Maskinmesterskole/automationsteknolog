@@ -83,8 +83,6 @@ I skal opsætte kommunikation mellem to PLC'er:
 - Netværkskonfiguration
 - Hardware setup
 
-**Sværhedsgrad:** ⭐⭐☆☆☆
-
 ---
 
 ### 🔨 Type 2: Implementeringsopgaver
@@ -95,8 +93,6 @@ I skal opsætte kommunikation mellem to PLC'er:
 - Datastrukturer og buffers
 - Fejlhåndtering
 - Timing og synkronisering
-
-**Sværhedsgrad:** ⭐⭐⭐☆☆
 
 ---
 
@@ -109,8 +105,6 @@ I skal opsætte kommunikation mellem to PLC'er:
 - Systematisk fejlfinding
 - Performance monitoring
 
-**Sværhedsgrad:** ⭐⭐⭐⭐☆
-
 ---
 
 ### 📝 Type 4: Dokumentationsopgaver
@@ -121,8 +115,6 @@ I skal opsætte kommunikation mellem to PLC'er:
 - Skærmbilleder og annoteringer
 - Struktureret rapportering
 - Best practices
-
-**Sværhedsgrad:** ⭐⭐☆☆☆
 
 ---
 
@@ -213,7 +205,7 @@ I skal opsætte kommunikation mellem to PLC'er:
 - Dokumenter **alle konfigurationer** med skærmbilleder
 - Spørg underviser hvis I **sidder fast i >15 minutter**
 
-### ✅ Efter opgaverne:
+## ✅ Efter opgaverne:
 - Verificer at **alle test-cases fungerer**
 - Tjek at **dokumentationen er komplet**
 - Eksperimentér med **bonus-udfordringer**
@@ -233,11 +225,3 @@ I skal opsætte kommunikation mellem to PLC'er:
 - Spørg klassekammeraterne
 - Check Siemens dokumentation
 - Brug diagnostiske værktøjer
-
----
-
-## 🎉 Held og Lykke!
-
-I dag lærer I fundamentale skills til industriel netværkskommunikation. Disse kompetencer er **essentielle** for moderne automationsingeniører og bruges dagligt i industrien.
-
-**Gå i gang med opgave 01 og arbejd jer gennem dem systematisk!** 🚀
