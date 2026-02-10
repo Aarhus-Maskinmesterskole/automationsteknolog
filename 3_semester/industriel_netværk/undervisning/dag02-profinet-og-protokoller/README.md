@@ -128,22 +128,6 @@ I skal opsætte kommunikation mellem to PLC'er:
 - [x] Oprette basic webside på PLC
 - [x] Bruge diagnostiske værktøjer til fejlfinding
 
-### 🚀 Avanceret niveau (ekstra udfordringer):
-- [x] Implementere komplekse datastrukturer (arrays, UDT'er)
-- [x] Bygge robust fejlhåndtering med timeout og retry-logik
-- [x] Oprette interaktive websider med JavaScript
-- [x] Implementere WebSocket kommunikation med Python
-- [x] Analysere netværkstrafik med Wireshark
-- [x] Optimere dataudveksling for performance
-
-### 💼 Professionelle færdigheder:
-- [x] **Systemintegration:** Forbinde PLC med IT-systemer
-- [x] **Protokol-valg:** Vælge rigtig kommunikationsmetode for opgaven
-- [x] **Netværksdesign:** Designe industrielle netværksarkitekturer
-- [x] **Fejlhåndtering:** Implementere robust error handling
-- [x] **Dokumentation:** Professionel teknisk dokumentation
-- [x] **Troubleshooting:** Systematisk fejlfinding i komplekse systemer
-
 ---
 
 ## 🗂️ Opgavestruktur
@@ -191,20 +175,6 @@ I skal opsætte kommunikation mellem to PLC'er:
 
 ---
 
-## 💡 Tips til Succes
-
-### 🎯 Før I går i gang:
-1. **Læs teorien først** - Forstå forskellen mellem de tre metoder
-2. **Tjek netværk** - Verificer IP-adresser og forbindelser
-3. **Backup projekter** - Gem ofte, især før store ændringer
-4. **Arbejd systematisk** - Fuldfør én opgave ad gangen
-
-### 🔧 Under opgaverne:
-- Brug **Online & Diagnostics** i TIA Portal til at overvåge kommunikation
-- Test med **simple data først** (fx integers) før komplekse strukturer
-- Dokumenter **alle konfigurationer** med skærmbilleder
-- Spørg underviser hvis I **sidder fast i >15 minutter**
-
 ## ✅ Efter opgaverne:
 - Verificer at **alle test-cases fungerer**
 - Tjek at **dokumentationen er komplet**
@@ -225,3 +195,5 @@ I skal opsætte kommunikation mellem to PLC'er:
 - Spørg klassekammeraterne
 - Check Siemens dokumentation
 - Brug diagnostiske værktøjer
+
+---
