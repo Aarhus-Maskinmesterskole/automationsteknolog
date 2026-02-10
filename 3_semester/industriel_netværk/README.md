@@ -36,36 +36,38 @@ Efter forløbet kan du …
 
 ---
 
-## 📁 Repo-struktur (eksempel)
+## 📁 Repo-struktur
 
 ```text
-industrielt-netvaerk/
-├── README.md
-├── forloebsplan.md
-├── common/
-│   ├── netvaerksdiagram-skabeloner/
-│   ├── assets/ (billeder, slides, ekstra opgaver)
+industriel_netværk/
+├── README.md                         ← Du er her!
 │
-├── dag01-it-netvaerk/
-├── dag02-subnet-vlan/
-├── dag03-profibus-io-link-teori/
-├── dag04-rotation1-profibus-io-link-modbus/
-├── dag05-dokumentation/
-├── dag06-profinet-ethernetip-teori/
-├── dag07-rotation2-profinet-ethernetip/
-├── dag08-fejlfinding-sikkerhed/
-├── dag09-integration-dokumentation/
-├── dag10-visualisering-dataflow/
-├── dag11-projektopgaver/
-├── dag12-opsamling/
+├── hardware-og-software/
+│   ├── github-use/                   → GitHub guides og tutorials
+│   ├── GNS3/                         → GNS3 setup og konfiguration
+│   └── GNS3-IMAGE/                   → Router/switch images til GNS3
+│
+└── undervisning/
+    ├── README.md                     → Oversigt over alle dage
+    ├── dag01-netværk-og-ip-basic/
+    ├── dag02-profinet-og-protokoller/
+    ├── dag03-profibus-io-link-teori/
+    ├── dag04-rotationsøvelse-1-profibus/
+    ├── dag05-modbus-tcp-universial-robots/
+    ├── dag06-rockwell/
+    ├── dag07-kepserverex-(opc-ua-gateway)/
+    ├── dag08-gns3-ping-arp-og-traceroute/
+    ├── dag09-gns3-subnet-vlan-segmentering/
+    ├── dag11-rotationsøvelse-2-gns3-firewall/
+    └── dag12-vpn/
 ````
 
 > **Bemærk:**
 > Hver *dag-mappe* indeholder:
-> • *README.md* → mål, ressourcer, opgaver
-> • Opgavefiler (.md, evt. pdf/skabelon)
-> • Evt. billeder eller netværksdiagrammer
-> • Evt. bonus- eller “stretch”-opgaver
+> • **README.md** → Dagens læringsmål, indhold og opgaver
+> • **Opgavefiler** (.md) med step-by-step guides
+> • **Billeder/diagrammer** til visualisering
+> • **Ekstra ressourcer** og bonus-opgaver
 
 ---
 
