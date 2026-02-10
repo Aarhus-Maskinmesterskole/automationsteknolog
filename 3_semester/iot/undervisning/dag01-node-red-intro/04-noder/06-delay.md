@@ -1,245 +1,91 @@
 # ⏱️ Delay Node
 
-Delay-noden i Node-RED giver mulighed for at introducere tidsforsinkelser i dit flow, rate-limiting beskeder eller implementere simple time-out funktionaliteter. Dette er en central node for tidsstyring af beskeder.
+Delay-noden lader dig forsinke beskeder eller begrænse hvor mange beskeder der sendes videre pr. sekund. Nyttig til at undgå at overbelaste systemer.
 
 ## 🎯 Formål
 
-I denne guide lærer du om delay-noden og hvordan du kan:
-- Forsinke beskeder i et specificeret tidsrum
-- Rate-begrænse beskeder for at undgå overbelastning
-- Droppe beskeder ved for høj frekvens
-- Samle flere beskeder i batches
+Med delay-noden kan du:
+- Forsinke en besked med et antal sekunder
+- Begrænse antallet af beskeder der sendes videre (rate limiting)
+- Undgå at overbelaste andre systemer (fx databaser, API'er)
 
 ---
 
-## ⚡ Grundfunktionalitet
+## ⚡ To hovedfunktioner
 
-Delay-noden tilbyder fire primære funktioner:
+1. **Delay each message** - Forsinker hver besked med et fast antal sekunder
+2. **Limit rate to** - Sender højst X beskeder pr. sekund/minut
 
-1. **Delay each message**: Forsinker hver enkelt besked med et specificeret tidsrum
-2. **Limit rate to**: Begrænser antallet af beskeder der kan passere pr. tidsenhed
-3. **Throttle messages**: Kun lader seneste besked passere efter en venteperiode
-4. **Queue messages and output at fixed interval**: Samler beskeder og sender dem videre med faste intervaller
-
----
-
-## 🛠️ Konfiguration
-
-### Forsinkelse (Delay Each Message)
-
-![Delay Node Configuration](https://nodered.org/docs/user-guide/images/node-red-delay-node.png)
-
-- **For** - Tidsperioden beskeder skal forsinkes (millisekunder, sekunder, minutter, timer)
-- **Random delay** - Forsink med et tilfældigt tidsrum op til det angivne maksimum
-- **Dynamic delay** - Brug en beskedegenskab til at bestemme forsinkelsen
-
-### Rate Begrænsning (Limit Rate)
-
-- **To** - Antallet af beskeder der tillades pr. tidsrum (f.eks. 1 besked pr. sekund)
-- **Drop intermediate messages** - Mellem-beskeder droppes (kun de tilladte antal videreføres)
-- **Queue intermediate messages** - Mellem-beskeder køes og sendes med den tilladte rate
-
-### Throttling
-
-- **To 1 message per** - Venter på at der ikke er flere indkomne beskeder i et givent tidsrum, før den videresender den seneste besked
-- **Reset timeout if new message arrives** - Nulstiller ventetiden når der kommer en ny besked
-
-### Fast Interval
-
-- **Send at fixed interval** - Sender beskeder videre med fast interval uanset inputraten
-- **Timed interval** - Vælg tidsinterval mellem outputs
-- **Send concatenated array** - Sender alle beskeder som ét array
-- **Send each message individually** - Sender beskederne enkeltvis med det angivne interval
+**Eksempel:**
+- Delay: Vent 2 sekunder før beskeden sendes videre
+- Rate limit: Send max 1 besked pr. sekund (resten venter i kø)
 
 ---
 
 ## 💡 Eksempler
 
-### Eksempel 1: Simpel forsinkelse
+### Eksempel 1: Forsink besked 3 sekunder
 
 ```
 [Inject] → [Delay] → [Debug]
 ```
 
-Delay-node konfiguration:
+Delay-node:
 - Action: "Delay each message"
-- For: "2 seconds"
+- For: "3 seconds"
 
-Dette forsinkelser hver besked med 2 sekunder, hvilket er nyttigt for at simulere netværksforsinkelse eller give enheder tid til at reagere.
+Beskeden venter 3 sekunder før den vises i Debug.
 
-### Eksempel 2: Rate begrænsning af API-kald
+### Eksempel 2: Begræns til 1 besked pr. sekund
 
 ```
-[Inject] → [HTTP Request] → [Delay] → [Debug]
+[Inject] → [Delay] → [Debug]
 ```
 
-Delay-node konfiguration:
+Delay-node:
 - Action: "Limit rate to"
-- To: "1 message per 5 seconds"
-- Drop intermediate messages: unchecked (queue them instead)
+- To: "1 message per 1 second"
+- Med "all messages" valgt
 
-Dette sikrer, at API-kald ikke overstiger en frekvens på 1 kald hver 5. sekund, og køer yderligere forespørgsler.
-
-### Eksempel 3: Debounce sensor input
-
-```
-[MQTT In] → [Delay] → [Debug]
-```
-
-Delay-node konfiguration:
-- Action: "Throttle messages"
-- To: "1 message per 500 milliseconds"
-- Reset timeout if new message arrives: checked
-
-Dette filtrerer hurtigt skiftende sensorværdier og lader kun den seneste værdi passere efter en stabil periode på 500 ms.
-
-### Eksempel 4: Batch-behandling
-
-```
-[Inject] → [Delay] → [Debug]
-```
-
-Delay-node konfiguration:
-- Action: "Queue messages and output at fixed interval"
-- Send: "Every 5 seconds"
-- Send as concatenated array: checked
-
-Dette samler beskeder over 5 sekunder og sender dem som et enkelt array for batch-behandling.
+Selv hvis du klikker Inject mange gange hurtigt, sendes kun 1 besked pr. sekund videre.
 
 ---
 
-## 🔄 Avanceret anvendelse
+## 🏋️ Øvelser (begynder)
 
-### Dynamisk forsinkelse
+### Øvelse 1: Forsink en besked
 
-Du kan bruge en dynamisk forsinkelse baseret på en beskedegenskab:
+1. Træk **Inject** → **Delay** → **Debug** ind
+2. I Inject: Sæt payload til string `"Besked sendt"`
+3. I Delay-noden:
+   - Action: **Delay each message**
+   - For: `5` seconds
+4. Deploy og klik på Inject-knappen
+5. Observer at Debug først viser beskeden efter 5 sekunder
 
-```
-[Inject] → [Function] → [Delay] → [Debug]
-```
+**Du skal se:** Beskeden kommer først efter et mellemrum på 5 sekunder.
 
-Function-node:
-```javascript
-msg.delay = Math.floor(Math.random() * 5000); // Random delay up to 5 seconds
-return msg;
-```
-
-Delay-node konfiguration:
-- Action: "Delay each message"
-- For: "msg.delay milliseconds"
-
-Dette giver dynamiske forsinkelser baseret på beskedindhold.
-
-### Implementering af retry-mekanisme
-
-```
-[HTTP Request] → [Switch] → [Delay] → [Change] → [HTTP Request]
-```
-
-Switch-node: Check for fejlkode (status != 200)
-Change-node: Sæt `msg.retry_count = (msg.retry_count || 0) + 1`
-Delay-node konfiguration:
-- Action: "Delay each message"
-- For: "2^msg.retry_count seconds" (eksponentiel backoff)
-
-Dette giver eksponentiel backoff for fejlede HTTP-requests.
-
-### Dag/nat timing
-
-```
-[Inject] → [Function] → [Delay] → [Debug]
-```
-
-Function-node:
-```javascript
-const hour = new Date().getHours();
-// Længere forsinkelse om natten, kortere om dagen
-msg.delayTime = (hour >= 22 || hour <= 6) ? 60000 : 10000;
-return msg;
-```
-
-Delay-node konfiguration:
-- Action: "Delay each message"
-- For: "msg.delayTime milliseconds"
-
-Dette giver forskellige forsinkelser baseret på tidspunkt på dagen.
+![alt text](image-11.png)
 
 ---
 
-## 🚩 Særlige tilfælde
+### Øvelse 2: Rate limit - begræns hastigheden
 
-### Håndtering af msg.delay
+1. Træk **Inject** → **Delay** → **Debug** ind
+2. I Inject: Sæt repeat til `interval` hver `0.5` sekunder (det er hver halve sekund)
+3. I Delay-noden:
+   - Action: **Limit rate to**
+   - To: `1` message per `2` seconds
+   - Vælg "all messages" (så de køes)
+4. Deploy og vent 10 sekunder
+5. Stop inject'en igen (sæt repeat til none og deploy)
 
-Når du bruger dynamisk forsinkelse, husk at:
-- `msg.delay` skal være et tal i millisekunder
-- Negative værdier behandles som 0 (ingen forsinkelse)
+**Du skal se:** Selvom inject sender hver 0.5 sekund, viser Debug kun én besked hvert 2. sekund. De andre venter i kø.
 
-### Rate-limit vs. Throttle
-
-- **Rate-limit**: Jævn fordeling af beskeder over tid, med potentielt kø
-- **Throttle**: Filtrerer burst af aktivitet til én besked, ignorerer mellemliggende beskeder
-
-### Memory begrænsning
-
-Vær opmærksom på:
-- Store batches kan forbruge betydelig hukommelse
-- Lange køer ved rate-limiting kan også bruge meget hukommelse
-- Ved systemgenstart mistes køede beskeder
-
-### Flow/global kontekst
-
-Delay-noden gemmer ikke sit interne tilstand i flow eller global kontekst, så ved genstart af Node-RED:
-- Alle ventende forsinkede beskeder går tabt
-- Køede beskeder ved rate-limiting går tabt
-- Batches nulstilles
-
----
-
-## 🏋️ Øvelser
-
-### Øvelse 1: Implementer en simpel trafiklys-sekvens
-
-1. Opret et flow med en inject-node (trigger) og tre debug-noder (rød, gul, grøn)
-2. Tilføj delay-noder mellem inject og debug-noderne
-3. Konfigurer delayene til følgende sekvens:
-   - Rød: Ingen forsinkelse
-   - Gul: 2 sekunders forsinkelse efter rød
-   - Grøn: 4 sekunders forsinkelse efter rød
-4. Tilføj yderligere delay-noder for at skifte tilbage (grøn → gul → rød)
-
-### Øvelse 2: Rate-limit dashboard-opdateringer
-
-1. Opret et flow med et MQTT-input, en delay-node og en dashboard gauge
-2. Konfigurer delay-noden til at:
-   - Begrænse opdateringer til 1 pr. sekund
-   - Køe mellemliggende beskeder
-3. Test med hurtige MQTT-beskeder og observer dashboard-opdateringsraten
-
-### Øvelse 3: Debounce med betinget output
-
-1. Opret et flow med inject → delay → function → debug
-2. Konfigurer delay-noden til throttle-mode (1 besked pr. 2 sekunder)
-3. I function-noden, tilføj logik der sammenligner den aktuelle værdi med den forrige:
-```javascript
-// Gem sidste værdi i flow-kontekst
-const lastVal = flow.get('lastValue') || 0;
-const currentVal = msg.payload;
-
-// Hvis værdien er uændret, afbryd flow
-if (currentVal === lastVal) {
-    return null;
-}
-
-// Gem den nye værdi og send beskeden videre
-flow.set('lastValue', currentVal);
-return msg;
-```
-4. Dette skaber et debounced output der kun sender beskeder når værdien faktisk ændrer sig
+![alt text](image-12.png)
 
 ---
 
 ## 🔍 Yderligere ressourcer
 
 - [Node-RED Documentation - Delay Node](https://nodered.org/docs/user-guide/nodes#delay)
-- [Understanding Rate Limiting in APIs](https://nordicapis.com/everything-you-need-to-know-about-api-rate-limiting/)
-- [Debounce and Throttle Concepts](https://css-tricks.com/debouncing-throttling-explained-examples/)

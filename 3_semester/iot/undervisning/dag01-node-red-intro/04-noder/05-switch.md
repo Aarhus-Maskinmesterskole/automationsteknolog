@@ -1,222 +1,118 @@
 # 🔀 Switch Node
 
-Switch-noden fungerer som en betinget router i Node-RED. Den evaluerer beskedens indhold mod et eller flere vilkår og dirigerer beskeden til forskellige outputs baseret på resultaterne.
+Switch-noden router beskeder til forskellige outputs baseret på simple betingelser. Tænk på det som en "hvis-så" funktion uden at skrive kode.
 
 ## 🎯 Formål
 
-I denne guide lærer du om switch-noden og hvordan du kan:
-- Implementere betinget logik uden at skrive JavaScript-kode
-- Route beskeder til forskellige dele af dit flow baseret på indholdet
-- Opsætte forskellige sammenligningstyper og operatorer
-- Anvende avancerede filtreringsmønstre med regulære udtryk og JSONata
+Med switch-noden kan du:
+- Route beskeder til forskellige outputs baseret på værdier
+- Filtrere beskeder (fx kun høje temperaturer videre)
+- Opdele et flow i flere grene
 
 ---
 
-## ⚡ Grundfunktionalitet
+## ⚡ Hvordan det virker
 
-Switch-noden evaluerer en specifik egenskab i en besked (typisk `msg.payload`) mod et sæt definerede regler. For hver regel, der er opfyldt, sendes beskeden til det tilsvarende output. Noden kan konfigureres til at:
+Switch-noden tjekker en værdi (fx `msg.payload`) og sammenligner den med dine regler:
 
-- Sende til første matchende output og derefter stoppe
-- Sende til alle outputs hvor reglerne er opfyldt
-- Sende til outputs baseret på forskellige egenskaber i beskeden
+- **Regel 1 match?** → Send til output 1
+- **Regel 2 match?** → Send til output 2
+- **Ingen match?** → Beskeden stoppes (medmindre du har en "otherwise" regel)
 
----
-
-## 🛠️ Konfiguration
-
-![Switch Node Configuration](https://nodered.org/docs/user-guide/images/editor-switch-node-properties.png)
-
-### Egenskab at evaluere
-
-Du angiver først hvilken beskedegenskab du vil teste, fx:
-- `msg.payload` (standard)
-- `msg.topic`
-- `msg.temperature`
-- Eller enhver anden valid egenskabssti
-
-### Operatorer
-
-Switch-noden tilbyder mange sammenligningsoperatorer:
-
-- **==**: Er lig med
-- **!=**: Er ikke lig med
-- **<**: Mindre end
-- **<=**: Mindre end eller lig med
-- **>**: Større end
-- **>=**: Større end eller lig med
-- **is between**: Mellem to værdier (inklusiv)
-- **contains**: Indeholder en understreng eller et element
-- **matches regex**: Matcher et regulært udtryk
-- **is valid JSONata**: Evaluerer et JSONata-udtryk til true
-
-### Outputs
-
-- **Checking all rules** (standard): Sender beskeden til alle outputs hvor reglen er opfyldt
-- **Stopping after first match**: Sender kun til det første matchende output
+Du kan vælge:
+- **Stop efter første match** (standard)
+- **Send til alle matchende outputs**
 
 ---
 
 ## 💡 Eksempler
 
-### Eksempel 1: Temperaturzoner
+### Eksempel 1: Temperaturvarsling
 
 ```
-[Inject] → [Switch] → [Debug 1, Debug 2, Debug 3]
+[Inject] → [Switch] → [Debug "Koldt", Debug "OK", Debug "Varmt"]
 ```
 
-Switch-node konfiguration:
-- Egenskab: `msg.payload` (temperatur)
-- Regel 1 (til output 1): `payload < 18` (koldt)
-- Regel 2 (til output 2): `payload >= 18 && payload <= 25` (behageligt)
-- Regel 3 (til output 3): `payload > 25` (varmt)
-
-Dette router temperaturværdier til forskellige outputs baseret på værdiområder.
-
-### Eksempel 2: Fejlfiltrering
-
-```
-[MQTT In] → [Switch] → [Debug 1, Debug 2]
-```
-
-Switch-node konfiguration:
-- Egenskab: `msg.payload.status`
-- Regel 1 (til output 1): `== "ok"` (normale beskeder)
-- Regel 2 (til output 2): `!= "ok"` (fejlbeskeder)
-
-Dette separerer normale driftsmeddelelser fra fejlrapporter.
-
-### Eksempel 3: Topic-baseret routing
-
-```
-[MQTT In] → [Switch] → [Debug 1, Debug 2, Debug 3]
-```
-
-Switch-node konfiguration:
-- Egenskab: `msg.topic`
-- Regel 1 (til output 1): `contains "temperature"`
-- Regel 2 (til output 2): `contains "humidity"`
-- Regel 3 (til output 3): `contains "pressure"`
-
-Dette dirigerer beskeder til forskellige outputs baseret på deres emne.
-
----
-
-## 🔄 Avanceret anvendelse
-
-### Regexp routing
-
-Regulære udtryk giver kraftfuld mønstergenkendelse:
-
-```
-[Inject] → [Switch] → [Debug 1, Debug 2]
-```
-
-Switch-node konfiguration:
+Switch-node:
 - Egenskab: `msg.payload`
-- Regel 1: `matches regexp ^[A-Z][0-9]{3}$` (matcher formatet: et stort bogstav efterfulgt af 3 cifre)
-- Regel 2: `!matches regexp ^[A-Z][0-9]{3}$` (matcher ikke formatet)
+- Regel 1: `< 18` → output 1 (koldt)
+- Regel 2: `is between 18 and 25` → output 2 (OK)
+- Regel 3: `> 25` → output 3 (varmt)
 
-Dette kan bruges til at validere formater som produkt-ID'er, serienumre, osv.
-
-### JSONata betingelser
-
-JSONata giver mulighed for komplekse betingede udtryk:
+### Eksempel 2: Filtrer fejlbeskeder
 
 ```
-[Inject] → [Switch] → [Debug 1, Debug 2, Debug 3]
+[Inject] → [Switch] → [Debug "OK", Debug "Fejl"]
 ```
 
-Switch-node konfiguration:
-- Egenskab: (JSONata udtryk vælges direkte)
-- Regel 1: `$count(payload.readings) > 5` (mere end 5 målinger)
-- Regel 2: `$average(payload.readings) > 50` (gennemsnit over 50)
-- Regel 3: `$max(payload.readings) - $min(payload.readings) > 20` (range større end 20)
-
-Dette lader dig udføre komplekse dataanalyser og betingelser.
-
-### Multiple egenskaber
-
-Du kan teste forskellige egenskaber med hver regel:
-
-```
-[Inject] → [Switch] → [Debug 1, Debug 2, Debug 3]
-```
-
-Switch-node konfiguration:
-- Regel 1: `msg.payload.temperature > 30` (høj temperatur)
-- Regel 2: `msg.payload.humidity > 80` (høj luftfugtighed)
-- Regel 3: `msg.payload.battery < 20` (lavt batteri)
-
-Dette lader dig reagere på forskellige betingelser fra samme besked.
+Switch-node:
+- Egenskab: `msg.topic`
+- Regel 1: `== "status/ok"` → output 1
+- Regel 2: `contains "error"` → output 2
 
 ---
 
-## 🚩 Særlige tilfælde
+## 🏋️ Øvelser (begynder)
 
-### Håndtering af null/undefined
+### Øvelse 1: Simpel temperaturrouting
 
-Når du tester værdier, er det vigtigt at være opmærksom på null/undefined:
+1. Træk **Inject** → **Switch** → **Debug** ind
+2. I Inject: Sæt payload til number `30`
+3. I Switch-noden:
+   - Property: `msg.payload` (standard)
+   - Klik **+ add** to gange for at få 3 regler:
+   - Regel 1: Vælg `<` og skriv `20` (mindre end 20)
+   - Regel 2: Vælg `is between` og skriv `20` and `25` (mellem 20 og 25)
+   - Regel 3: Vælg `>` og skriv `25` (større end 25)
+4. Træk 3 **Debug-noder** ind
+5. Forbind hver output til sin Debug (output 1→Debug 1, osv.)
+6. Giv Debug-noderne navne: "Koldt", "Normalt", "Varmt"
+7. Deploy og test med forskellige værdier (fx 19, 22, 26)
 
-- Brug operatoren `is null` til at tjekke for null-værdier
-- Brug operatoren `is undefined` til at tjekke for udefinerede egenskaber
+**Du skal se:** Kun "Varmt" viser beskeden når payload er 26.
 
-### Typekonvertering
-
-Switch-noden forsøger at udføre type-konvertering ved sammenligning:
-- Sammenligning mellem streng "42" og tal 42 vil evaluere som lig
-- For streng typesammenligning, brug JSONata-udtryk
-
-### Otherwise output
-
-Tilføj en "otherwise" regel som den sidste regel for at fange beskeder, der ikke matcher nogen anden regel:
-
-- Klik på '+add' knappen
-- Vælg 'otherwise' (vil altid være sand)
+![alt text](image-7.png)
 
 ---
 
-## 🏋️ Øvelser
+### Øvelse 2: Filtrer på topic
 
-### Øvelse 1: Datavalidering
+1. Træk **Inject** → **Switch** → **Debug** ind
+2. Opret 2 Inject-noder med forskellige topics:
+   - Inject 1: payload=`"Motor startet"`, topic=`"motor"`
+   - Inject 2: payload=`"Temperatur høj"`, topic=`"sensor"`
+3. I Switch-noden:
+   - Property: `msg.topic`
+   - Regel 1: `contains` `"motor"`
+   - Regel 2: `contains` `"sensor"`
+4. Forbind begge Inject → Switch
+5. Forbind 2 Debug-noder til output 1 og 2
+6. Navngiv Debug: "Motor beskeder", "Sensor beskeder"
+7. Deploy og test begge inject-knapper
 
-1. Opret et flow med inject → switch → 3 debug-noder
-2. Konfigurer inject til at sende forskellige JSON-objekter
-3. Konfigurer switch-noden til at:
-   - Output 1: Gyldige beskeder med alle påkrævede felter  
-     `is valid JSONata: payload.id && payload.value`
-   - Output 2: Mangelfulde beskeder, men med id  
-     `is valid JSONata: payload.id && !payload.value`
-   - Output 3: Ugyldige beskeder uden id  
-     `otherwise`
+**Du skal se:** Beskederne bliver sendt til forskellige Debug-noder baseret på topic.
 
-### Øvelse 2: Temperaturalarm med hysterese
+![alt text](image-8.png)
 
-1. Opret et flow med inject → switch → 3 debug-noder
-2. Konfigurer switch-noden med JSONata-udtryk der implementerer hysterese:
-   - Output 1 (normal): `$flowContext("lastState") != "normal" && payload > 18 && payload < 26`  
-     Sæt også flow-konteksten: `$flowContext("lastState", "normal")`
-   - Output 2 (for koldt): `$flowContext("lastState") != "cold" && payload <= 16`  
-     Sæt også flow-konteksten: `$flowContext("lastState", "cold")`
-   - Output 3 (for varmt): `$flowContext("lastState") != "hot" && payload >= 28`  
-     Sæt også flow-konteksten: `$flowContext("lastState", "hot")`
+---
 
-### Øvelse 3: Multi-kriterier filtering
+### Øvelse 3: Otherwise (catch-all)
 
-1. Opret et flow der analyserer sensormålinger
-2. Konfigurer switch-noden til at route beskeder baseret på flere kriterier:
-   - Output 1: Kritisk høj temperatur OG lav luftfugtighed  
-     `msg.payload.temperature > 30 && msg.payload.humidity < 20`
-   - Output 2: Temperatur stigende hurtigt  
-     `msg.payload.temperature - msg.payload.lastTemperature > 5`
-   - Output 3: Unormal sensoropførsel  
-     `isNaN(msg.payload.temperature) || msg.payload.temperature < -40 || msg.payload.temperature > 100`
-   - Output 4: Normal drift  
-     `otherwise`
+1. Træk **Inject** → **Switch** → **Debug** ind
+2. I Inject: Sæt payload til string `"aktiv"`
+3. I Switch-noden:
+   - Property: `msg.payload`
+   - Regel 1: `==` `"aktiv"`
+   - Regel 2: Vælg **otherwise** fra dropdown (nederst)
+4. Forbind 2 Debug-noder
+5. Deploy og test med forskellige værdier: `"aktiv"`, `"standby"`, `"fejl"`
+
+**Du skal se:** "aktiv" går til output 1, alt andet går til output 2.
+
+![alt text](image-10.png)
 
 ---
 
 ## 🔍 Yderligere ressourcer
 
 - [Node-RED Documentation - Switch Node](https://nodered.org/docs/user-guide/nodes#switch)
-- [Regular Expression Tester](https://regex101.com/)
-- [JSONata Documentation](https://jsonata.org/)
