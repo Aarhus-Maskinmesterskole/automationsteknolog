@@ -1,12 +1,66 @@
-# 🛠️ Komplet guide: Brug af Git via kommandolinjen (CLI)
+# 🛠️ Komplet guide: Git i terminalen
 
-Denne guide giver dig en omfattende introduktion til Git via kommandolinjen — fra oprettelse af nye projekter, til effektivt samarbejde, versionsstyring og deling af kode på GitHub. Den er tiltænkt begyndere og let øvede, der ønsker at mestre Git som værktøj i deres daglige udviklingsarbejde.
+Denne guide giver dig en omfattende introduktion til Git via terminalen — fra installation, til effektivt samarbejde, versionsstyring og deling af kode på GitHub.
+
+## 📦 Installation af Git
+
+### Windows
+
+1. **Download Git til Windows**:
+   - Gå til [git-scm.com/download/win](https://git-scm.com/download/win)
+   - Download den seneste version af Git for Windows
+   - Kør installationsfilen (.exe)
+
+2. **Installationsvejledning**:
+   - Vælg **default editor** (anbefalet: Visual Studio Code hvis installeret)
+   - Vælg **Git from the command line and also from 3rd-party software**
+   - Vælg **Use bundled OpenSSH**
+   - Vælg **Use the OpenSSL library**
+   - Vælg **Checkout Windows-style, commit Unix-style line endings**
+   - Vælg **Use MinTTY** (default terminal)
+   - Accepter resten af standardindstillingerne
+
+3. **Verificer installationen**:
+   ```bash
+   git --version
+   ```
+
+### macOS
+
+```bash
+# Via Homebrew (anbefalet)
+brew install git
+
+# Eller via Xcode Command Line Tools
+xcode-select --install
+```
+
+### Linux (Debian/Ubuntu)
+
+```bash
+sudo apt update
+sudo apt install git
+```
+
+## ⚙️ Grundlæggende Git-konfiguration
+
+Efter installation skal du konfigurere Git med dit navn og email:
+
+```bash
+git config --global user.name "Dit Navn"
+git config --global user.email "din.email@example.com"
+```
+
+Se din konfiguration:
+
+```bash
+git config --list
+```
 
 ## 🧰 Forudsætninger
 
-* Git er installeret på din maskine (se installationsguide)
+* Git er installeret på din maskine
 * Du har en GitHub-konto og adgang til internettet
-* GitHub CLI (`gh`) er installeret og du er logget ind (`gh auth login`)
 
 ---
 
@@ -57,18 +111,31 @@ git status
 
 ## 🌐 3. Opret GitHub-repo og forbind det til lokalt repo
 
-Du kan bruge GitHub CLI til at oprette et repository online:
+### Opret repository på GitHub
 
-```bash
-gh repo create mit-projekt --public --source=. --remote=origin --push
-```
+1. Gå til [github.com](https://github.com) og log ind
+2. Klik på **New repository** (eller + ikonet øverst til højre)
+3. Giv repoet et navn (fx `mit-projekt`)
+4. Vælg **Public** eller **Private**
+5. **Tilføj IKKE** README, .gitignore eller license (vi har allerede disse lokalt)
+6. Klik **Create repository**
 
-Alternativt kan du gøre det manuelt på GitHub og derefter forbinde:
+### Forbind lokalt repo til GitHub
+
+Kopiér kommandoerne fra GitHub og kør dem i din terminal:
 
 ```bash
 git remote add origin https://github.com/brugernavn/mit-projekt.git
 git branch -M main
 git push -u origin main
+```
+
+> Erstat `brugernavn` med dit GitHub-brugernavn
+
+Verificer at det er forbundet:
+
+```bash
+git remote -v
 ```
 
 ---
@@ -98,9 +165,15 @@ git pull
 Du kan hente andres kode til din maskine:
 
 ```bash
-gh repo clone brugernavn/projektnavn
-# eller:
 git clone https://github.com/brugernavn/projektnavn.git
+```
+
+Dette opretter en ny mappe med projektets navn og downloader alle filer.
+
+Skift til projektmappen:
+
+```bash
+cd projektnavn
 ```
 
 ---
@@ -146,7 +219,7 @@ Løs eventuelle konflikter, og push den opdaterede main:
 git push
 ```
 
-> Merge-konflikter kan ses med `git status` og redigeres i en teksteditor eller VS Code.
+> Merge-konflikter kan ses med `git status` og redigeres i en teksteditor.
 
 ---
 
@@ -205,8 +278,10 @@ git push origin --delete ny-feature  # Fjerner fra GitHub
 
 Du er nu klar til at:
 
+* Installere og konfigurere Git på din maskine
+* Arbejde med Git i terminalen
 * Oprette, versionere og dokumentere kodeprojekter
 * Samarbejde effektivt i grupper
 * Forstå og navigere i branches, commits og konflikter
 
-> Brug Git som et dagligt værktøj – det giver bedre samarbejde, sikkerhed og overblik i alle udviklingsprojekter.
+> Brug Git som et dagligt værktøj — det giver bedre samarbejde, sikkerhed og overblik i alle udviklingsprojekter.

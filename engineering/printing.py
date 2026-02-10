@@ -1,7 +1,0 @@
-name = input("indsæt pumpe navn: ")
-motorDriftTimer = int(input("indsæt motor drift timer: "))
-motorDriftMinutter = int(input("indsæt motor drift minutter: "))
-motorDriftSekunder = int(input("indsæt motor drift sekunder: "))
-motorIsOn = input("indsæt motor status (ON/OFF): ")
-motorStatus = input("Er motor OK? i Fejl? Vedligeholdelse?")
-print(f"Pumpe navn: {name}, Motor drift timer: {motorDriftTimer}, Motor drift minutter: {motorDriftMinutter}, Motor drift sekunder: {motorDriftSekunder}, Motor status: {motorStatus}, Motor er ON: {motorIsOn}")

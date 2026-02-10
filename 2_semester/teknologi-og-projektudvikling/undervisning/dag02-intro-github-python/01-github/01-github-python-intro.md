@@ -8,7 +8,7 @@ Denne introduktionsdag handler om at opbygge fundamentet for resten af forløbet
 
 ## 🧭 Formål med dagen
 
-* Få installeret og sat GitHub CLI og Visual Studio Code korrekt op
+* Få installeret og sat Git og Visual Studio Code korrekt op
 * Forstå hvordan man opretter og kloner GitHub repositories
 * Få indblik i projektstruktur og hvordan dokumentation og kode organiseres
 * Forstå hvad `.gitignore` er og hvorfor den bruges
@@ -29,9 +29,13 @@ Der finder du installationsvejledninger i `.md`-filer for:
 
 | Platform | Vejledninger                                                            |
 | -------- | ----------------------------------------------------------------------- |
-| Windows  | `installation-vscode-windows.md` + `installation-github-cli-windows.md` |
-| Linux    | `installation-vscode-linux.md` + `installation-github-cli-linux.md`     |
-| macOS    | `installation-vscode-macos.md` + `installation-github-cli-macos.md`     |
+| Windows  | `installation-vscode-windows.md` + `installation-git-windows.md` + `installation-python-windows.md` + `installation-thonny-windows.md` |
+| Linux    | `installation-vscode-linux.md` + `installation-git-linux.md` + `installation-python-linux.md` + `installation-thonny-linux.md`     |
+| macOS    | `installation-vscode-macos.md` + `installation-git-macos.md` + `installation-python-macos.md` + `installation-thonny-macos.md`     |
+
+> **Vigtigt**: Python skal downloades fra [python.org](https://www.python.org/downloads/), **ikke** fra Microsoft Store.
+
+
 
 ---
 
@@ -42,7 +46,11 @@ Disse guides fører dig gennem dagens aktiviteter i rækkefølge:
 1. `01-github-python-intro.md` – Introduktion til forløbet og GitHub som samarbejdsværktøj
 2. `02-Opret-og-klon-et-GitHub-repository.md` – Oprettelse og kloning af eget repo
 3. `03-Tilføj-struktur-og-filer-til-GitHub-repo.md` – Struktur, README og .gitignore
-4. `07-github-opgaver.md` – Fælles opgavesæt for hele Git-forløbet
+4. `04-Lav-en-ændring-og-commit.md` – Foretag ændringer og commit til Git
+5. `05-Opret-og-arbejd-i-en-ny-branch.md` – Arbejd med branches
+6. `06-Merge-en-branch-til-main.md` – Merge branches sammen
+7. `07-Slet-en-branch-(lokalt-og-på-GitHub).md` – Ryd op efter merge
+8. `08-github-opgaver.md` – Fælles opgavesæt for hele Git-forløbet
 
 ---
 
@@ -50,7 +58,7 @@ Disse guides fører dig gennem dagens aktiviteter i rækkefølge:
 
 Du lærer:
 
-* At anvende GitHub CLI til at arbejde med versioner af dit projekt
+* At anvende Git i terminalen til at arbejde med versioner af dit projekt
 * At arbejde med et repository lokalt og online
 * At opbygge korrekt mappe- og dokumentstruktur
 * At bruge `.gitignore` til at filtrere støj fra versionering

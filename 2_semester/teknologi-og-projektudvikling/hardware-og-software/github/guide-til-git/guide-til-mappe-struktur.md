@@ -18,8 +18,8 @@ Denne struktur er den officielle, obligatoriske mappestruktur for studerende på
 │   ├── raw.csv
 │   └── cleaned.csv
 │
-├── 📁 esp32/                 # .ino-filer til ESP32 kode (Arduino IDE)
-│   └── main.ino
+├── 📁 esp32/                 # .ino-filer til ESP32 kode (VS CODE)
+│   └── main.py
 │
 ├── 📁 python/                # Python scripts og notebooks
 │   ├── reader.py

@@ -51,13 +51,56 @@ Hvis Python ikke allerede er installeret:
 
 ---
 
-## 5️⃣ Tilføj Python-understøttelse i VS Code
+## 5️⃣ Installer nødvendige Extensions
 
-1. Åbn VS Code
-2. Klik på firkanten i venstre side (Extensions)
-3. Søg efter **Python** (udgivet af Microsoft)
-4. Klik på **Install**
-5. (Valgfrit) Installer **Pylance** for bedre IntelliSense og performance
+Extensions udvider VS Code's funktionalitet. Åbn Extensions-panelet (Ctrl+Shift+X) og installer følgende:
+
+### Nødvendige Extensions
+
+1. **Python** (Microsoft)
+   - Python-understøttelse, debugging, IntelliSense
+   - Søg efter "Python" og installer den fra Microsoft
+
+2. **Pylance** (Microsoft)
+   - Forbedret Python IntelliSense og type checking
+   - Installeres ofte automatisk med Python-extension
+
+### Anbefalede Extensions
+
+3. **Rainbow CSV**
+   - Farver kolonner i CSV-filer for bedre læsbarhed
+   - Søg efter "Rainbow CSV"
+
+4. **Markdown All in One**
+   - Gør det nemmere at skrive dokumentation i Markdown
+   - Nyttig til README-filer og dokumentation
+
+5. **GitLens** (valgfrit)
+   - Udvidet Git-funktionalitet direkte i editoren
+   - Se hvem der lavede hvilke ændringer
+
+6. **Indent Rainbow**
+   - Farver indrykning for bedre overblik i Python-kode
+   - Især nyttigt i Python hvor indrykning er vigtig
+
+7. **Error Lens**
+   - Viser fejl og advarsler direkte i koden
+   - Gør det lettere at spotte problemer
+
+8. **Better Comments**
+   - Farvemarkerer forskellige typer kommentarer
+   - Gør kommentarer mere læsbare
+
+9. **Material Icon Theme** (valgfrit)
+   - Pænere ikoner til forskellige filtyper
+   - Gør det lettere at finde filer i file explorer
+
+### Sådan installerer du extensions:
+
+1. Klik på Extensions-ikonet (firkant i venstre sidebar) eller tryk **Ctrl+Shift+X**
+2. Søg efter extension-navnet
+3. Klik **Install** på den rigtige extension
+4. Genstart VS Code hvis du bliver bedt om det
 
 ---
 
