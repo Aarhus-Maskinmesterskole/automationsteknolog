@@ -2,6 +2,8 @@
 
 I denne opgave skal du programmere ESP32 til at læse input fra en fysisk knap og sende en MQTT-besked hver gang knappen trykkes. Dette viser hvordan man håndterer digital input med debouncing.
 
+![alt text](image-3.png)
+
 ## 🎯 Formål
 
 Lær at:
