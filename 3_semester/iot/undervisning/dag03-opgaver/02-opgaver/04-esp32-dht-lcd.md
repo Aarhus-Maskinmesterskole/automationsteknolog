@@ -1,4 +1,4 @@
-# 🌡️📟 Projekt 13 – Standalone Klima-station med Display
+# 🌡️📟 Projekt 04 – Standalone Klima-station med Display
 
 ## 📋 Projektbeskrivelse
 

@@ -1,4 +1,4 @@
-# 👁️🌈 Projekt 12 – Presence Indicator med Motion og RGB
+# 👁️🌈 Projekt 03 – Presence Indicator med Motion og RGB
 
 ## 📋 Projektbeskrivelse
 

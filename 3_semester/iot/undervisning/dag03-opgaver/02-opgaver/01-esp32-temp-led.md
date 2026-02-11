@@ -1,4 +1,4 @@
-# 🌡️💡 Projekt 10 – Temperatur Overvågning med LED Alarm
+# 🌡️💡 Projekt 01 – Temperatur Overvågning med LED Alarm
 
 ## 📋 Projektbeskrivelse
 

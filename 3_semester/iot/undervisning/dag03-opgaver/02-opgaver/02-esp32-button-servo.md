@@ -1,4 +1,4 @@
-# 🔘🚪 Projekt 11 – Manuel Dør-styring med Knap
+# 🔘🚪 Projekt 02 – Manuel Dør-styring med Knap
 
 ## 📋 Projektbeskrivelse
 
