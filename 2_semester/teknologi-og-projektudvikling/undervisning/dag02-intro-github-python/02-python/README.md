@@ -1,83 +1,28 @@
-# 🐍 Python Guides og Opgaver – Oversigt
+# Python guides og opgaver
 
-Herunder finder du en anbefalet struktur over guides og opgaver i **begynder-Python**. Forløbet dækker grundlæggende programmering med fokus på kontrolstrukturer, datastrukturer, input/output og funktionel tænkning. Hver fil repræsenterer en konkret lektion eller øvelse, der bygger ovenpå den forrige.
+Denne mappe er et helt grundlaeggende Python-forloeb.  
+Hver fil bygger oven paa den forrige.
 
----
+## Filer i mappen
 
-## 📘 Guides (teori og kodeeksempler)
+1. `01-intro-til-python.md` - print, input, variabler
+2. `02-fejlfinding-og-debug.md` - laes fejl og ret simple bugs
+3. `03-data-types.md` - list, set, tuple, dict
+4. `04-loops-og-if.md` - if/elif/else, for, while
+5. `05-lister-og-iteration.md` - lister, indeks, slicing, iteration
+6. `06-tekstbehandling.md` - strenge, split/join/replace
+7. `07-funktioner.md` - def, parametre, return
+8. `08-error-handling.md` - separat introduktion til try/except
+9. `09-klasser.md` - helt enkel intro til klasser og objekter
+10. `10-pyqt-gui.md` - enkel GUI med PyQt
+11. `11-tkinder-gui.md` - enkel GUI med Tkinter
+12. `12-simpel-api.md` - simple GET-kald med `requests`
+13. `13-flask-api-server.md` - simpel Flask server med GET endpoints
+14. `14-flask-post-data.md` - simpel Flask POST og gem data i liste
 
-**01-intro-til-python.md**
-*Introduktion til Python-syntaks og grundbegreber.*
+## Anbefalet raekkefoelge
 
-* `print()` og `input()`
-* variabler: `int`, `float`, `str`, `bool`
-* kommentarer og navngivningsregler
-
-**02-loops-og-if.md**
-*Forståelse af kontrolstrukturer og iteration.*
-
-* `if`, `elif`, `else`
-* `for` og `while` løkker
-* betingelser og operatorer
-
-**03-lister-og-iteration.md**
-*Arbejdet med lister og gennemløb.*
-
-* Opret og brug lister
-* `for element in liste:`
-* indeks og slicing
-
-**04-funktioner.md**
-*Opdeling af kode med funktioner.*
-
-* `def`, parametre og `return`
-* kald og genbrug af funktioner
-
-**05-tekstbehandling.md**
-*Strenge og tekstbaseret logik.*
-
-* `len()`, `split()`, `join()`, slicing
-* sammenligning af tekst, `in`-operator
-
-**06-fejlfinding-og-debug.md**
-*Introduktion til fejltyper og fejlsøgning.*
-
-* `SyntaxError`, `TypeError`, `NameError`
-* brug af `print()` til debug
-
-**07-klasser.md**
-*Introduktion til klasser.*
-
-* `__init__`, `self`
-* brug af `Class` for bedre struktur
-
-
----
-
-## 📝 Opgavesæt
-
-**opgave-01-variabler.md**
-Skriv et program der spørger om navn og alder og udskriver det.
-
-**opgave-02-if-else.md**
-Lav et program der afgør om en person er myndig ud fra alder.
-
-**opgave-03-loops.md**
-Lav et program der udskriver tallene 1-10 med en løkke.
-
-**opgave-04-list-og-gennemsnit.md**
-Opret en liste med tal og udskriv gennemsnit og maksimum.
-
-**opgave-05-funktion-med-parameter.md**
-Lav en funktion der tager et tal som input og returnerer kvadratet.
-
----
-
-## 🔁 Progression og flow
-
-1. Start med guides 01–02 for basal forståelse
-2. Brug 03–04 til at lære datastrukturer og opdeling
-3. Afslut med 05–06 for at styrke robusthed og fejlhåndtering
-4. Løs opgaverne løbende efter hvert emne
-
----
+1. Start med `01` til `07`
+2. Tag `08` som sin egen lektion
+3. Fortsaet med `09` til `11`
+4. Slut med `12`, `13`, `14`

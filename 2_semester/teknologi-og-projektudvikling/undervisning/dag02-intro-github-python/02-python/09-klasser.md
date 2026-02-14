@@ -23,8 +23,8 @@ class Motor:
     def start(self):
         print("Motoren er startet!")
 
-    m = Motor()
-    m.start()
+m = Motor()
+m.start()
 ```
 
 ---
@@ -55,8 +55,6 @@ Du kan oprette flere objekter fra samme klasse:
 
 ```python
 sensor1 = Sensor("Tryk")
-person2 = Person("Sara")
-
 sensor2 = Sensor("Niveau")
 
 sensor1.vis_status()

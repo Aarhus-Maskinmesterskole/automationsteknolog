@@ -37,10 +37,10 @@ print("Bruger", navn, "er logget ind.")
 ## ðŸ“˜ 3. Brug af variabler og datatyper
 
 ```python
-motorRunTimeHour = 20Â  Â  Â  Â  Â  Â # heltal (int)
-motorRunTimeSeconds = 3.14Â  Â  Â  # decimaltal (float)
-isMotorOn = TrueÂ  Â  Â            # boolesk vÃ¦rdi (True/False)
-motorStatus = "OK"Â  Â  Â  Â  Â      # tekst (str)
+motorRunTimeHour = 20Â  Â  Â  Â  Â  Â # heltal (int)
+motorRunTimeSeconds = 3.14Â  Â  Â  # decimaltal (float)
+isMotorOn = TrueÂ  Â  Â            # boolesk vÃ¦rdi (True/False)
+motorStatus = "OK"Â  Â  Â  Â  Â      # tekst (str)
 ```
 
 Python bruger dynamisk typning: du skal ikke skrive typen eksplicit.
