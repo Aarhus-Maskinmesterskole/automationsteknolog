@@ -2,6 +2,17 @@
 
 Før du begynder at løse netværksopgaverne i TIA Portal, er det vigtigt at du har forståelse for de forskellige metoder til dataoverførsel og netværkskommunikation. Følgende afsnit vil give dig indsigt i de vigtigste kommunikationsblokke og deres anvendelsesområder. Dette vil danne grundlaget for de praktiske opgaver, du skal udføre.
 
+---
+
+## Opsætning af PLCSIM adv.
+1. Start PLCSIM adv.
+2. Indstil PLCSIM adv. ved `Online access` til `TCP/IP Single Adapter`
+3. Vælge `Local` under `TCP/IP Communication with`
+4. Vælge `S7-1500` og indstil IP adressen til en adresse som eksistere i samme subnet som dit netkort (fx 192.168.0.xxx)
+5. Ved brug af flere PLC'er, gentag trin 2-4 og indstil forskellige IP-adresser for hver PLC.
+
+---
+
 ## Kommunikationsblokke og deres Anvendelse
 
 **BSEND**
@@ -73,9 +84,81 @@ Før du begynder at løse netværksopgaverne i TIA Portal, er det vigtigt at du 
   * **Broadcast Kommunikation:** Sender data til flere modtagere i et netværk.
   * **Ikke-kritiske Opdateringer:** Bruges til opdateringer, hvor tab af data kan tolereres, såsom periodiske statusmeddelelser.
 
+## TSEND & TRCV
+
+### 📽️ Video
+
+Video link: [TSEND & TRCV](https://www.youtube.com/watch?v=sYQmtA9ZlmA)
+
+**Mål** Denne opgave har til formål at guide dig gennem den grundlæggende konfiguration og anvendelse af TSEND- og TRCV-funktionsblokke i TIA Portal. Fokus er på at etablere en simpel kommunikation mellem to PLC'er, hvor den ene fungerer som sender og den anden som modtager, uden at inddrage komplekse scenarier eller simulering af produktionslinjer.
+
+**Opgave:**
+1. **Forberedelse:**
+
+   * Sørg for, at du har to PLC'er til rådighed i TIA Portal (det kan være både fysiske eller simulerede PLC'er).
+   * Tildel unikke IP-adresser til begge PLC'er, fx 192.168.0.2 for PLC_1 og 192.168.0.3 for PLC_2.
+2. **Opsætning af TCON og TDISCON datablocks (PLC_1 & PLC_2):**
+   * Tilføj og konfigurer datablock for TCON med følgende variabler:
+      * req (BOOL)
+      * done (BOOL)
+      * busy (BOOL)
+      * error (BOOL)
+      * status (WORD)
+   * Tilføj og konfigurer datablock for TDISCON med følgende variabler:
+      * req (BOOL)
+      * done (BOOL)
+      * error (BOOL)
+      * busy (BOOL)
+      * status (WORD)
+   * Tilføj TCON og TDISCON funktionsblokke i OB1-programmet for begge PLC'er.
+   * Indsæt variabler fra datablokken i henholdsvis TCON og TDISCON funktionsblokke i OB1-programmet for begge PLC'er.
+3. **Opsætning af værktøjskasse for TCON**
+   * Tryk på den lille værkstøjskasse i højre hjørne af TCON funktionsblokken i OB1-programmet for begge PLC'er.
+      * Vælge `Partner` -> `PLC_2`
+      * Ved `Connection ID (dec)` vælg `new` for både PLC_1 og PLC_2
+      * Vælge `Local port` og `Partner port` til at være ens (fx 2000)
+
+         Den port som er vigtig at lave opsætning på er den port som agere server, altså den port som modtageren (PLC_2) lytter på. Det er vigtigt at huske på at denne port skal være åben i firewall for at kommunikationen kan fungere.
+
+4. **Opsætning af TSEND datablock i sender-PLC (PLC_1):**
+   * Tilføj og konfigurer datablock for  TSEND i PLC_1's OB1-program.
+   * Brug følgende parametre:
+      * req (BOOL)
+      * data (ARRAY[0..10] OF BYTE)
+      * done (BOOL)
+      * error (BOOL)
+      * busy (BOOL)
+      * status (WORD)
+   * Indsæt funktionsblokken TSEND i OB1-programmet for PLC_1.
+   * Indsæt variabler fra datablokken i TSEND funktionsblokken i OB1-programmet for PLC_1.
+5. **Opsætning af TRCV datablock i modtager-PLC (PLC_2):**
+   * Tilføj og konfigurer datablock for TRCV i PLC_2's OB1-program.
+   * Brug følgende parametre:
+      * en_r (BOOL)
+      * data (ARRAY[0..10] OF BYTE)
+      * ndr (BOOL)
+      * error (BOOL)
+      * busy (BOOL)
+      * status (WORD)
+   * Indsæt funktionsblokken TRCV i OB1-programmet for PLC_2.
+   * Indsæt variabler fra datablokken i TRCV funktionsblokken i OB1-programmet for PLC_2.
+
+6. **Test af kommunikation:**
+   * Test dataoverførslen ved at sende en simpel byte-array (fx [1, 2, 3]) fra sender-PLC'en (PLC_1) til modtager-PLC'en (PLC_2).
+   * Verificér, at modtager-PLC'en korrekt modtager ved at overvåge datablokken for TRCV og kontrollere værdierne.
+   * Aktivere først `req` på TCON funktionsblokken for at etablere forbindelsen mellem PLC'erne
+   * derefter aktivere `en_r` på TRCV funktionsblokken for at modtage data. 
+   * Aktivere `req` på TSEND funktionsblokken for at sende data.
+   
 ---
 
 ## PUT-metode
+
+
+### 📽️ Video
+Video link: [PUT](https://youtu.be/G_QhJIaOuNA)
+
+---
 
 <a name="subsec:put_method_plc_communication_simplified"></a>
 
@@ -129,6 +212,13 @@ Før du begynder at løse netværksopgaverne i TIA Portal, er det vigtigt at du 
 
 ## GET-metode
 
+
+### 📽️ Video
+
+Video link: [GET](https://youtu.be/G_QhJIaOuNA)
+
+---
+
 <a name="subsec:get_method_plc_communication_simplified"></a>
 
 **Mål:** Formålet med denne opgave er at konfigurere og anvende GET-metoden til at hente data mellem to SIMATIC S7-1500 PLC'er. Fokus er på at etablere en simpel kommunikation, hvor én PLC fungerer som datakilde, og den anden PLC henter dataene uden at inddrage komplekse scenarier eller simulering af produktionslinjer.
@@ -176,6 +266,11 @@ Før du begynder at løse netværksopgaverne i TIA Portal, er det vigtigt at du 
 ---
 
 # S7-Communication Others
+
+### 📽️ Video
+Video link: [USEND & URCV](https://youtube.com/watch?v=z6FAgjdByhY&feature=youtu.be)
+
+---
 
 ## USEND & URCV
 
