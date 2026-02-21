@@ -39,7 +39,7 @@ Velkommen til dag 6 af Industrielt Netværk!
 | 2   | Kort case: Vælg den rette protokol | Individuel| Svar i `.md`       |
 | 3   | Forberedelse til rotation          | Individuel| Tjekliste i `.md`  |
 
-Lav alt arbejde i en undermappe med dit navn (eller gruppe) under `dag06-profinet-ethernetip-teori`.
+Lav alt arbejde i en undermappe med dit navn (eller gruppe) under `dag07-profinet-ethernetip-teori`.
 
 ---
 
@@ -49,17 +49,6 @@ Lav alt arbejde i en undermappe med dit navn (eller gruppe) under `dag06-profine
 - [Siemens: What is PROFINET?](https://new.siemens.com/global/en/products/automation/industrial-communication/profinet.html)
 - [Rockwell: EtherNet/IP Overview](https://literature.rockwellautomation.com/idc/groups/literature/documents/wp/enet-wp001_-en-p.pdf)
 - [Table: Industrial Ethernet Comparison (pdf)](https://www.turck.com/static/media/downloads/BusComparison_EN.pdf)
-
----
-
-## 📝 Afleveringsguide
-
-1. Opret en mappe: `dag06-ditnavn` eller `dag06-gruppeX`
-2. Svar på quiz og case i markdown-filer (fx `quiz.md`, `case.md`)
-3. Lav en kort tjekliste med punkter, du vil huske til rotation (fx “Konfigurer IP”, “Tjek cyclic data”, “Tag screenshot”)
-4. Upload alle filer til GitHub før næste gang
-
-> Husk: Tydelig forberedelse gør din næste (praktiske) rotationsdag nemmere og mere lærerig!
 
 ---
 

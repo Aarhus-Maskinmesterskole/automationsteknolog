@@ -1,7 +1,3 @@
-# 📚 Undervisning – Python & Automation (2. semester)
-
----
-
 ## 📆 LEKTIONSPLAN – Teknologi og Projektudvikling (5 ECTS)
 
 **Uddannelse:** Automationsteknolog  
@@ -116,5 +112,5 @@ Studerende arbejder løbende med:
 
 ---
 
-Denne kursusoversigt supplerer lektionsplanen og de daglige undervisningsfiler i [undervisning](undervisning/).
+Denne kursusoversigt supplerer lektionsplanen og de daglige undervisningsfiler i [**undervisning**](./undervisning/).
 
