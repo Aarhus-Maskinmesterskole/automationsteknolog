@@ -12,26 +12,21 @@
 
 **01-snap7**
 - Arbejd med Siemens S7 PLC
-- Læs og skriv BOOL, INT, REAL, WORD
-- Log data til txt (og evt. CSV)
-- Visualiser med matplotlib
+- Etabler forbindelse med snap7
+- Læs BOOL, INT, REAL, WORD
 
-**02-ethernet-ip**
+**02-ethernet-ip (optional)**
 - Arbejd med Allen-Bradley PLC
 - Læs og skriv tags med pycomm3
-- Log data til txt (og evt. CSV)
-- Visualiser med matplotlib
 
 ---
 
 ## Kompetencer du får 💡
 
 - Forstå PLC-kommunikation fra Python
-- Læse og skrive forskellige datatyper
-- Gemme målinger med tidsstempel
-- Lave simple dashboards
-- Håndtere fejl og stoppe programmer pænt
+- Etablere forbindelse til Siemens S7
+- Læse forskellige datatyper
 
 ---
 
-**Du kan nu bygge dine egne Python-værktøjer til PLC! 🚀**
+**Du kan nu etablere forbindelse og læse variabler fra PLC! 🚀**
