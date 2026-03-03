@@ -1,0 +1,2 @@
+# Node-red Websocket Client
+I denne guide vil vi oprette en simpel WebSocket-klient i Node-RED, som kan køre på en Raspberry Pi eller en anden computer. Denne klient vil oprette forbindelse til en WebSocket-server (fx den vi lavede i forrige guide), modtage data og vise dem i Node-RED’s debug-vindue.

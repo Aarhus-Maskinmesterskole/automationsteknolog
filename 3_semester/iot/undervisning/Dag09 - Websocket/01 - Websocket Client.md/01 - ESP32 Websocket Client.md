@@ -2,7 +2,8 @@
 I denne guide vil vi oprette en simpel WebSocket-klient på en ESP32, der kører MicroPython. Vi vil forbinde til en offentlig WebSocket-server, sende en besked og modtage et svar.
 
 Før du starter, skal du sørge for at hentet følgende biblioteker:
-[uwebsockets](https://github.com/danni/uwebsockets)
+[uwebsockets](https://github.com/danni/uwebsockets) - et MicroPython WebSocket-klientbibliotek.
+
 ```python 
 import network
 import time
