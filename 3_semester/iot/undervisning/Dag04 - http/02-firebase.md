@@ -1,7 +1,3 @@
-Jep, her er en opgavebeskrivelse til at forbinde Node-RED med Firebase Realtime Database (RTDB) ved hjælp af simple `http request`-noder.
-
------
-
 ## Opgave: Læs og Skriv til Firebase RTDB via HTTP i Node-RED
 
 ### Beskrivelse 📝
@@ -12,7 +8,7 @@ Du skal bygge et flow, der kan både **skrive (PUT)** og **læse (GET)** data ti
 
 -----
 
-**Hint:** Se denne video for at løse opgaven [Firebase](https://studio.youtube.com/video/55Z5XNs45Nc/edit)
+**Hint:** Se denne video for at løse opgaven [Firebase](https://www.youtube.com/watch?v=55Z5XNs45Nc)
 
 ### Forberedelse: Opsætning af Firebase 🔥
 
