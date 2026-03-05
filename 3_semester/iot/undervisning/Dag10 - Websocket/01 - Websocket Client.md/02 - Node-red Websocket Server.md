@@ -1,0 +1,2 @@
+# Node-red Websocket Server
+I denne guide vil vi oprette en simpel WebSocket-server ved hjælp af Node-RED, som kan køre på en Raspberry Pi eller en anden computer. Denne server vil modtage WebSocket-forbindelser fra klienter (fx en ESP32) og sende simulerede sensordata i JSON-format.

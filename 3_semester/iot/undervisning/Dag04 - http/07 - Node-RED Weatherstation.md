@@ -1,9 +1,5 @@
-# Dag 4: Rest og http
-
-# Opgave: Opret Vejrstation i Node-RED med Weatherstack API
-
-## Beskrivelse
-
+# Dag 4: Node-RED Weatherstation
+## Beskrivelse 📝
 Formålet med denne opgave er at bygge et simpelt, men funktionelt, vejr-dashboard i Node-RED. Flowet skal hente aktuelle vejrdata fra **Weatherstack API** for en selvvalgt by og visualisere dem ved hjælp af `node-red-dashboard`.
 
 Dette projekt giver praktisk erfaring med at kalde eksterne REST API'er, behandle JSON-data og skabe en simpel brugergrænseflade.

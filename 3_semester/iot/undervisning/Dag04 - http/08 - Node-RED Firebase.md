@@ -1,12 +1,10 @@
-## Opgave: Læs og Skriv til Firebase RTDB via HTTP i Node-RED
-
+# Dag 4: Node-RED Firebase RTDB Integration
 ### Beskrivelse 📝
-
 Formålet med denne opgave er at lære, hvordan man interagerer med en **Google Firebase Realtime Database** direkte fra Node-RED. I stedet for at bruge specifikke Firebase-noder, skal du bruge de grundlæggende `http request`-noder. Dette giver en dybere forståelse for, hvordan Firebase's REST API fungerer.
 
 Du skal bygge et flow, der kan både **skrive (PUT)** og **læse (GET)** data til/fra en selvvalgt sti i din database.
 
------
+---
 
 **Hint:** Se denne video for at løse opgaven [Firebase](https://www.youtube.com/watch?v=55Z5XNs45Nc)
 
@@ -24,7 +22,7 @@ Inden du starter i Node-RED, skal du have din Firebase-database klar.
 
 5.  **Find din Database URL:** Øverst i din Realtime Database-visning finder du URL'en. Den ligner typisk `https://dit-projektnavn-default-rtdb.europe-west1.firebasedatabase.app/`. Kopier denne URL.
 
------
+---
 
 ### Krav: Byg dit Node-RED Flow ⚙️
 
