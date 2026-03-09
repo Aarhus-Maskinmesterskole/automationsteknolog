@@ -6,9 +6,12 @@
 
 ---
 
-## 📡 Del A: Modbus TCP – Siemens S7-1200/S7-1500 som Server + Emulate3D som Client
+## 📡 Del A: Modbus TCP 
+I del A kan der vælges imellem 2 opgaver at have med i sin rapport: 
+1. Siemens S7-1200/S7-1500 som Server + Emulate3D som Client
+2. Siemens S7-1200/S7-1500 som Server + Universial Robots som Client
 
-### 🛠️ Øvelsesbeskrivelse
+### 🛠️ Øvelsesbeskrivelse for *Siemens S7-1200/S7-1500 som Server + Emulate3D som Client*
 
 I skal konfigurere en **Modbus TCP server** på en Siemens **S7-1200/S7-1500**.
 Herefter bruger I **Emulate3D som Modbus TCP client** til at læse/skrive data til PLC’en.
@@ -25,6 +28,8 @@ Herefter bruger I **Emulate3D som Modbus TCP client** til at læse/skrive data t
 ### 🎥 Video
 
 👉 [Modbus TCP med Emulate3D](https://www.youtube.com/watch?v=WTjcJUzEBSk)
+   
+### 🛠️ Øvelsesbeskrivelse for *Siemens S7-1200/S7-1500 som Server + Emulate3D som Client*
 
 ---
 
