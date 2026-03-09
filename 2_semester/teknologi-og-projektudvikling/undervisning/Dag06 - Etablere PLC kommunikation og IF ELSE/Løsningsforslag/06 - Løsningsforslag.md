@@ -22,7 +22,6 @@ i01 = False # S2 - Fotocelle
 q00 = False # Q1
 
 first_scan = True
-
 # =================== Opret forbindelse =================
 
 try:

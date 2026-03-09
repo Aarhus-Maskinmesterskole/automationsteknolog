@@ -24,6 +24,7 @@ k1 = False # k1
 K1 = False # K1
 q00 = False # Q1
 
+first_scan = True
 # =================== Opret forbindelse =================
 
 try:

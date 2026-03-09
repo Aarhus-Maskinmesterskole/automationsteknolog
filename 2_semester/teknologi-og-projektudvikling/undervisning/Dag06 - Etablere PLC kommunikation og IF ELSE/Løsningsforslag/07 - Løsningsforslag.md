@@ -23,6 +23,7 @@ i01 = False # S2 - Fotocelle
 q00 = False # Q1
 step = 0 # Variabel til at holde styr på vores logiske trin i Match/Case strukturen
 
+first_scan = True
 # =================== Opret forbindelse =================
 
 try:

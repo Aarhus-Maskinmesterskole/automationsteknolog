@@ -23,6 +23,7 @@ i02 = False # B1
 i03 = False # B2
 q00 = False # Q1
 
+first_scan = True
 # =================== Opret forbindelse =================
 
 try:

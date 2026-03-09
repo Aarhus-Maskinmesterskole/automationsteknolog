@@ -26,6 +26,7 @@ step = 0 # Variabel til at holde styr på vores logiske trin i Match/Case strukt
 previous_i00 = False # Variabel til at holde styr på tidligere tilstand af S1
 previous_i01 = False # Variabel til at holde styr på tidligere tilstand af S2
 
+first_scan = True
 # =================== One shot funktion =================
 
 def one_shot(input_signal, previous_state):

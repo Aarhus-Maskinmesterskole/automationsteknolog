@@ -22,6 +22,7 @@ i01 = False # S2
 i02 = False # S3
 q00 = False # Q1
 
+first_scan = True
 # =================== Opret forbindelse =================
 
 try:
