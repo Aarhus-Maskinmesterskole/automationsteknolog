@@ -1,0 +1,2 @@
+# 02 - exercise 2
+I denne opgave skal du skrive et tidsstempel og værdien fra aktuelt tankniveau, tankniveau i procent og flow meter til en CSV-fil. Dette kan være nyttigt for at logge data over tid og analysere det senere.

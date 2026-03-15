@@ -4,6 +4,7 @@
 import snap7
 from snap7.util import get_bool, set_bool
 from snap7.type import Area
+import time
 import sys
 
 # =================== PLC Konfiguration =================
@@ -14,6 +15,7 @@ SLOT = 1
 AREA_IN = snap7.Area.PE
 AREA_OUT = snap7.Area.PA
 
+first_scan = True
 # =================== Opret forbindelse =================
 
 try:
@@ -26,8 +28,11 @@ except Exception as e:
 
 try:
     while True:
+        # =========== First Scan Bit ====================
+        if first_scan:
+            # Initialiseringskode her
+            first_scan = False
         # =========== Læser Input =======================
-
         INPUT_RAW = client.read_area(AREA_IN, 1, 0, 1) # Læs 1 byte fra input (PE)
         OUTPUT_RAW = client.read_area(AREA_OUT, 1, 0, 1) # Læs 1 byte fra output (PA)
         # i00 = get_bool(INPUT_RAW, 0, 0) # Læs bit 0 fra input
