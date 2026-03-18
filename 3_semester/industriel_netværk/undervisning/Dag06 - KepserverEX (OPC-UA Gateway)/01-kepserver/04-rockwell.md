@@ -9,7 +9,7 @@
 5. Test kommunikationen ved at læse værdier fra PLC'en og skrive værdier til PLC'en via KepserverEX.
 
 ## 🎥 Video Guide
-[Rockwell PLC og KepserverEX](https://www.youtube.com/watch?v=WTjcJUzEBSk)
+[Rockwell PLC og KepserverEX](https://www.youtube.com/watch?v=4Sk7am5LRKM&feature=youtu.be)
 
 ## 📝 Fokuspunkter
 - Forståelse af Rockwell PLC'er og deres kommunikationsprotokoller
