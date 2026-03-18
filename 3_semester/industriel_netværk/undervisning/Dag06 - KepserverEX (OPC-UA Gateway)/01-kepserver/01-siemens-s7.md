@@ -9,7 +9,7 @@
 5. Test kommunikationen ved at læse værdier fra PLC'en og skrive værdier til PLC'en via KepserverEX.
 
 ## 🎥 Video Guide
-[Siemens S7 og KepserverEX](youtube.com/watch?v=5n7Sf_Da0jI&feature=youtu.be)
+[Siemens S7 og KepserverEX](https://www.youtube.com/watch?v=5n7Sf_Da0jI&feature=youtu.be)
 ## 📝 Fokuspunkter
 - Forståelse af KepserverEX og dets rolle i industriel kommunikation
 - Konfiguration af Siemens S7 driveren i KepserverEX
