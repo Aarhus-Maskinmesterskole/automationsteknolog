@@ -205,8 +205,8 @@ Tillad kun:
 - Bloker IT-zone → OT-zone (direkte)
 
 ```bash
-# Hint: Brug iptables eller nftables på routeren
-iptables -A FORWARD -s 192.168.1.0/24 -d 10.20.0.0/16 -j DROP
+# Hint: Brug nftables på routeren
+nft add rule inet filter forward ip saddr 192.168.1.0/24 ip daddr 10.20.0.0/16 drop
 ```
 
 ### Udfordring 2: Tilføj mere OT-udstyr

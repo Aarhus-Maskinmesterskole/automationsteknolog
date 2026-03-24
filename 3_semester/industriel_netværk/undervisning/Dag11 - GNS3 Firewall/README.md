@@ -1,7 +1,24 @@
-# 🛡️ Dag 08 – Fejlfinding & Netværkssikkerhed
+# 🛡️ Dag 11 – GNS3 Firewall
 
-Velkommen til dag 8 af Industrielt Netværk!
-I dag arbejder vi med fejlfinding og beskyttelse af OT-netværk i GNS3, inkl. firewall, VLAN, NAT og adgangskontrol.
+Velkommen til dag 11 af Industrielt Netværk!
+I dag arbejder vi med firewall-regler og beskyttelse af OT-netværk i GNS3, inkl. nftables, RDP og adgangskontrol.
+
+---
+
+## Placering i forløbet
+
+1. Forrige dag: [Dag10 - GNS3 Routing og ACL/README.md](./../Dag10%20-%20GNS3%20Routing%20og%20ACL/README.md)
+2. Denne dag: filtrering og kontrol af trafik oven på routing
+3. Næste dag: [Dag12 - GNS3 VPN/README.md](./../Dag12%20-%20GNS3%20VPN/README.md)
+
+---
+
+## Dagens progression
+
+1. Start med Linux-router og grundlæggende trafik mellem netværk
+2. Indfør nftables-regler til at tillade og blokere trafik
+3. Arbejd med RDP og adgangskontrol i et kontrolleret setup
+4. Brug rotationsøvelsen til at samle routing, firewall og dokumentation
 
 ---
 
@@ -24,8 +41,8 @@ I dag arbejder vi med fejlfinding og beskyttelse af OT-netværk i GNS3, inkl. fi
   - Opret Linux-router med flere netværk
   - Konfigurér firewall med nftables
   - Test og dokumentér fejl (forkert subnet, IP-konflikt, VLAN-fejl)
-  - RDP-adgang og sikkerhed (se RDP.md)
-  - NAT og VLAN-router-on-a-stick (se router-nftv.md)
+  - RDP-adgang og sikkerhed (se 03 - RDP.md)
+  - Router- og firewall-opgaver (se 01 - Router NFT Opgaver.md)
 
 ---
 
@@ -37,9 +54,18 @@ I dag arbejder vi med fejlfinding og beskyttelse af OT-netværk i GNS3, inkl. fi
 | 2   | Firewall & ACL konfiguration| Individuel/gruppe |
 | 3   | Dokumentér fejl og løsning  | Individuel |
 
-> Opgavebeskrivelser og eksempler findes i `gns3-opgaver.md`.  
-> RDP-opsætning og sikkerhed: se `RDP.md`.  
-> Avanceret router/firewall: se `router-nftv.md`.
+> Opgavebeskrivelser og eksempler findes i `01 - Router NFT Opgaver.md`.  
+> RDP-opsætning og sikkerhed: se `03 - RDP.md`.  
+> Firewall-konfiguration: se `02 - NFTables.md`.
+
+---
+
+## Anbefalet gennemførelse
+
+1. Start med [01 - Router NFT Opgaver.md](./01%20-%20Router%20NFT%20Opgaver.md)
+2. Brug derefter [02 - NFTables.md](./02%20-%20NFTables.md) som reference og udbygning
+3. Tilføj [03 - RDP.md](./03%20-%20RDP.md) når basisfiltrering virker
+4. Brug rotationsøvelsen til sidst som opsamling og repetition
 
 ---
 
@@ -49,9 +75,9 @@ I dag arbejder vi med fejlfinding og beskyttelse af OT-netværk i GNS3, inkl. fi
 - [GNS3: Simulering af firewalls](https://gns3.com/tech/firewall-simulation)
 - [Ping & Traceroute – Hurtig guide](https://www.cloudflare.com/learning/network-layer/what-is-ping/)
 - Eksempler og guides:  
-  - `gns3-opgaver.md` – opgaver og konfiguration  
-  - `RDP.md` – remote desktop og sikkerhed  
-  - `router-nftv.md` – avanceret router/firewall
+  - `01 - Router NFT Opgaver.md` – opgaver og konfiguration  
+  - `03 - RDP.md` – remote desktop og sikkerhed  
+  - `02 - NFTables.md` – avanceret router/firewall
 
 ---
 

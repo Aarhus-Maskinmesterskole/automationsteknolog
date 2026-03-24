@@ -143,7 +143,6 @@ tcpdump -ni eth0 icmp or arp     # på R1 eller PC ved tvivl
 
 ```bash
 command -v nft >/dev/null && sudo nft list ruleset
-command -v iptables >/dev/null && sudo iptables -S
 # lav ingen ændringer her i øvelsen
 ```
 

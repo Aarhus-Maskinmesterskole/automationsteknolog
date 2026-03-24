@@ -6,6 +6,23 @@ Velkommen til dag 10 af Industrielt Netværk!
 
 ---
 
+## Placering i forløbet
+
+1. Forrige dag: [Dag09 - GNS3 Segmentering/README.md](./../Dag09%20-%20GNS3%20Segmentering/README.md)
+2. Denne dag: styring af trafik mellem zoner og netværk
+3. Næste dag: [Dag11 - GNS3 Firewall/README.md](./../Dag11%20-%20GNS3%20Firewall/README.md)
+
+---
+
+## Dagens progression
+
+1. Start med simpel statisk routing mellem tre zoner
+2. Udvid til flere routere og flere hop
+3. Arbejd med redundans og backup-ruter
+4. Afslut med målrettet fejlfinding af routing-problemer
+
+---
+
 ## 🎯 Læringsmål for dagen
 
 - Forstå hvorfor industrielle netværk bruger statisk routing i stedet for dynamisk routing
@@ -27,10 +44,10 @@ Velkommen til dag 10 af Industrielt Netværk!
   - Best practices for industriel routing
   
 - **Hands-on i GNS3:**
-    1. [Grundlæggende statisk routing - 3 netværkszoner](01-basic-static-routing/README.md)
-    2. [Multi-router topologi - flere hop](02-multi-router/README.md)
-    3. [Redundante ruter og failover](03-redundancy/README.md)
-    4. [Fejlfinding: Routing loops og fejlkonfiguration](04-troubleshooting/README.md)
+  1. [Grundlæggende statisk routing - 3 netværkszoner](01 - Basic Static Routing/README.md)
+  2. [Multi-router topologi - flere hop](02 - Multi Router/README.md)
+  3. [Redundante ruter og failover](03 - Redundans/README.md)
+  4. [Fejlfinding: Routing loops og fejlkonfiguration](04 - Fejlfinding/README.md)
 
 ---
 
@@ -44,6 +61,15 @@ Velkommen til dag 10 af Industrielt Netværk!
 | 4   | Fejlfinding: routing loops               | Individuel        | `.md` + løsning     |
 
 Læg alle besvarelser i en undermappe med dit navn (eller gruppe) under `dag10-routing`.
+
+---
+
+## Anbefalet gennemførelse
+
+1. Gennemfør opgaverne i rækkefølge fra 01 til 04
+2. Dokumentér routing-tabeller undervejs i stedet for kun til sidst
+3. Sammenlign forventet og faktisk pakkevej med `ip route get` og `traceroute`
+4. Brug fejlscenarierne aktivt som del af læringen
 
 ---
 

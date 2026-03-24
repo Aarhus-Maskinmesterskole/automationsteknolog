@@ -30,9 +30,7 @@ sysctl -w net.ipv4.ip_forward=1
 
 3) Tillad ICMP-forwarding (hvis firewall er aktiv)
 
-# iptables
-iptables -A FORWARD -p icmp -j ACCEPT
-# nftables (alternativt)
+# nftables
 nft add rule inet filter forward ip protocol icmp accept
 
 4) Test

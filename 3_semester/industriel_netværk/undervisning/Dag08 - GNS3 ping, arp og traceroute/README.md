@@ -1,252 +1,72 @@
-# 🔗 Dag 09 – VLAN-lab: Inter-VLAN routing med Linux-router (VLAN 110, 120, 130)
+# Dag 08 - GNS3 Ping, ARP og Traceroute
 
-## 1. Formål
+Velkommen til dag 8 af Industrielt Netværk.
 
-Formålet med denne øvelse er, at du får praktisk erfaring med:
-
-* Segmentering af et LAN ved hjælp af VLAN.
-* Konfiguration af access- og trunk-porte på en switch.
-* Opsætning af inter-VLAN routing på en Linux-baseret router (router-on-a-stick).
-* Test og fejlsøgning af forbindelse mellem Linux-klienter i forskellige VLAN.
-
-Efter øvelsen skal du kunne forklare, hvordan en enkelt fysisk forbindelse mellem switch og router kan håndtere trafik fra flere VLAN ved hjælp af 802.1Q-tags.
+> I dag arbejder vi med de vigtigste værktøjer til netværksforståelse og fejlfinding i GNS3: `ping`, ARP og `traceroute`.
 
 ---
 
-## 2. Scenarie
+## Læringsmål for dagen
 
-En virksomhed ønsker at adskille deres interne netværk i tre logiske segmenter:
-
-* **VLAN 110 – PRODUKTION**
-* **VLAN 120 – ADMINISTRATION**
-* **VLAN 130 – GÆSTER**
-
-Alle tre VLAN er forbundet til den samme switch. En Linux-router sørger for routing mellem VLAN’ene.
-
-Der er kun **ét fysisk kabel** mellem routeren og switchen. For at kunne føre trafik fra alle tre VLAN over dette kabel, benyttes en **trunk-port** på switchen og **VLAN-subinterfaces** på routeren.
+- Forstå hvad `ping` kan og ikke kan fortælle om en forbindelse
+- Forklare hvordan ARP bruges til at finde MAC-adresser på lokale netværk
+- Bruge `traceroute` til at se vejen gennem et netværk
+- Dokumentere og fejlfinde forbindelsesproblemer systematisk
+- Koble værktøjerne til de topologier, der blev bygget på Dag 07
 
 ---
 
-## 3. Topologi
+## Placering i forløbet
 
-Logisk topologi:
-
-<img width="1917" height="1030" alt="image" src="https://github.com/user-attachments/assets/715fa470-3f39-41b9-ba0c-dab6c66461f0" />
-
-* **Linux-router**
-
-  * Ét interface mod switchen: `eth0` (trunk)
-  * VLAN-subinterfaces:
-
-    * `eth0.110` → VLAN 110
-    * `eth0.120` → VLAN 120
-    * `eth0.130` → VLAN 130
-
-* **L2-switch**
-
-  * Port til Host1 → Access, VLAN 110
-  * Port til Host2 → Access, VLAN 120
-  * Port til Host3 → Access, VLAN 130
-  * Port til router → Trunk, tilladt VLAN 110, 120, 130
-
-* **3 Linux-klienter (Alpine)**
-
-  * Host1 tilhører VLAN 110
-  * Host2 tilhører VLAN 120
-  * Host3 tilhører VLAN 130
+1. Forrige dag: [Dag07 - GNS3 Introduktion/README.md](./../Dag07%20-%20GNS3%20introduktion/README.md)
+2. Denne dag: netværksanalyse og fejlfinding i de miljøer, du allerede har bygget
+3. Næste dag: [Dag09 - GNS3 Segmentering/README.md](./../Dag09%20-%20GNS3%20Segmentering/README.md)
 
 ---
 
-## 4. IP-plan
+## Dagens progression
 
-| VLAN | Beskrivelse | Netværk          | Gateway (Linux-router) | Host-IP        |
-| ---: | ----------- | ---------------- | ---------------------- | -------------- |
-|  110 | PRODUKTION  | 192.168.110.0/24 | 192.168.110.1          | 192.168.110.10 |
-|  120 | ADMIN       | 192.168.120.0/24 | 192.168.120.1          | 192.168.120.10 |
-|  130 | GÆSTER      | 192.168.130.0/24 | 192.168.130.1          | 192.168.130.10 |
-
-Routeren fungerer som default gateway for alle VLAN.
+1. Verificér lokal forbindelse med `ping`
+2. Undersøg hvordan ARP knytter IP-adresser til MAC-adresser
+3. Brug `traceroute` til at se vejen mellem subnet
+4. Saml resultaterne i en kort fejlsøgningsmetode
 
 ---
 
-## 5. Krav
+## Hovedaktiviteter
 
-* Alle hosts skal kunne:
-
-  * Pinge deres egen gateway (samme VLAN).
-  * Pinge de andre hosts i de andre VLAN via routeren.
-
-* VLAN-segmentering skal ske på switchen (access/trunk).
-
-* Inter-VLAN routing skal ske på Linux-routeren (router-on-a-stick).
+1. Genbrug topologien fra Dag 07 med to hosts og en router
+2. Test forbindelse i samme subnet og mellem to subnet
+3. Brug `ip neigh` eller tilsvarende til at se ARP-tabellen
+4. Brug `traceroute` eller `tracepath` til at identificere hop
+5. Beskriv forskellen på lokal levering og routing via gateway
 
 ---
 
-# Opgave: Step-by-step konfiguration
+## Anbefalet gennemførelse
 
-Nedenstående trin skal følges i rækkefølge.
-Dokumentér undervejs med relevante screenshots eller kommandoudskrifter efter lærerens anvisning.
-
----
-
-## Trin 1 – Opret GNS3-projekt og topologi
-
-1. Opret et nyt projekt i GNS3, fx:
-   `VLAN_LAB_110_120_130`.
-2. Tilføj følgende noder:
-
-   * 1 × Linux-router (Debian/Ubuntu VM eller anden generisk Linux).
-   * 1 × L2-switch (Cisco IOS/IOU eller tilsvarende).
-   * 3 × **Alpine Linux-VM’er** som klienter.
-3. Forbind noderne:
-
-   * Router `eth0` → Switch port `f0/0`.
-   * Alpine-Host1 → Switch `f0/1`.
-   * Alpine-Host2 → Switch `f0/2`.
-   * Alpine-Host3 → Switch `f0/3`.
-
-Kontrollér at alle links er “up” i GNS3, når noderne er startet.
+1. Start med en topologi hvor ping allerede virker
+2. Slet eller ryd ARP-tabellen og observer hvad der sker ved første ping
+3. Test `traceroute` fra et subnet til et andet
+4. Dokumentér hvilke kommandoer du brugte, og hvad de viste
 
 ---
 
-## Trin 2 – Forbered Linux-routeren
+## Dokumentation
 
-Antagelse: Nødvendige pakker (vlan, iproute2) er allerede installeret.
+Dokumenter gerne med:
 
-
-1. Verificér at interfacet `eth0` findes (eller find det rigtige navn):
-
-```bash
-ip link show
-```
-
-<img width="1917" height="1028" alt="image" src="https://github.com/user-attachments/assets/a60ee12d-b4ab-42ad-b16e-92ff873c0856" />
-
-
-Notér navnet på interfacet mod switchen (forudsat `eth0` – hvis det hedder noget andet, brug det navn i resten af øvelsen).
+- skærmbillede af GNS3-topologi
+- output fra `ping`
+- output fra `ip neigh`
+- output fra `traceroute` eller `tracepath`
+- kort forklaring af hvad hvert hop eller hver ARP-entry betyder
 
 ---
 
-## Trin 3 – Opret VLAN-subinterfaces på Linux-routeren
+## Næste dag
 
-Opret et subinterface pr. VLAN:
-
-```bash
-# VLAN 110
-ip link add link eth0 name eth0.110 type vlan id 110
-
-# VLAN 120
-ip link add link eth0 name eth0.120 type vlan id 120
-
-# VLAN 130
-ip link add link eth0 name eth0.130 type vlan id 130
-```
-
-Kontrol: 
-
-```bash
-ip -d -link show
-```
-
-<img width="1917" height="1028" alt="image" src="https://github.com/user-attachments/assets/8ddfeee3-f780-4cae-b059-3a8235745864" />
-
-
-Tildel IP-adresser iht. IP-planen:
-
-```bash
-ip addr add 192.168.110.1/24 dev eth0.110
-ip addr add 192.168.120.1/24 dev eth0.120
-ip addr add 192.168.130.1/24 dev eth0.130
-```
-
-Aktivér interfaces og routing:
-
-```bash
-ip link set eth0 up
-ip link set eth0.110 up
-ip link set eth0.120 up
-ip link set eth0.130 up
-
-sysctl -w net.ipv4.ip_forward=1
-```
-
-Brug `clear` til at ryde console
-
-Kontrol:
-
-```bash
-ip -d link show eth0.110
-```
-
-Tjek at der står, at det er et VLAN-interface med `vlan id 110`.
-Gentag evt. for `eth0.120` og `eth0.130`.
-
-<img width="1917" height="1030" alt="image" src="https://github.com/user-attachments/assets/852d0090-a19c-4274-8a22-b37a74198e12" />
-
----
-
-## Trin 4 – Konfigurer switchen (VLAN og porte)
-
-Gå på switchens konsol og udfør følgende.
-
-1. Opret VLAN 110, 120 og 130 på port 1,2 og 3 (port 1 forbeholdt til dotq):
-
-<img width="1917" height="1028" alt="image" src="https://github.com/user-attachments/assets/b98ca9f3-9810-43c8-a89d-e1a17876e26e" />
-
-Sikr dig, at:
-
-* VLAN 110, 120 og 130 findes `ip -d link show`
-
----
-
-## Trin 5 – Konfigurer Alpine Linux-klienter (midlertidig/running config)
-
-På hver Alpine-VM arbejdes **som root** (ingen `sudo`, ingen rc/persistenskonfiguration).
-Vi laver kun runtime-konfiguration med `ip`-kommandoerne.
-
-### 5.1 Find interface-navn
-
-På hver Alpine-host:
-
-```bash
-ip link
-```
-
-Find navnet på det interface, der er forbundet til switchen – her antager vi `eth0`.
-Hvis det hedder noget andet (fx `ens3`), bruger du det navn i stedet for `eth0` i resten af kommandoerne.
-
----
-
-### 5.2 Host1 (VLAN 110)
-
-På Alpine-Host1:
-
-1. Sæt IP-adresse:
-
-```bash
-ip addr add 192.168.110.10/24 dev eth0
-```
-
-2. Sæt interface op:
-
-```bash
-ip link set eth0 up
-```
-
-3. Sæt default gateway:
-
-```bash
-ip route add default via 192.168.110.1
-```
-
-4. Kontrol:
-
-```bash
-ip addr show dev eth0
-ip route show dev eth0
-```
-
-<img width="1918" height="1029" alt="image" src="https://github.com/user-attachments/assets/73615690-68f0-404c-bcd5-cfffb72e067d" />
+Næste naturlige skridt er at opdele netværket i segmenter med subnet og VLAN.
 
 
 ---

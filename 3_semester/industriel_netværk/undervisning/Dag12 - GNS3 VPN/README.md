@@ -1,4 +1,41 @@
-# WireGuard: Windows ↔ GNS3-router ↔ Linux-PC
+# Dag 12 - GNS3 VPN
+
+Velkommen til dag 12 af Industrielt Netværk.
+
+> I dag arbejder vi med sikker fjernadgang til et GNS3-netværk ved hjælp af VPN. Fokus er på WireGuard som en enkel og moderne metode til at nå ind i et afgrænset laboratorienetværk.
+
+---
+
+## Læringsmål for dagen
+
+- Forstå hvorfor VPN er relevant i industrielle netværk
+- Konfigurere en WireGuard-tunnel mellem Windows og en Linux-router i GNS3
+- Route trafik fra VPN-klienten ind i et internt laboratorienetværk
+- Teste og dokumentere sikker fjernadgang
+- Koble VPN sammen med det segmenterede og beskyttede netværk fra Dag 10 og 11
+
+---
+
+## Placering i forløbet
+
+1. Forrige dag: [Dag11 - GNS3 Firewall/README.md](./../Dag11%20-%20GNS3%20Firewall/README.md)
+2. Denne dag: sikker adgang ind i et eksisterende GNS3-miljø
+3. Supplerende materiale: [RDP.md](./RDP.md)
+
+---
+
+## Dagens progression
+
+1. Klargør router og intern Linux-PC
+2. Installer og konfigurer WireGuard på Windows
+3. Opret tunnel og aktiver IP-forwarding på routeren
+4. Test adgang til både tunnel-interface og LAN bag routeren
+
+---
+
+## Hovedøvelse: WireGuard mellem Windows, GNS3-router og Linux-PC
+
+### WireGuard: Windows ↔ GNS3-router ↔ Linux-PC
 
 *(Ingen firewall — fuld guide i Markdown)*
 

@@ -388,7 +388,6 @@ sysctl -w net.ipv4.ip_forward=1
 ip route show
 
 # Tjek 3: Er der firewall regler?
-iptables -L -v -n
 nft list ruleset
 ```
 
@@ -488,7 +487,6 @@ net.ipv4.ip_forward=1
     → Tjek routing på remote router
 
 [ ] Layer 4+: Firewall blokeringer?
-    → iptables -L -v -n
     → nft list ruleset
 
 [ ] Pakke-flow: Kommer pakker frem?

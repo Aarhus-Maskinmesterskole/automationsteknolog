@@ -1,84 +1,69 @@
-# 🛡️ Dag 02 – Subnet, VLAN & Fejlfinding (med fysisk PLC)
+# Dag 09 - GNS3 Segmentering
 
-Velkommen til anden undervisningsdag i Industrielt Netværk!
+Velkommen til dag 9 af Industrielt Netværk.
 
-> I dag kobler du den virtuelle verden i GNS3 sammen med rigtig PLC-udstyr: Du segmenterer netværk med subnet og VLAN, og fejlfinder kommunikation mellem både virtuelle pc’er og en fysisk PLC.
-
----
-
-## 🎯 Læringsmål for dagen
-
-- Forstå forskellen på subnet og VLAN – og hvorfor segmentering er vigtigt i industrien
-- Kunne konfigurere subnet og VLAN i GNS3 (med VPCS og fysisk PLC)
-- Udføre og dokumentere ping-test mellem virtuel PC og fysisk PLC
-- Bruge netværksværktøjer (ping, evt. traceroute) til fejlfinding på tværs af fysisk og virtuel netværksudstyr
-- Dokumentere netværksopsætning, resultater og fejl
+> I dag går vi fra et fladt netværk til opdelte net med subnet, VLAN og routing mellem segmenter.
 
 ---
 
-## 📚 Dagens indhold
+## Læringsmål for dagen
 
-- **Mini-forelæsning:**  
-  Subnet, VLAN, gateway, typiske fejl og netværkssikkerhed
-- **Opgaver:**
-    1. [Segmentér netværket med subnet og VLAN – GNS3 + fysisk PLC](segmenter-med-subnet-og-vlan-plc.md)
-    2. [Ping fra virtuel PC til fysisk PLC](ping-virtuel-til-fysisk-plc.md)
-    3. [Fejlfinding – hvis ping fejler](fejlfinding-gns3-fysisk-plc.md)
-    4. [Refleksion: Hvad lærte du om integration mellem virtuel og fysisk netværk?](reflekter-over-dag02.md)
-- **Fælles opsamling:**  
-  Hvilke problemer opstod, hvordan blev de løst, og hvorfor er det vigtigt at kunne netværke med både virtuelle og fysiske enheder?
+- Forklare forskellen på subnetting og VLAN-segmentering
+- Opdele et netværk i mindre logiske enheder i GNS3
+- Forstå hvornår en router er nødvendig mellem segmenter
+- Dokumentere og teste trafik mellem segmenter
+- Forberede grundlaget for Dag 10 med statisk routing
 
 ---
 
-## 🛠️ Opgaver
+## Placering i forløbet
 
-| #   | Titel                                             | Type        | Aflevering          |
-|-----|---------------------------------------------------|-------------|---------------------|
-| 1   | Segmentér med subnet og VLAN (GNS3 + PLC)         | Individuel/gruppe | `.md` + diagram   |
-| 2   | Ping fra virtuel PC til fysisk PLC                | Individuel  | `.md` + screenshot  |
-| 3   | Fejlfinding ved netværksfejl (virtuelt/fysisk)    | Individuel  | `.md` + noter       |
-| 4   | Refleksion over integration og fejlfinding        | Individuel  | `.md`               |
-
-Læg alle besvarelser i en undermappe med dit navn (eller gruppe) under `dag02-subnet-vlan`.
+1. Forrige dag: [Dag08 - GNS3 Ping, ARP og Traceroute/README.md](./../Dag08%20-%20GNS3%20Ping%2C%20ARP%20og%20Traceroute/README.md)
+2. Denne dag: opdeling og strukturering af netværket
+3. Næste dag: [Dag10 - GNS3 Routing og ACL/README.md](./../Dag10%20-%20GNS3%20Routing%20og%20ACL/README.md)
 
 ---
 
-## 💾 Ressourcer
+## Dagens progression
 
-- [YouTube: VLAN og subnet forklaret (DK/ENG)](https://www.youtube.com/watch?v=_IAUOQpnEjw)
-- [GNS3 VLAN tutorial](https://gns3.com/tech/vlan-configuration)
-- [Subnetting quick guide](https://www.cloudflare.com/learning/network-layer/subnetting/)
-- [Ping & Traceroute guide](https://www.cloudflare.com/learning/network-layer/what-is-ping/)
-
----
-
-## 📝 Afleveringsguide
-
-1. Opret mappe: `dag02-ditnavn` eller `dag02-gruppeX`
-2. Svar på opgaverne i de relevante `.md`-filer
-3. Indsæt screenshots og diagrammer som  
-```
-
-![navn](billede.png)
-
-```
-4. Push til GitHub senest før næste undervisningsgang
-
-> Husk: Beskriv altid, hvordan din virtuelle og fysiske opsætning hænger sammen – både hvis det virker og hvis det fejler!
+1. Start med subnetting og adresseplanlægning
+2. Arbejd videre med VLAN og isolation
+3. Byg routing mellem segmenter
+4. Brug ekstra øvelser til at forbinde teori og praksis
 
 ---
 
-## ❓ Ofte stillede spørgsmål
+## Opgaver og materialer
 
-- **Hvordan dokumenterer jeg ping fra GNS3 til PLC?**  
-Tag screenshot af både GNS3 og dit ping-resultat.
-- **Kan jeg bruge andet end VPCS i GNS3?**  
-Ja, men hold det simpelt – fokus er på netværkskommunikation.
-- **Hvad hvis PLC ikke svarer på ping?**  
-Tjek kabling, IP-konfiguration, VLAN, firewall – og dokumentér din fejlsøgning!
+1. [01-subnetting/README.md](./01-subnetting/README.md)
+2. [02-vlan/01-opgave.md](./02-vlan/01-opgave.md)
+3. [03-routing/01-opgaver.md](./03-routing/01-opgaver.md)
+4. [router-subnet-routing.md](./router-subnet-routing.md)
+5. [router-bridge.md](./router-bridge.md)
 
 ---
 
-God arbejdslyst – og husk: Den største gevinst er at få virtuel og fysisk netværksudstyr til at spille sammen! 🛠️🤖
+## Anbefalet gennemførelse
 
-**Sig til hvis du vil have opgaveskabeloner/cheat sheet til de enkelte punkter, eller et eksempel på hvordan diagrammet kan tegnes!**
+1. Start med subnetting for at få adresseplanen på plads
+2. Gå videre til VLAN for at forstå logisk segmentering på switchniveau
+3. Arbejd derefter med routing mellem adskilte net
+4. Brug de ekstra router-øvelser til at forstærke forståelsen
+
+---
+
+## Dokumentation
+
+Dokumenter gerne med:
+
+- IP-plan og subnetberegninger
+- skærmbillede af topologi i GNS3
+- output fra `ip addr`, `ip route` og relevante switch-kommandoer
+- ping-tests mellem segmenter
+- kort forklaring af hvorfor trafik virker eller ikke virker
+
+---
+
+## Næste dag
+
+Næste naturlige skridt er at styre trafikken mellem netværkszoner med statisk routing og adgangskontrol.

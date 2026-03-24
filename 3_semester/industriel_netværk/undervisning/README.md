@@ -14,12 +14,12 @@ Denne mappe indeholder undervisningsmateriale pr. undervisningsdag.
 - [Dag04 – Profibus og Modbus TCP](Dag04%20-%20Profibus%20og%20Modbus%20TCP/README.md)
 - [Dag05 – Profibus, IO-Link og Modbus TCP (start her)](Dag05%20-%20Profibus%2C%20IO-Link%20og%20Modbus%20TCP/01-rotations%C3%B8velse.md)
 - [Dag06 – KepserverEX (OPC-UA Gateway) (start her)](Dag06%20-%20KepserverEX%20(OPC-UA%20Gateway)/01-kepserver/01-siemens-s7.md)
-- [Dag07 – Rockwell](Dag07%20-%20Rockwell/README.md)
-- [Dag08 – GNS3 ping, arp og traceroute](Dag08%20-%20GNS3%20ping%2C%20arp%20og%20traceroute/README.md)
-- [Dag09 – GNS3 segmentering](Dag09%20-%20GNS3%20segmentering/README.md)
+- [Dag07 – GNS3 Introduktion](Dag07%20-%20GNS3%20introduktion/README.md)
+- [Dag08 – GNS3 Ping, ARP og Traceroute](Dag08%20-%20GNS3%20Ping%2C%20ARP%20og%20Traceroute/README.md)
+- [Dag09 – GNS3 Segmentering](Dag09%20-%20GNS3%20Segmentering/README.md)
 - [Dag10 – GNS3 Routing og ACL](Dag10%20-%20GNS3%20Routing%20og%20ACL/README.md)
 - [Dag11 – GNS3 Firewall](Dag11%20-%20GNS3%20Firewall/README.md)
-- [Dag12 – GNS3 VPN (Virtual Private Network)](Dag12%20-%20GNS3%20VPN%20(Virtual%20Private%20Network)/README.md)
+- [Dag12 – GNS3 VPN](Dag12%20-%20GNS3%20VPN/README.md)
 
 ---
 
@@ -30,8 +30,3 @@ Denne mappe indeholder undervisningsmateriale pr. undervisningsdag.
 - Evt. `img/` med billeder/diagrammer
 
 ---
-
-## ✅ Aflevering (kort)
-
-- Læg dine besvarelser i en undermappe med dit navn/gruppe under den relevante dag.
-- Dokumentér med tekst + relevante screenshots/diagrammer.

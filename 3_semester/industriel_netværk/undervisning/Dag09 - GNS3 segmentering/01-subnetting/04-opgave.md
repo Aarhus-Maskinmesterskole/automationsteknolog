@@ -146,7 +146,9 @@ Typiske fejl:
 ## Hvis PLC’s gateway ikke kan ændres (midlertidig NAT)
 
 ```bash
-iptables -t nat -A POSTROUTING -s 192.168.0.0/25 -d 192.168.0.128/25 -o eth1 -j MASQUERADE
+nft add table ip nat
+nft 'add chain ip nat postrouting { type nat hook postrouting priority srcnat; }'
+nft add rule ip nat postrouting ip saddr 192.168.0.0/25 ip daddr 192.168.0.128/25 oifname "eth1" masquerade
 ```
 
 Fjern NAT igen når korrekt gateway er sat på PLC.
