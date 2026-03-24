@@ -33,7 +33,7 @@ Velkommen til dag 9 af Industrielt Netværk.
 
 ---
 
-## Opgaver og materialer
+## Opgaver
 
 1. [01-subnetting/README.md](./01-subnetting/README.md)
 2. [02-vlan/01-opgave.md](./02-vlan/01-opgave.md)
@@ -52,7 +52,7 @@ Velkommen til dag 9 af Industrielt Netværk.
 
 ---
 
-## Dokumentation
+## Egne noter og dokumentation
 
 Dokumenter gerne med:
 
@@ -61,6 +61,8 @@ Dokumenter gerne med:
 - output fra `ip addr`, `ip route` og relevante switch-kommandoer
 - ping-tests mellem segmenter
 - kort forklaring af hvorfor trafik virker eller ikke virker
+
+Inden undervisningen slutter vises dette til underviseren, og der er mulighed for at stille spørgsmål og få feedback.
 
 ---
 

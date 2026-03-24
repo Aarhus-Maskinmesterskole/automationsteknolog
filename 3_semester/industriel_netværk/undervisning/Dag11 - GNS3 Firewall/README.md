@@ -1,4 +1,4 @@
-# 🛡️ Dag 11 – GNS3 Firewall
+# Dag 11 - GNS3 Firewall
 
 Velkommen til dag 11 af Industrielt Netværk!
 I dag arbejder vi med firewall-regler og beskyttelse af OT-netværk i GNS3, inkl. nftables, RDP og adgangskontrol.
@@ -22,7 +22,7 @@ I dag arbejder vi med firewall-regler og beskyttelse af OT-netværk i GNS3, inkl
 
 ---
 
-## 🎯 Læringsmål
+## Læringsmål for dagen
 
 - Forstå OT-netværkssikkerhed: firewall, segmentering, ACL
 - Udføre fejlfinding: ping, traceroute, fysisk/logisk analyse
@@ -31,32 +31,12 @@ I dag arbejder vi med firewall-regler og beskyttelse af OT-netværk i GNS3, inkl
 
 ---
 
-## 📚 Indhold
+## Opgaver
 
-- **Mini-forelæsning:**  
-  - OT vs. IT-sikkerhed, trusler og beskyttelse
-  - Firewalls, access control, fysisk adskillelse
-  - Fejlfinding: ping, traceroute, netværksdiagrammer
-- **Hands-on i GNS3:**  
-  - Opret Linux-router med flere netværk
-  - Konfigurér firewall med nftables
-  - Test og dokumentér fejl (forkert subnet, IP-konflikt, VLAN-fejl)
-  - RDP-adgang og sikkerhed (se 03 - RDP.md)
-  - Router- og firewall-opgaver (se 01 - Router NFT Opgaver.md)
-
----
-
-## 🛠️ Opgaver
-
-| #   | Titel                       | Type      |
-|-----|-----------------------------|-----------|
-| 1   | Fejlfinding i GNS3          | Individuel/gruppe |
-| 2   | Firewall & ACL konfiguration| Individuel/gruppe |
-| 3   | Dokumentér fejl og løsning  | Individuel |
-
-> Opgavebeskrivelser og eksempler findes i `01 - Router NFT Opgaver.md`.  
-> RDP-opsætning og sikkerhed: se `03 - RDP.md`.  
-> Firewall-konfiguration: se `02 - NFTables.md`.
+1. [01 - Router NFT Opgaver.md](./01%20-%20Router%20NFT%20Opgaver.md)
+2. [02 - NFTables.md](./02%20-%20NFTables.md)
+3. [03 - RDP.md](./03%20-%20RDP.md)
+4. [04 - Rotationsøvelse](./04%20-%20Rotations%C3%B8velse)
 
 ---
 
@@ -66,6 +46,25 @@ I dag arbejder vi med firewall-regler og beskyttelse af OT-netværk i GNS3, inkl
 2. Brug derefter [02 - NFTables.md](./02%20-%20NFTables.md) som reference og udbygning
 3. Tilføj [03 - RDP.md](./03%20-%20RDP.md) når basisfiltrering virker
 4. Brug rotationsøvelsen til sidst som opsamling og repetition
+
+---
+
+## Egne noter og dokumentation
+
+Dokumenter gerne med:
+
+- topologi og zoner i GNS3
+- relevante nftables-regler
+- ping- og forbindelsestests før og efter filtrering
+- korte noter om hvad der blev tilladt og blokeret
+
+Inden undervisningen slutter vises dette til underviseren, og der er mulighed for at stille spørgsmål og få feedback.
+
+---
+
+## Næste dag
+
+Næste naturlige skridt er at etablere sikker fjernadgang med VPN ind til laboratorienetværket.
 
 ---
 

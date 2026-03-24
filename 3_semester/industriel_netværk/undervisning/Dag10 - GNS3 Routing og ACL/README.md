@@ -1,6 +1,6 @@
-# 🛤️ Dag 10 – Statisk Routing & Route Management
+# Dag 10 - GNS3 Routing og ACL
 
-Velkommen til dag 10 af Industrielt Netværk!
+Velkommen til dag 10 af Industrielt Netværk.
 
 > I dag går vi i dybden med statisk routing – det fundament som ALLE industrielle netværk bygger på. I lærer at bygge routing-tabeller, prioritere ruter, håndtere redundans og undgå routing loops.
 
@@ -23,7 +23,7 @@ Velkommen til dag 10 af Industrielt Netværk!
 
 ---
 
-## 🎯 Læringsmål for dagen
+## Læringsmål for dagen
 
 - Forstå hvorfor industrielle netværk bruger statisk routing i stedet for dynamisk routing
 - Kunne læse og forstå routing-tabeller (`ip route show`, `route -n`)
@@ -34,24 +34,16 @@ Velkommen til dag 10 af Industrielt Netværk!
 
 ---
 
-## 📚 Dagens indhold
+## Opgaver
 
-- **Mini-forelæsning:**  
-  - Hvorfor statisk routing i OT-netværk?
-  - Routing-tabeller og route lookup
-  - Metrics, prioritering og redundans
-  - Routing loops og TTL
-  - Best practices for industriel routing
-  
-- **Hands-on i GNS3:**
-  1. [Grundlæggende statisk routing - 3 netværkszoner](01 - Basic Static Routing/README.md)
-  2. [Multi-router topologi - flere hop](02 - Multi Router/README.md)
-  3. [Redundante ruter og failover](03 - Redundans/README.md)
-  4. [Fejlfinding: Routing loops og fejlkonfiguration](04 - Fejlfinding/README.md)
+1. [Grundlæggende statisk routing - 3 netværkszoner](01 - Basic Static Routing/README.md)
+2. [Multi-router topologi - flere hop](02 - Multi Router/README.md)
+3. [Redundante ruter og failover](03 - Redundans/README.md)
+4. [Fejlfinding: Routing loops og fejlkonfiguration](04 - Fejlfinding/README.md)
 
 ---
 
-## 🛠️ Opgaver
+## Aflevering
 
 | #   | Titel                                    | Type              | Aflevering          |
 |-----|------------------------------------------|-------------------|---------------------|
@@ -59,10 +51,6 @@ Velkommen til dag 10 af Industrielt Netværk!
 | 2   | Multi-router netværk                     | Individuel/gruppe | `.md` + route tables|
 | 3   | Redundans og backup routes               | Individuel        | `.md` + test        |
 | 4   | Fejlfinding: routing loops               | Individuel        | `.md` + løsning     |
-
-Læg alle besvarelser i en undermappe med dit navn (eller gruppe) under `dag10-routing`.
-
----
 
 ## Anbefalet gennemførelse
 
@@ -73,16 +61,36 @@ Læg alle besvarelser i en undermappe med dit navn (eller gruppe) under `dag10-r
 
 ---
 
+## Egne noter og dokumentation
+
+Dokumenter gerne med:
+
+- netværksdiagram
+- routing-tabeller fra alle routere
+- output fra `ip route get` og `traceroute`
+- ping-tests mellem zoner
+- kort forklaring af route-valg, redundans eller fejlscenarier
+
+Inden undervisningen slutter vises dette til underviseren, og der er mulighed for at stille spørgsmål og få feedback.
+
+---
+
+## Næste dag
+
+Næste naturlige skridt er at filtrere og kontrollere trafikken med firewall-regler og adgangskontrol.
+
+---
+
 ## 🏭 Hvorfor statisk routing i industrien?
 
 ### ✅ Fordele ved statisk routing i OT-netværk:
 
-- **Forudsigelighed:** Traffik følger altid samme vej
+- **Forudsigelighed:** Trafik følger altid samme vej
 - **Sikkerhed:** Ingen routing-protokoller der kan udnyttes
 - **Simpelhed:** Nemt at dokumentere og fejlfinde
 - **Performance:** Ingen overhead fra routing-protokoller
 - **Oppetid:** Ingen afhængighed af routing-daemons
-- **Kontrol:** Fuldstændig kontrol over traffik-flow
+- **Kontrol:** Fuldstændig kontrol over trafik-flow
 
 ### ❌ Hvorfor IKKE DHCP eller dynamisk routing?
 

@@ -33,11 +33,48 @@ Velkommen til dag 12 af Industrielt Netværk.
 
 ---
 
+## Opgaver
+
+1. Konfigurér router, LAN og VPN-interface
+2. Installer og opsæt WireGuard-klienten på Windows
+3. Verificér tunnel og adgang til LAN bag routeren
+4. Brug [RDP.md](./RDP.md) som supplerende materiale til fjernadgang
+
+---
+
 ## Hovedøvelse: WireGuard mellem Windows, GNS3-router og Linux-PC
 
 ### WireGuard: Windows ↔ GNS3-router ↔ Linux-PC
 
 *(Ingen firewall — fuld guide i Markdown)*
+
+---
+
+## Anbefalet gennemførelse
+
+1. Start med at klargøre router og intern Linux-PC
+2. Konfigurér derefter WireGuard på routeren
+3. Opsæt klienten på Windows og test tunnelen
+4. Afslut med at verificere adgang til LAN bag routeren
+
+---
+
+## Egne noter og dokumentation
+
+Dokumenter gerne med:
+
+- IP-plan for WAN, LAN og VPN-net
+- skærmbillede af tunnelkonfiguration
+- output fra `wg`, `ip route` og ping-tests
+- kort forklaring af hvordan trafikken bevæger sig gennem tunnelen
+
+Inden undervisningen slutter vises dette til underviseren, og der er mulighed for at stille spørgsmål og få feedback.
+
+---
+
+## Næste dag
+
+Efter Dag 12 kan forløbet samles i større scenarier, hvor segmentering, routing, firewall og VPN kombineres i samme topologi.
 
 ---
 

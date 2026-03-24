@@ -29,10 +29,10 @@ Dag 7 er dermed fundamentet for de efterfølgende dage med ARP, traceroute, segm
 
 ## Opgaver
 
-1. [01 - Installation af GNS3](./01 - Installation af GNS3.md)
-2. [02 - Ping mellem to Alpine-maskiner](./02 - Ping mellem to Alpine-maskiner.md)
-3. [03 - Permanent IP på Alpine-maskiner](./03 - Permanent IP på Alpine-maskiner.md)
-4. [04 - Router mellem to subnet](./04 - Router mellem to subnet.md)
+1. [01 - Installation af GNS3](01%20-%20Installation%20af%20GNS3.md)
+2. [02 - Ping mellem to Alpine-maskiner](02%20-%20Ping%20mellem%20to%20Alpine-maskiner.md)
+3. [03 - Permanent IP på Alpine-maskiner](03%20-%20Permanent%20IP%20på%20Alpine-maskiner.md)
+4. [04 - Router mellem to subnet](04%20-%20Router%20mellem%20to%20subnet.md)
 
 ---
 

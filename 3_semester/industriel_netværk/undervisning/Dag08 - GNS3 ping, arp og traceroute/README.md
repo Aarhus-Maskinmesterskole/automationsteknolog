@@ -1,4 +1,4 @@
-# Dag 08 - GNS3 Ping, ARP og Traceroute
+﻿# Dag 08 - GNS3 Ping, ARP og Traceroute
 
 Velkommen til dag 8 af Industrielt Netværk.
 
@@ -33,7 +33,7 @@ Velkommen til dag 8 af Industrielt Netværk.
 
 ---
 
-## Hovedaktiviteter
+## Opgaver
 
 1. Genbrug topologien fra Dag 07 med to hosts og en router
 2. Test forbindelse i samme subnet og mellem to subnet
@@ -52,7 +52,7 @@ Velkommen til dag 8 af Industrielt Netværk.
 
 ---
 
-## Dokumentation
+## Egne noter og dokumentation
 
 Dokumenter gerne med:
 
@@ -62,190 +62,10 @@ Dokumenter gerne med:
 - output fra `traceroute` eller `tracepath`
 - kort forklaring af hvad hvert hop eller hver ARP-entry betyder
 
+Inden undervisningen slutter vises dette til underviseren, og der er mulighed for at stille spørgsmål og få feedback.
+
 ---
 
 ## Næste dag
 
 Næste naturlige skridt er at opdele netværket i segmenter med subnet og VLAN.
-
-
----
-
-### 5.3 Host2 (VLAN 120)
-
-På Alpine-Host2:
-
-1. Sæt IP-adresse:
-
-```bash
-ip addr add 192.168.120.10/24 dev eth0
-```
-
-2. Sæt interface op:
-
-```bash
-ip link set eth0 up
-```
-
-3. Sæt default gateway:
-
-```bash
-ip route add default via 192.168.120.1
-```
-
-4. Kontrol:
-
-```bash
-ip addr show dev eth0
-ip route show dev eth0
-```
-
-<img width="1916" height="1028" alt="image" src="https://github.com/user-attachments/assets/ec162f2a-cecf-45bf-91dc-3eaeaff58b70" />
-
-
----
-
-### 5.4 Host3 (VLAN 130)
-
-På Alpine-Host3:
-
-1. Sæt IP-adresse:
-
-```bash
-ip addr add 192.168.130.10/24 dev eth0
-```
-
-2. Sæt interface op:
-
-```bash
-ip link set eth0 up
-```
-
-3. Sæt default gateway:
-
-```bash
-ip route add default via 192.168.130.1
-```
-
-4. Kontrol:
-
-```bash
-ip addr show dev eth0
-ip route show dev eth0
-```
-
-<img width="1918" height="1029" alt="image" src="https://github.com/user-attachments/assets/9666237b-fd51-434c-8b22-b1e7bbab83b2" />
-
----
-
-## Trin 6 – Test af forbindelse
-
-### 6.1 Test lokal gateway
-
-Fra **Host1** (Alpine):
-
-```bash
-ping -c4 192.168.110.1
-```
-
-<img width="1917" height="1029" alt="image" src="https://github.com/user-attachments/assets/faa61391-1a87-41f0-9b11-d69c3bae611a" />
-
-Fra **Host2**:
-
-```bash
-ping -c4 192.168.120.1
-```
-
-<img width="1917" height="1028" alt="image" src="https://github.com/user-attachments/assets/47879e49-dec3-41cc-a11e-0688b1b155ae" />
-
-Fra **Host3**:
-
-```bash
-ping -c4 192.168.130.1
-```
-
-<img width="1915" height="1027" alt="image" src="https://github.com/user-attachments/assets/dda3b888-9781-4198-95a1-edaa880bce3b" />
-
-Alle tre tests skal lykkes. Hvis ikke: tjek IP-adresser, gateway og om `eth0` er `UP`.
-
----
-
-### 6.2 Test inter-VLAN routing
-
-Fra **Host1 (VLAN 110)**:
-
-```bash
-ping 192.168.120.10
-ping 192.168.130.10
-```
-
-<img width="1916" height="1028" alt="image" src="https://github.com/user-attachments/assets/425dba6e-5014-4aff-9ac7-9b66c1dd4dae" />
-
-
-Fra **Host2 (VLAN 120)**:
-
-```bash
-ping 192.168.110.10
-ping 192.168.130.10
-```
-
-Fra **Host3 (VLAN 130)**:
-
-```bash
-ping 192.168.110.10
-ping 192.168.120.10
-```
-
-Hvis pings lykkes, fungerer inter-VLAN routing via Linux-routeren.
-
----
-
-## Trin 7 – Fejlsøgning (hvis noget fejler)
-
-På **routeren**:
-
-```bash
-ip addr show
-ip -d link show
-ip route
-ping 192.168.110.10
-ping 192.168.120.10
-ping 192.168.130.10
-```
-
-På **switchen**:
-
-```text
-show vlan brief
-show interfaces trunk
-show running-config
-```
-
-På **Alpine-hosts**:
-
-```bash
-ip addr show dev eth0
-ip route show
-ping <egen gateway>
-```
-
-Typiske fejl:
-
-* Forkert IP/netmaske eller gateway på Alpine-host.
-* Forkert VLAN på switch-port.
-* Trunk-port ikke korrekt konfigureret.
-* VLAN-subinterface på router ikke aktivt (`DOWN`).
-
----
-
-## Ekstra (frivilligt)
-
-Hvis du bliver hurtigt færdig:
-
-1. Tilføj et ekstra VLAN (140) med tilsvarende opsætning (subinterface på router, VLAN på switch, Alpine-host).
-2. Brug `tcpdump` på routeren til at se trafik:
-
-```bash
-tcpdump -i eth0
-tcpdump -i eth0.110
-```
