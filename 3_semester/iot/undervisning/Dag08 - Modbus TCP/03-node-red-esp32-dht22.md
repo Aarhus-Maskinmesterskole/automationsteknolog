@@ -4,7 +4,16 @@ Formålet: du skal lære at læse data fra en ESP32 (Modbus TCP server) i Node-R
 
 ---
 
-## 1) Forbered ESP32 med DHT22 og Modbus TCP
+## 1) Hent Modbus-biblioteket
+
+Installer **brainelectronics/micropython-modbus** på ESP32:
+
+**Metode: Thonny**
+- Hent GitHub-repoet **brainelectronics/micropython-modbus**
+- Kopiér mappen **`umodbus`** til **`/lib`** på ESP32
+
+
+## 2) Forbered ESP32 med DHT22 og Modbus TCP
 
 ### Hardware
 - ESP32 board
@@ -96,7 +105,7 @@ while True:
 
 ---
 
-## 2) Installér Node-RED palette
+## 3) Installér Node-RED palette
 
 I Node-RED, installér paletten:
 
@@ -107,7 +116,7 @@ I Node-RED, installér paletten:
 
 ---
 
-## 3) Opret Node-RED flow
+## 4) Opret Node-RED flow
 
 ### Flow struktur
 
@@ -154,7 +163,7 @@ I Node-RED, installér paletten:
 
 ---
 
-## 4) Ekstra opgaver (valgfri)
+## 5) Ekstra opgaver (valgfri)
 
 ### Opgave A: Dashboard
 - Installér `node-red-dashboard`

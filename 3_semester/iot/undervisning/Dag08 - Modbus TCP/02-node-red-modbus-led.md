@@ -8,15 +8,9 @@ Formålet: du skal lære at styre en LED på ESP32 fra Node-RED ved at skrive ti
 
 Installer **brainelectronics/micropython-modbus** på ESP32:
 
-**Metode 1: Via Thonny**
+**Metode: Thonny**
 - Hent GitHub-repoet **brainelectronics/micropython-modbus**
 - Kopiér mappen **`umodbus`** til **`/lib`** på ESP32
-
-**Metode 2: Via REPL**
-```python
-import mip
-mip.install('github:brainelectronics/micropython-modbus')
-```
 
 ---
 
