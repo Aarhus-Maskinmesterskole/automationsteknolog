@@ -1,0 +1,27 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{snap7}
+\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{snap7}\PYG{n+nn}{.}\PYG{n+nn}{util}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{get\PYGZus{}bool}
+\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{snap7}\PYG{n+nn}{.}\PYG{n+nn}{type}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{Area}  \PYG{c+c1}{\PYGZsh{} PE = fysiske indgange}
+
+\PYG{c+c1}{\PYGZsh{} ====== PLC opsaetning ==========}
+\PYG{n}{PLC\PYGZus{}IP}   \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{192.168.0.1}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n}{RACK}     \PYG{o}{=} \PYG{l+m+mi}{0}
+\PYG{n}{SLOT}     \PYG{o}{=} \PYG{l+m+mi}{1}
+\PYG{n}{AREA}     \PYG{o}{=} \PYG{n}{Area}\PYG{o}{.}\PYG{n}{PE}
+\PYG{n}{I\PYGZus{}OFFSET} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}  \PYG{n}{I\PYGZus{}SIZE} \PYG{o}{=} \PYG{l+m+mi}{1}
+
+\PYG{c+c1}{\PYGZsh{} ====== PLC forbindelse =========}
+\PYG{n}{client} \PYG{o}{=} \PYG{n}{snap7}\PYG{o}{.}\PYG{n}{client}\PYG{o}{.}\PYG{n}{Client}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{client}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n}{PLC\PYGZus{}IP}\PYG{p}{,} \PYG{n}{RACK}\PYG{p}{,} \PYG{n}{SLOT}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} ====== Laes input ===============}
+\PYG{n}{i\PYGZus{}bytes\PYGZus{}raw} \PYG{o}{=} \PYG{n}{client}\PYG{o}{.}\PYG{n}{read\PYGZus{}area}\PYG{p}{(}\PYG{n}{AREA}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{I\PYGZus{}OFFSET}\PYG{p}{,} \PYG{n}{I\PYGZus{}SIZE}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} ====== Logik ===================}
+\PYG{n}{S1} \PYG{o}{=} \PYG{n}{get\PYGZus{}bool}\PYG{p}{(}\PYG{n}{i\PYGZus{}bytes\PYGZus{}raw}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} I0.0}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{S1 (I0.0): }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{S1}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} ====== Disconnect og destroy ===}
+\PYG{n}{client}\PYG{o}{.}\PYG{n}{disconnect}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{client}\PYG{o}{.}\PYG{n}{destroy}\PYG{p}{(}\PYG{p}{)}
+\end{MintedVerbatim}

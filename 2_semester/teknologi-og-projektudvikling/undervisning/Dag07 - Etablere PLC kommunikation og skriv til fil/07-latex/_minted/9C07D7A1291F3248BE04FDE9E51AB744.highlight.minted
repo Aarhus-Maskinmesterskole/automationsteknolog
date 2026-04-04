@@ -1,0 +1,14 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{csv}
+\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{datetime}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{datetime}
+
+\PYG{n}{timestamp} \PYG{o}{=} \PYG{n}{datetime}\PYG{o}{.}\PYG{n}{now}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{strftime}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZpc{}}\PYG{l+s+s2}{Y\PYGZhy{}}\PYG{l+s+s2}{\PYGZpc{}}\PYG{l+s+s2}{m\PYGZhy{}}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s2}{\PYGZus{}}\PYG{l+s+s2}{\PYGZpc{}}\PYG{l+s+s2}{H\PYGZhy{}}\PYG{l+s+s2}{\PYGZpc{}}\PYG{l+s+s2}{M\PYGZhy{}}\PYG{l+s+s2}{\PYGZpc{}}\PYG{l+s+s2}{S}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{filename}  \PYG{o}{=} \PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{timestamp}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZus{}data.csv}\PYG{l+s+s2}{\PYGZdq{}}
+
+\PYG{k}{with} \PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{filename}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{w}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{newline}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{encoding}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{utf\PYGZhy{}8}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{file}\PYG{p}{:}
+    \PYG{n}{writer} \PYG{o}{=} \PYG{n}{csv}\PYG{o}{.}\PYG{n}{writer}\PYG{p}{(}\PYG{n}{file}\PYG{p}{)}
+    \PYG{n}{writer}\PYG{o}{.}\PYG{n}{writerow}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Tidsstempel}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Vaerdi}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}\PYG{p}{)}   \PYG{c+c1}{\PYGZsh{} Header\PYGZhy{}raekke}
+    \PYG{n}{writer}\PYG{o}{.}\PYG{n}{writerow}\PYG{p}{(}\PYG{p}{[}\PYG{n}{timestamp}\PYG{p}{,} \PYG{l+m+mi}{42}\PYG{p}{]}\PYG{p}{)}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{CSV\PYGZhy{}fil oprettet: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{filename}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{MintedVerbatim}

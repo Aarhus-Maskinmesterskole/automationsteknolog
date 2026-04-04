@@ -1,0 +1,604 @@
+% +==============================================================+
+% |  PLC kommunikation og skriv til fil                          |
+% |  Forfatter : aso                                             |
+% |  Skole     : AAMS                                            |
+% +==============================================================+
+
+\documentclass[12pt, a4paper]{article}
+
+% --- Kodning & sprog ----------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[danish]{babel}
+
+% --- Layout -------------------------------------------------------------------
+\usepackage{geometry}
+\geometry{top=2.5cm, bottom=2.5cm, left=3cm, right=3cm, headheight=15pt}
+
+% --- Typografi ----------------------------------------------------------------
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{parskip}
+
+% --- Grafik & farver ----------------------------------------------------------
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+% --- Bokse & kode-highlighting ------------------------------------------------
+\usepackage[most]{tcolorbox}
+\usepackage{minted}
+
+% --- Hyperlinks ---------------------------------------------------------------
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks = true,
+  linkcolor  = primaryblue,
+  urlcolor   = accentblue,
+}
+
+% --- Header & footer ----------------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{fontawesome5}
+
+% ==============================================================================
+%  FARVEDEFINITIONER
+% ==============================================================================
+\definecolor{primaryblue}{HTML}{1A3A5C}
+\definecolor{accentblue}{HTML}{2E86C1}
+\definecolor{lightblue}{HTML}{D6EAF8}
+\definecolor{darkgray}{HTML}{555555}
+\definecolor{lightgray}{HTML}{F4F6F7}
+\definecolor{successgreen}{HTML}{1E8449}
+\definecolor{lightgreen}{HTML}{D5F5E3}
+\definecolor{warnorange}{HTML}{E67E22}
+\definecolor{lightyellow}{HTML}{FEF9E7}
+\definecolor{codebg}{HTML}{1E1E2E}
+\definecolor{siemensblue}{HTML}{009999}
+
+% ==============================================================================
+%  MINTED OPSAETNING
+% ==============================================================================
+\setminted{
+  style      = monokai,
+  fontsize   = \small,
+  linenos    = true,
+  numbersep  = 6pt,
+  breaklines = true,
+  tabsize    = 4,
+}
+
+% ==============================================================================
+%  TCOLORBOX STILE
+% ==============================================================================
+\tcbset{
+  pythonbox/.style={
+    enhanced,
+    colback         = codebg,
+    colframe        = siemensblue,
+    coltitle        = white,
+    fonttitle       = \bfseries\small,
+    arc             = 3pt,
+    boxrule         = 1.5pt,
+    top             = 2pt,
+    bottom          = 2pt,
+    left            = 0pt,
+    right           = 0pt,
+    title style     = {fill=siemensblue, top=3pt, bottom=3pt},
+    attach boxed title to top left={xshift=8pt, yshift=-\tcboxedtitleheight/2},
+    boxed title style={
+      colback=siemensblue,
+      colframe=siemensblue,
+      arc=2pt,
+      boxrule=0pt,
+    },
+  },
+  infobox/.style={
+    enhanced,
+    colback   = lightblue,
+    colframe  = accentblue,
+    coltitle  = white,
+    fonttitle = \bfseries,
+    arc       = 3pt,
+    boxrule   = 1pt,
+    title style={fill=accentblue},
+  },
+  tipbox/.style={
+    enhanced,
+    colback   = lightgreen,
+    colframe  = successgreen,
+    coltitle  = white,
+    fonttitle = \bfseries,
+    arc       = 3pt,
+    boxrule   = 1pt,
+    title style={fill=successgreen},
+  },
+  warnbox/.style={
+    enhanced,
+    colback   = lightyellow,
+    colframe  = warnorange,
+    coltitle  = white,
+    fonttitle = \bfseries,
+    arc       = 3pt,
+    boxrule   = 1pt,
+    title style={fill=warnorange},
+  },
+}
+
+% ==============================================================================
+%  HEADER & FOOTER
+% ==============================================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{darkgray}{\small\textit{PLC kommunikation og skriv til fil}}}
+\fancyhead[R]{\textcolor{darkgray}{\small\textit{AAMS | aso}}}
+\fancyhead[C]{\textcolor{siemensblue}{\rule[-2pt]{0pt}{12pt}\small\faIndustry}}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\headrule}{{\color{siemensblue}\hrule width\headwidth height 1pt}}
+\fancyfoot[C]{\textcolor{darkgray}{\small\thepage}}
+\fancyfoot[R]{\textcolor{darkgray}{\small\today}}
+
+% ==============================================================================
+%  SEKTIONSFORMATERING
+% ==============================================================================
+\titleformat{\section}
+  {\color{primaryblue}\Large\bfseries}
+  {\color{siemensblue}\thesection\hspace{6pt}\textcolor{siemensblue}{|}\hspace{6pt}}
+  {0pt}{}[{\color{siemensblue}\titlerule[1pt]}]
+
+\titleformat{\subsection}
+  {\color{primaryblue}\large\bfseries}
+  {\color{accentblue}\thesubsection\hspace{6pt}}
+  {0pt}{}
+
+\titlespacing{\section}{0pt}{18pt}{8pt}
+\titlespacing{\subsection}{0pt}{12pt}{4pt}
+
+% ==============================================================================
+%  DOKUMENT START
+% ==============================================================================
+\begin{document}
+
+% -----------------------------------------------------------------------------
+%  FORSIDE
+% -----------------------------------------------------------------------------
+\begin{titlepage}
+\thispagestyle{empty}
+
+\begin{tikzpicture}[remember picture, overlay]
+  % Oeverste farvede banner
+  \fill[primaryblue]
+    (current page.north west) rectangle
+    ([yshift=-4.5cm] current page.north east);
+
+  % Siemens-groent dekorativt baand
+  \fill[siemensblue]
+    ([yshift=-4.5cm] current page.north west) rectangle
+    ([yshift=-5.0cm] current page.north east);
+
+  % Tyndt accentstribe
+  \fill[accentblue]
+    ([yshift=-5.0cm] current page.north west) rectangle
+    ([yshift=-5.15cm] current page.north east);
+
+  % Dekorativt ikon - hoejre side
+  \node[anchor=east, xshift=-1.5cm, yshift=-2.3cm]
+    at (current page.north east)
+    {\textcolor{white!20!primaryblue}{\fontsize{90}{90}\selectfont\faIndustry}};
+
+  % Skole-tekst
+  \node[anchor=north west, xshift=2cm, yshift=-0.7cm]
+    at (current page.north west)
+    {\textcolor{white!70!primaryblue}\large\bfseries AAMS --- Automationsteknolog};
+
+  % Fag-tekst
+  \node[anchor=north west, xshift=2cm, yshift=-1.3cm]
+    at (current page.north west)
+    {\textcolor{white!60!primaryblue}\normalsize Teknologi og Projektudvikling $\cdot$ 2.\ Semester};
+
+  % Hoved-titel
+  \node[anchor=north west, xshift=2cm, yshift=-2.2cm]
+    at (current page.north west)
+    {\textcolor{white}{\fontsize{24}{30}\selectfont\bfseries PLC kommunikation og skriv til fil}};
+
+  % Undertitel
+  \node[anchor=north west, xshift=2.1cm, yshift=-3.7cm]
+    at (current page.north west)
+    {\textcolor{white!80!siemensblue}\large\itshape Python \texttt{snap7} + filskrivning med \texttt{open()} og \texttt{csv}};
+
+  % Bundlinje
+  \fill[lightgray]
+    ([yshift=3.5cm] current page.south west) rectangle
+    ([yshift=2.0cm] current page.south east);
+  \fill[accentblue]
+    ([yshift=3.5cm] current page.south west) rectangle
+    ([yshift=3.35cm] current page.south east);
+
+  \node[anchor=west, xshift=2cm, yshift=2.8cm]
+    at (current page.south west)
+    {\textcolor{primaryblue}{\faUserCircle\quad\textbf{Forfatter:} aso
+     \quad\textcolor{darkgray}{|}\quad
+     \faCalendar\quad\textbf{Dato:} \today
+     \quad\textcolor{darkgray}{|}\quad
+     \faUniversity\quad\textbf{Skole:} AAMS}};
+\end{tikzpicture}
+
+\vspace*{5.5cm}
+
+\begin{center}
+\begin{tcolorbox}[
+  enhanced,
+  width=13cm,
+  colback=lightgray,
+  colframe=primaryblue,
+  arc=5pt,
+  boxrule=1.5pt,
+  title={\faInfoCircle\quad Laeringsmaal},
+  coltitle=white,
+  fonttitle=\bfseries,
+  title style={fill=primaryblue},
+]
+\begin{itemize}[leftmargin=1.2em, itemsep=4pt]
+  \item[\textcolor{siemensblue}{\faCheckCircle}]
+    Skrive data til en tekstfil (\texttt{.txt}) med \texttt{open()} og append mode
+  \item[\textcolor{siemensblue}{\faCheckCircle}]
+    Tilfoeje tidsstempler med \texttt{datetime} modulet
+  \item[\textcolor{siemensblue}{\faCheckCircle}]
+    Skrive strukturerede data til en CSV-fil med \texttt{csv.writer}
+  \item[\textcolor{siemensblue}{\faCheckCircle}]
+    Bruge tidsstemplet som filnavn for at organisere logfiler
+  \item[\textcolor{siemensblue}{\faCheckCircle}]
+    Kombinere PLC-laesning (\texttt{snap7}) med fil-logging i en samlet loekke
+\end{itemize}
+\end{tcolorbox}
+\end{center}
+
+\end{titlepage}
+
+% -----------------------------------------------------------------------------
+%  INDHOLDSFORTEGNELSE
+% -----------------------------------------------------------------------------
+\newpage
+\thispagestyle{fancy}
+\tableofcontents
+\newpage
+
+% ==============================================================================
+\section{Introduktion}
+% ==============================================================================
+
+I dag kombinerer vi PLC-kommunikation med fil-skrivning.
+Data der laeses fra PLC'en gemmes i en \texttt{.txt} eller \texttt{.csv} fil
+med et tidsstempel --- en grundlaeggende form for \textbf{datalogning}.
+
+\begin{tcolorbox}[infobox, title={\faInfoCircle\quad Hvorfor logge data?}]
+Ved at gemme maalevaerdier over tid kan vi:
+\begin{itemize}[leftmargin=1.2em, itemsep=2pt]
+  \item Analysere forloeb efterfolgende
+  \item Opdage fejl eller aendringer i processen
+  \item Visualisere data i fx Excel eller Matplotlib
+  \item Dokumentere produktion eller testforloeb
+\end{itemize}
+\end{tcolorbox}
+
+% ==============================================================================
+\section{Skriv til tekstfil (.txt)}
+% ==============================================================================
+
+Python har en indbygget \texttt{open()} funktion til at arbejde med filer.
+De vigtigste file modes er:
+
+\begin{center}
+\begin{tabular}{cll}
+\toprule
+\textbf{Mode} & \textbf{Navn} & \textbf{Beskrivelse} \\
+\midrule
+\texttt{'r'} & Read    & Laese mode (fejl hvis filen ikke findes) \\
+\texttt{'w'} & Write   & Skrive mode --- \textbf{overskriver} eksisterende fil \\
+\texttt{'a'} & Append  & Tilføjer til eksisterende fil (opretter hvis ny) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Skriv en linje til .txt}
+
+\begin{tcolorbox}[pythonbox, title={\faPython\quad Kode 1 --- Skriv og laes en tekstfil}]
+\begin{minted}{python}
+# Skriv en linje til filen (append mode)
+with open('min_fil.txt', 'a') as file:
+    file.write("Dette er en ny linje.\n")
+
+# Laes og udskriv filens indhold
+with open('min_fil.txt', 'r') as file:
+    content = file.read()
+    print(content)
+\end{minted}
+\end{tcolorbox}
+
+\begin{tcolorbox}[infobox, title={\faInfoCircle\quad \textbackslash n --- ny linje}]
+\texttt{file.write()} tilfojer \textbf{ikke} automatisk linjeskift.
+Brug \texttt{"\textbackslash n"} for at starte paa en ny linje.
+Med \texttt{'a'} (append) beholder filen sit eksisterende indhold
+--- kør koden flere gange og se resultatet.
+\end{tcolorbox}
+
+\subsection{Skriv tidsstempel til .txt}
+
+\begin{tcolorbox}[pythonbox, title={\faPython\quad Kode 2 --- Tidsstempel i tekstfil}]
+\begin{minted}{python}
+from datetime import datetime
+
+# Hent og formater aktuelt tidspunkt
+current_time = datetime.now()
+formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
+
+# Skriv tidsstemplet til filen
+with open('tidsstempel.txt', 'a') as file:
+    file.write(formatted_time + '\n')
+
+# Laes og udskriv
+with open('tidsstempel.txt', 'r') as file:
+    print(file.read())
+\end{minted}
+\end{tcolorbox}
+
+\subsection{Tidsstempel som filnavn}
+
+I stedet for et fast filnavn kan vi bruge tidsstemplet direkte i filnavnet.
+Det er nayttigt nar vi vil gemme separate log-sessioner.
+
+\begin{tcolorbox}[pythonbox, title={\faPython\quad Kode 3 --- Tidsstempel som filnavn}]
+\begin{minted}{python}
+from datetime import datetime
+
+# Tidsstempel formateret til brug i filnavn (ingen ugyldige tegn)
+timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+filename  = f"{timestamp}_log.txt"
+
+with open(filename, 'a') as file:
+    file.write("Logsession startet.\n")
+    file.write(f"Tidspunkt: {timestamp}\n")
+
+print(f"Fil oprettet: {filename}")
+\end{minted}
+\end{tcolorbox}
+
+\begin{tcolorbox}[warnbox, title={\faExclamationTriangle\quad Undgaa ugyldige tegn i filnavne}]
+Tegn som \texttt{:} (kolon) er ugyldige i filnavne paa Windows og macOS.
+Brug \texttt{"-"} i stedet for \texttt{":"} nar du formaterer tidsstemplet
+til et filnavn, fx \texttt{"\%H-\%M-\%S"} fremfor \texttt{"\%H:\%M:\%S"}.
+\end{tcolorbox}
+
+\clearpage
+% ==============================================================================
+\section{Skriv til CSV-fil}
+% ==============================================================================
+
+CSV (\textit{Comma Separated Values}) er et simpelt og bredt understottet format
+til tabeldata. Python har det indbyggede \texttt{csv} modul.
+
+\subsection{Basal CSV-skrivning}
+
+\begin{tcolorbox}[pythonbox, title={\faPython\quad Kode 4 --- Skriv og laes en CSV-fil}]
+\begin{minted}{python}
+import csv
+
+# Skriv en raekke til CSV-filen
+with open('min_fil.csv', 'a', newline='', encoding='utf-8') as file:
+    writer = csv.writer(file)
+    writer.writerow(["Dette er en ny linje."])
+
+# Laes og udskriv indholdet
+with open('min_fil.csv', 'r', encoding='utf-8') as file:
+    reader = csv.reader(file)
+    for row in reader:
+        print(row)
+\end{minted}
+\end{tcolorbox}
+
+\begin{tcolorbox}[infobox, title={\faInfoCircle\quad Parametre til \texttt{open()} ved CSV}]
+\begin{description}[leftmargin=3.5cm, style=nextline]
+  \item[\texttt{newline=''}]  Forhindr dobbelt linjeskift paa Windows.
+  \item[\texttt{encoding='utf-8'}]  Sikre korrekt haandtering af danske tegn (ae, oe, aa).
+  \item[\texttt{writer.writerow([ ])}]  Acepterer en liste --- hvert element bliver en kolonne.
+\end{description}
+\end{tcolorbox}
+
+\subsection{Skriv tidsstempel og vaerdi til CSV}
+
+\begin{tcolorbox}[pythonbox, title={\faPython\quad Kode 5 --- Tidsstempel og tilfaeldig vaerdi i CSV}]
+\begin{minted}{python}
+import csv
+import random
+from datetime import datetime
+
+# Formater tidsstempel
+formatted_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+value          = random.randint(1, 100)
+
+# Skriv raekke til CSV
+with open('tidsstempel.csv', 'a', newline='', encoding='utf-8') as file:
+    writer = csv.writer(file)
+    writer.writerow([formatted_time, value])
+
+# Verificer ved at laese tilbage
+with open('tidsstempel.csv', 'r', encoding='utf-8') as file:
+    reader = csv.reader(file)
+    for row in reader:
+        print(row)
+\end{minted}
+\end{tcolorbox}
+
+\subsection{Tidsstempel som CSV-filnavn}
+
+\begin{tcolorbox}[pythonbox, title={\faPython\quad Kode 6 --- Tidsstempel som CSV-filnavn}]
+\begin{minted}{python}
+import csv
+from datetime import datetime
+
+timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+filename  = f"{timestamp}_data.csv"
+
+with open(filename, 'w', newline='', encoding='utf-8') as file:
+    writer = csv.writer(file)
+    writer.writerow(["Tidsstempel", "Vaerdi"])   # Header-raekke
+    writer.writerow([timestamp, 42])
+
+print(f"CSV-fil oprettet: {filename}")
+\end{minted}
+\end{tcolorbox}
+
+% ==============================================================================
+\section{Kombiner PLC-laesning med fil-logging}
+% ==============================================================================
+
+Nu samler vi det hele: vi laaser et tankniveau fra PLC'en og gemmer det
+løbende i en CSV-fil med tidsstempel.
+
+\begin{tcolorbox}[pythonbox, title={\faPython\quad Kode 7 --- Log tankniveau fra PLC til CSV}]
+\begin{minted}{python}
+import csv
+import time
+import snap7
+from snap7.util import get_real
+from datetime import datetime
+
+# ====== PLC opsaetning ==========
+PLC_IP    = "192.168.0.1"
+RACK      = 0
+SLOT      = 1
+DB_NUMBER = 1
+TANK_OFFSET = 0
+TANK_SIZE   = 4
+
+# CSV-fil med tidsstempel som filnavn
+timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+filename  = f"{timestamp}_tankniveau.csv"
+
+try:
+    # ====== PLC forbindelse =========
+    client = snap7.client.Client()
+    client.connect(PLC_IP, RACK, SLOT)
+
+    # Skriv header-raekke til CSV
+    with open(filename, 'w', newline='', encoding='utf-8') as file:
+        writer = csv.writer(file)
+        writer.writerow(["Tidsstempel", "Tankniveau"])
+
+    # ====== Loekke: laes og log =====
+    for _ in range(10):
+        # ====== Laes input ===============
+        raw = client.db_read(DB_NUMBER, TANK_OFFSET, TANK_SIZE)
+
+        # ====== Logik ===================
+        niveau = round(get_real(raw, 0), 2)
+        ts     = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        print(f"{ts}  Tankniveau: {niveau}")
+
+        # ====== Skriv output (til fil) ==
+        with open(filename, 'a', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            writer.writerow([ts, niveau])
+
+        time.sleep(1)
+
+except snap7.exceptions.Snap7Exception as e:
+    print(f"Snap7 fejl: {e}")
+except Exception as e:
+    print(f"Uventet fejl: {e}")
+
+finally:
+    # ====== Disconnect og destroy ===
+    if client.get_connected():
+        client.disconnect()
+    client.destroy()
+    print(f"Logning afsluttet. Data gemt i: {filename}")
+\end{minted}
+\end{tcolorbox}
+
+\begin{tcolorbox}[tipbox, title={\faLightbulb\quad Tip --- Åben løkke}]
+Erstat \texttt{for \_ in range(10):} med \texttt{while True:} for en
+kontinuerlig logning. Brug \texttt{Ctrl+C} til at stoppe; haandter
+\texttt{KeyboardInterrupt} som en ekstra \texttt{except}-gren for en
+paen afslutning.
+\end{tcolorbox}
+
+% ==============================================================================
+\section{Oversigt over centrale funktioner}
+% ==============================================================================
+
+\begin{center}
+\begin{tabular}{lp{6cm}l}
+\toprule
+\textbf{Funktion / mode} & \textbf{Beskrivelse} & \textbf{Modul} \\
+\midrule
+\texttt{open(f, 'a')} & Append --- tilføjer til filen & indbygget \\
+\texttt{open(f, 'w')} & Write --- overskriver filen & indbygget \\
+\texttt{open(f, 'r')} & Read --- laes indholdet & indbygget \\
+\texttt{file.write(s)} & Skriv streng til filen & indbygget \\
+\texttt{file.read()} & Laes hele filens indhold & indbygget \\
+\texttt{csv.writer(f)} & Opret CSV-forfatter & \texttt{csv} \\
+\texttt{writer.writerow([ ])} & Skriv en raekke til CSV & \texttt{csv} \\
+\texttt{csv.reader(f)} & Laes CSV raekke for raekke & \texttt{csv} \\
+\texttt{datetime.now()} & Aktuelt dato og tidspunkt & \texttt{datetime} \\
+\texttt{.strftime("...")} & Formater tidsstempel som streng & \texttt{datetime} \\
+\texttt{time.sleep(n)} & Vent \textit{n} sekunder & \texttt{time} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ==============================================================================
+\section{Øvelser}
+% ==============================================================================
+
+\begin{tcolorbox}[tipbox, title={\faTasks\quad Øvelsesopgaver}]
+\begin{enumerate}[leftmargin=1.5em, itemsep=8pt]
+
+  \item \textbf{Exercise 1 --- Tankniveau til CSV}\\
+    Laes tankniveauet fra PLC'en og skriv det til en CSV-fil sammen med
+    et tidsstempel. CSV-filen skal have folgende format:
+    \begin{center}
+    \ttfamily\small
+    Tidsstempel, Tankniveau\\
+    2024-06-01 12:00:00, 75\\
+    2024-06-01 12:01:00, 80
+    \end{center}
+
+  \item \textbf{Exercise 2 --- Flere vaerdier til CSV}\\
+    Udvid Exercise 1 til at logge tidsstempel, tankniveau, tankniveau i
+    procent og flowmeter i samme CSV-fil.
+
+  \item \textbf{Exercise 3 --- On/off controller med logging}\\
+    Lav en on/off controller for tankniveauet. Naar tankniveauet naer
+    setpointet skal det svinge med en amplitude paa 10\% af setpointet.
+    Under 5\% under setpoint fyldes tanken; over setpoint falder det.
+    Log tankniveauet med tidsstempel over en passende periode.
+
+  \item \textbf{Exercise 4 (valgfri) --- PI controller}\\
+    Implementer en PI controller for tankniveauet i Emulate3D og log
+    data til en CSV-fil. En PI controller kombinerer:
+    \[
+      u(t) = K_p \cdot e(t) + K_i \int_0^t e(\tau)\,d\tau
+    \]
+    I kode:
+    \begin{center}
+    \begin{minipage}{0.75\linewidth}
+    \begin{tcolorbox}[pythonbox, title={\faPython\quad PI controller (skelet)}]
+\begin{minted}{python}
+error    = setpoint - current_level
+integral = integral + error * dt
+control  = Kp * error + Ki * integral
+\end{minted}
+    \end{tcolorbox}
+    \end{minipage}
+    \end{center}
+    Naar opgaven er faerdig, visualiser resultatet i Excel.
+
+\end{enumerate}
+\end{tcolorbox}
+
+\end{document}

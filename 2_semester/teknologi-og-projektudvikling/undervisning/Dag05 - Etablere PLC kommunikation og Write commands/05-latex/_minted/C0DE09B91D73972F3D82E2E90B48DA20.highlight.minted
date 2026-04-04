@@ -1,0 +1,40 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{snap7}
+\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{snap7}\PYG{n+nn}{.}\PYG{n+nn}{util}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{get\PYGZus{}bool}\PYG{p}{,} \PYG{n}{set\PYGZus{}bool}
+\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{snap7}\PYG{n+nn}{.}\PYG{n+nn}{type}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{Area}
+
+\PYG{c+c1}{\PYGZsh{} ====== PLC opsaetning ==========}
+\PYG{n}{PLC\PYGZus{}IP}   \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{192.168.0.1}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n}{RACK}     \PYG{o}{=} \PYG{l+m+mi}{0}
+\PYG{n}{SLOT}     \PYG{o}{=} \PYG{l+m+mi}{1}
+\PYG{n}{AREA}     \PYG{o}{=} \PYG{n}{Area}\PYG{o}{.}\PYG{n}{PA}
+\PYG{n}{Q\PYGZus{}OFFSET} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}  \PYG{n}{Q\PYGZus{}SIZE} \PYG{o}{=} \PYG{l+m+mi}{1}
+
+\PYG{k}{try}\PYG{p}{:}
+    \PYG{c+c1}{\PYGZsh{} ====== PLC forbindelse =========}
+    \PYG{n}{client} \PYG{o}{=} \PYG{n}{snap7}\PYG{o}{.}\PYG{n}{client}\PYG{o}{.}\PYG{n}{Client}\PYG{p}{(}\PYG{p}{)}
+    \PYG{n}{client}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n}{PLC\PYGZus{}IP}\PYG{p}{,} \PYG{n}{RACK}\PYG{p}{,} \PYG{n}{SLOT}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} ====== Laes input ===============}
+    \PYG{n}{q\PYGZus{}bytes\PYGZus{}raw} \PYG{o}{=} \PYG{n}{client}\PYG{o}{.}\PYG{n}{read\PYGZus{}area}\PYG{p}{(}\PYG{n}{AREA}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{Q\PYGZus{}OFFSET}\PYG{p}{,} \PYG{n}{Q\PYGZus{}SIZE}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} ====== Logik ===================}
+    \PYG{n}{set\PYGZus{}bool}\PYG{p}{(}\PYG{n}{q\PYGZus{}bytes\PYGZus{}raw}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{k+kc}{True}\PYG{p}{)}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Alt gik godt!}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} ====== Skriv output ============}
+    \PYG{n}{client}\PYG{o}{.}\PYG{n}{write\PYGZus{}area}\PYG{p}{(}\PYG{n}{AREA}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{Q\PYGZus{}OFFSET}\PYG{p}{,} \PYG{n}{q\PYGZus{}bytes\PYGZus{}raw}\PYG{p}{)}
+
+\PYG{k}{except} \PYG{n}{snap7}\PYG{o}{.}\PYG{n}{exceptions}\PYG{o}{.}\PYG{n}{Snap7Exception} \PYG{k}{as} \PYG{n}{e}\PYG{p}{:}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Snap7 fejl: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{e}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{k}{except} \PYG{n+ne}{Exception} \PYG{k}{as} \PYG{n}{e}\PYG{p}{:}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Uventet fejl: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{e}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{k}{finally}\PYG{p}{:}
+    \PYG{c+c1}{\PYGZsh{} ====== Disconnect og destroy ===}
+    \PYG{k}{if} \PYG{n}{client}\PYG{o}{.}\PYG{n}{get\PYGZus{}connected}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
+        \PYG{n}{client}\PYG{o}{.}\PYG{n}{disconnect}\PYG{p}{(}\PYG{p}{)}
+        \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Forbindelsen er lukket.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{client}\PYG{o}{.}\PYG{n}{destroy}\PYG{p}{(}\PYG{p}{)}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Ressourcer frigivet.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{MintedVerbatim}

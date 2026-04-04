@@ -1,0 +1,68 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{matplotlib}\PYG{n+nn}{.}\PYG{n+nn}{pyplot}\PYG{+w}{ }\PYG{k}{as}\PYG{+w}{ }\PYG{n+nn}{plt}
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{snap7}
+\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{snap7}\PYG{n+nn}{.}\PYG{n+nn}{util}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{get\PYGZus{}real}
+\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{datetime}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{datetime}
+
+\PYG{c+c1}{\PYGZsh{} ====== PLC opsaetning ==========}
+\PYG{n}{PLC\PYGZus{}IP}      \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{192.168.0.1}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n}{RACK}        \PYG{o}{=} \PYG{l+m+mi}{0}
+\PYG{n}{SLOT}        \PYG{o}{=} \PYG{l+m+mi}{1}
+\PYG{n}{DB\PYGZus{}NUMBER}   \PYG{o}{=} \PYG{l+m+mi}{1}
+\PYG{n}{TANK\PYGZus{}OFFSET} \PYG{o}{=} \PYG{l+m+mi}{0}
+\PYG{n}{TANK\PYGZus{}SIZE}   \PYG{o}{=} \PYG{l+m+mi}{4}
+
+\PYG{c+c1}{\PYGZsh{} ====== PLC forbindelse =========}
+\PYG{n}{client} \PYG{o}{=} \PYG{n}{snap7}\PYG{o}{.}\PYG{n}{client}\PYG{o}{.}\PYG{n}{Client}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{client}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n}{PLC\PYGZus{}IP}\PYG{p}{,} \PYG{n}{RACK}\PYG{p}{,} \PYG{n}{SLOT}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} ====== Live\PYGZhy{}plot opsaetning ====}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{ion}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{fig}\PYG{p}{,} \PYG{n}{ax} \PYG{o}{=} \PYG{n}{plt}\PYG{o}{.}\PYG{n}{subplots}\PYG{p}{(}\PYG{n}{figsize}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{n}{timestamps} \PYG{o}{=} \PYG{p}{[}\PYG{p}{]}
+\PYG{n}{niveauer}   \PYG{o}{=} \PYG{p}{[}\PYG{p}{]}
+
+\PYG{k}{try}\PYG{p}{:}
+    \PYG{k}{while} \PYG{k+kc}{True}\PYG{p}{:}
+        \PYG{c+c1}{\PYGZsh{} ====== Laes input ===============}
+        \PYG{n}{raw}    \PYG{o}{=} \PYG{n}{client}\PYG{o}{.}\PYG{n}{db\PYGZus{}read}\PYG{p}{(}\PYG{n}{DB\PYGZus{}NUMBER}\PYG{p}{,} \PYG{n}{TANK\PYGZus{}OFFSET}\PYG{p}{,} \PYG{n}{TANK\PYGZus{}SIZE}\PYG{p}{)}
+
+        \PYG{c+c1}{\PYGZsh{} ====== Logik ===================}
+        \PYG{n}{niveau} \PYG{o}{=} \PYG{n+nb}{round}\PYG{p}{(}\PYG{n}{get\PYGZus{}real}\PYG{p}{(}\PYG{n}{raw}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{)}
+        \PYG{n}{ts}     \PYG{o}{=} \PYG{n}{datetime}\PYG{o}{.}\PYG{n}{now}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{strftime}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZpc{}}\PYG{l+s+s2}{H:}\PYG{l+s+s2}{\PYGZpc{}}\PYG{l+s+s2}{M:}\PYG{l+s+s2}{\PYGZpc{}}\PYG{l+s+s2}{S}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+        \PYG{n}{timestamps}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{ts}\PYG{p}{)}
+        \PYG{n}{niveauer}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{niveau}\PYG{p}{)}
+
+        \PYG{c+c1}{\PYGZsh{} Behold kun de seneste 60 maelinger}
+        \PYG{k}{if} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{timestamps}\PYG{p}{)} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{60}\PYG{p}{:}
+            \PYG{n}{timestamps}\PYG{o}{.}\PYG{n}{pop}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}
+            \PYG{n}{niveauer}\PYG{o}{.}\PYG{n}{pop}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}
+
+        \PYG{c+c1}{\PYGZsh{} ====== Opdater graf ============}
+        \PYG{n}{ax}\PYG{o}{.}\PYG{n}{cla}\PYG{p}{(}\PYG{p}{)}
+        \PYG{n}{ax}\PYG{o}{.}\PYG{n}{plot}\PYG{p}{(}\PYG{n}{timestamps}\PYG{p}{,} \PYG{n}{niveauer}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{royalblue}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{linewidth}\PYG{o}{=}\PYG{l+m+mi}{2}\PYG{p}{)}
+        \PYG{n}{ax}\PYG{o}{.}\PYG{n}{axhline}\PYG{p}{(}\PYG{n}{y}\PYG{o}{=}\PYG{l+m+mi}{80}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{orange}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{linestyle}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZhy{}\PYGZhy{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{label}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Setpoint}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+        \PYG{n}{ax}\PYG{o}{.}\PYG{n}{axhline}\PYG{p}{(}\PYG{n}{y}\PYG{o}{=}\PYG{l+m+mi}{20}\PYG{p}{,} \PYG{n}{color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{red}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}    \PYG{n}{linestyle}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{:}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}  \PYG{n}{label}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Alarm}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+        \PYG{n}{ax}\PYG{o}{.}\PYG{n}{set\PYGZus{}title}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Live tankniveau fra PLC}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+        \PYG{n}{ax}\PYG{o}{.}\PYG{n}{set\PYGZus{}xlabel}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Tid}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+        \PYG{n}{ax}\PYG{o}{.}\PYG{n}{set\PYGZus{}ylabel}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Tankniveau (}\PYG{l+s+s2}{\PYGZpc{}}\PYG{l+s+s2}{)}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+        \PYG{n}{ax}\PYG{o}{.}\PYG{n}{set\PYGZus{}ylim}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{100}\PYG{p}{)}
+        \PYG{n}{ax}\PYG{o}{.}\PYG{n}{legend}\PYG{p}{(}\PYG{p}{)}
+        \PYG{n}{ax}\PYG{o}{.}\PYG{n}{grid}\PYG{p}{(}\PYG{k+kc}{True}\PYG{p}{)}
+        \PYG{n}{plt}\PYG{o}{.}\PYG{n}{xticks}\PYG{p}{(}\PYG{n}{rotation}\PYG{o}{=}\PYG{l+m+mi}{45}\PYG{p}{)}
+        \PYG{n}{plt}\PYG{o}{.}\PYG{n}{tight\PYGZus{}layout}\PYG{p}{(}\PYG{p}{)}
+
+        \PYG{n}{plt}\PYG{o}{.}\PYG{n}{pause}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}   \PYG{c+c1}{\PYGZsh{} Opdater hvert sekund}
+
+\PYG{k}{except} \PYG{n+ne}{KeyboardInterrupt}\PYG{p}{:}
+    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Stoppet af bruger.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{k}{finally}\PYG{p}{:}
+    \PYG{c+c1}{\PYGZsh{} ====== Disconnect og destroy ===}
+    \PYG{n}{plt}\PYG{o}{.}\PYG{n}{ioff}\PYG{p}{(}\PYG{p}{)}
+    \PYG{n}{plt}\PYG{o}{.}\PYG{n}{show}\PYG{p}{(}\PYG{p}{)}
+    \PYG{k}{if} \PYG{n}{client}\PYG{o}{.}\PYG{n}{get\PYGZus{}connected}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
+        \PYG{n}{client}\PYG{o}{.}\PYG{n}{disconnect}\PYG{p}{(}\PYG{p}{)}
+    \PYG{n}{client}\PYG{o}{.}\PYG{n}{destroy}\PYG{p}{(}\PYG{p}{)}
+\end{MintedVerbatim}

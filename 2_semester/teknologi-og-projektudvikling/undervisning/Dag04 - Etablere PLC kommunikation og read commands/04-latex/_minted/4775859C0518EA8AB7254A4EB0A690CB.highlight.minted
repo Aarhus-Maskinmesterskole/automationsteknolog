@@ -1,0 +1,37 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{snap7}
+\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{snap7}\PYG{n+nn}{.}\PYG{n+nn}{util}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{get\PYGZus{}bool}\PYG{p}{,} \PYG{n}{get\PYGZus{}int}\PYG{p}{,} \PYG{n}{set\PYGZus{}int}
+
+\PYG{c+c1}{\PYGZsh{} ====== PLC opsætning ==========}
+\PYG{n}{PLC\PYGZus{}IP}      \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{192.168.154.120}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n}{RACK}        \PYG{o}{=} \PYG{l+m+mi}{0}
+\PYG{n}{SLOT}        \PYG{o}{=} \PYG{l+m+mi}{1}
+\PYG{n}{DB\PYGZus{}NUMBER}   \PYG{o}{=} \PYG{l+m+mi}{1}
+\PYG{n}{BOOL\PYGZus{}OFFSET} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}  \PYG{n}{BOOL\PYGZus{}SIZE} \PYG{o}{=} \PYG{l+m+mi}{1}
+\PYG{n}{INT\PYGZus{}OFFSET}  \PYG{o}{=} \PYG{l+m+mi}{2}\PYG{p}{;}  \PYG{n}{INT\PYGZus{}SIZE}  \PYG{o}{=} \PYG{l+m+mi}{2}
+
+\PYG{c+c1}{\PYGZsh{} ====== PLC forbindelse =========}
+\PYG{n}{client} \PYG{o}{=} \PYG{n}{snap7}\PYG{o}{.}\PYG{n}{client}\PYG{o}{.}\PYG{n}{Client}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{client}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n}{PLC\PYGZus{}IP}\PYG{p}{,} \PYG{n}{RACK}\PYG{p}{,} \PYG{n}{SLOT}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} ====== Læs input ===============}
+\PYG{n}{raw\PYGZus{}bool} \PYG{o}{=} \PYG{n}{client}\PYG{o}{.}\PYG{n}{db\PYGZus{}read}\PYG{p}{(}\PYG{n}{DB\PYGZus{}NUMBER}\PYG{p}{,} \PYG{n}{BOOL\PYGZus{}OFFSET}\PYG{p}{,} \PYG{n}{BOOL\PYGZus{}SIZE}\PYG{p}{)}
+\PYG{n}{raw\PYGZus{}int}  \PYG{o}{=} \PYG{n}{client}\PYG{o}{.}\PYG{n}{db\PYGZus{}read}\PYG{p}{(}\PYG{n}{DB\PYGZus{}NUMBER}\PYG{p}{,} \PYG{n}{INT\PYGZus{}OFFSET}\PYG{p}{,} \PYG{n}{INT\PYGZus{}SIZE}\PYG{p}{)}
+\PYG{n}{my\PYGZus{}bool}  \PYG{o}{=} \PYG{n}{get\PYGZus{}bool}\PYG{p}{(}\PYG{n}{raw\PYGZus{}bool}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{n}{my\PYGZus{}int}   \PYG{o}{=} \PYG{n}{get\PYGZus{}int}\PYG{p}{(}\PYG{n}{raw\PYGZus{}int}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} ====== Logik ===================}
+\PYG{k}{if} \PYG{n}{my\PYGZus{}bool} \PYG{o}{==} \PYG{k+kc}{False}\PYG{p}{:}
+    \PYG{n}{set\PYGZus{}int}\PYG{p}{(}\PYG{n}{raw\PYGZus{}int}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{35}\PYG{p}{)}
+\PYG{k}{else}\PYG{p}{:}
+    \PYG{n}{set\PYGZus{}int}\PYG{p}{(}\PYG{n}{raw\PYGZus{}int}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{88}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} ====== Skriv output ============}
+\PYG{n}{client}\PYG{o}{.}\PYG{n}{db\PYGZus{}write}\PYG{p}{(}\PYG{n}{DB\PYGZus{}NUMBER}\PYG{p}{,} \PYG{n}{INT\PYGZus{}OFFSET}\PYG{p}{,} \PYG{n}{raw\PYGZus{}int}\PYG{p}{)}
+\PYG{n}{my\PYGZus{}int} \PYG{o}{=} \PYG{n}{get\PYGZus{}int}\PYG{p}{(}\PYG{n}{client}\PYG{o}{.}\PYG{n}{db\PYGZus{}read}\PYG{p}{(}\PYG{n}{DB\PYGZus{}NUMBER}\PYG{p}{,} \PYG{n}{INT\PYGZus{}OFFSET}\PYG{p}{,} \PYG{n}{INT\PYGZus{}SIZE}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{my\PYGZus{}int =}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{my\PYGZus{}int}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} ====== Disconnect og destroy ===}
+\PYG{n}{client}\PYG{o}{.}\PYG{n}{disconnect}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{client}\PYG{o}{.}\PYG{n}{destroy}\PYG{p}{(}\PYG{p}{)}
+\end{MintedVerbatim}

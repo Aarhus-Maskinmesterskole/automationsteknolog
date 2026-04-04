@@ -1,0 +1,5 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{n}{error}    \PYG{o}{=} \PYG{n}{setpoint} \PYG{o}{\PYGZhy{}} \PYG{n}{current\PYGZus{}level}
+\PYG{n}{integral} \PYG{o}{=} \PYG{n}{integral} \PYG{o}{+} \PYG{n}{error} \PYG{o}{*} \PYG{n}{dt}
+\PYG{n}{control}  \PYG{o}{=} \PYG{n}{Kp} \PYG{o}{*} \PYG{n}{error} \PYG{o}{+} \PYG{n}{Ki} \PYG{o}{*} \PYG{n}{integral}
+\end{MintedVerbatim}

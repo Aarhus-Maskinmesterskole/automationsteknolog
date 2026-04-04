@@ -1,0 +1,18 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{n+nn}{snap7}
+
+\PYG{c+c1}{\PYGZsh{} ====== PLC opsætning ==========}
+\PYG{n}{plc\PYGZus{}ip} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{192.168.154.1}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n}{rack}   \PYG{o}{=} \PYG{l+m+mi}{0}
+\PYG{n}{slot}   \PYG{o}{=} \PYG{l+m+mi}{1}
+\PYG{n}{port}   \PYG{o}{=} \PYG{l+m+mi}{1102}
+
+\PYG{c+c1}{\PYGZsh{} ====== PLC forbindelse =========}
+\PYG{n}{client} \PYG{o}{=} \PYG{n}{snap7}\PYG{o}{.}\PYG{n}{client}\PYG{o}{.}\PYG{n}{Client}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{client}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{n}{plc\PYGZus{}ip}\PYG{p}{,} \PYG{n}{rack}\PYG{p}{,} \PYG{n}{slot}\PYG{p}{,} \PYG{n}{port}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Forbundet til PLC:}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{client}\PYG{o}{.}\PYG{n}{get\PYGZus{}cpu\PYGZus{}info}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} ====== Disconnect og destroy ===}
+\PYG{n}{client}\PYG{o}{.}\PYG{n}{disconnect}\PYG{p}{(}\PYG{p}{)}
+\PYG{n}{client}\PYG{o}{.}\PYG{n}{destroy}\PYG{p}{(}\PYG{p}{)}
+\end{MintedVerbatim}

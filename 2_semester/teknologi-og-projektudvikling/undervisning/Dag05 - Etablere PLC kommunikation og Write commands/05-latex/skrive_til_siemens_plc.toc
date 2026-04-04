@@ -1,0 +1,10 @@
+\babel@toc {danish}{}\relax 
+\contentsline {section}{\numberline {1}Introduktion}{2}{section.1}%
+\contentsline {section}{\numberline {2}Skriv til Data Block (db\_write)}{3}{section.2}%
+\contentsline {section}{\numberline {3}Fysiske indgange og udgange (\%I, \%Q, \%M)}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Laes fysisk indgang (\%I)}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Laes og skriv fysisk udgang (\%Q)}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Laes og skriv memory bits (\%M)}{7}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Fejlhaandtering (try / except / finally)}{8}{section.4}%
+\contentsline {section}{\numberline {5}Oversigt over write-funktioner}{9}{section.5}%
+\contentsline {section}{\numberline {6}Oevelse}{9}{section.6}%

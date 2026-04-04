@@ -1,0 +1,585 @@
+% +==============================================================+
+% |  Skrive til Siemens PLC                                      |
+% |  Forfatter : aso                                             |
+% |  Skole     : AAMS                                            |
+% +==============================================================+
+
+\documentclass[12pt, a4paper]{article}
+
+% --- Kodning & sprog ----------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[danish]{babel}
+
+% --- Layout -------------------------------------------------------------------
+\usepackage{geometry}
+\geometry{top=2.5cm, bottom=2.5cm, left=3cm, right=3cm, headheight=15pt}
+
+% --- Typografi ----------------------------------------------------------------
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{parskip}
+
+% --- Grafik & farver ----------------------------------------------------------
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+% --- Bokse (tcolorbox) & kode-highlighting (minted) --------------------------
+\usepackage[most]{tcolorbox}
+\usepackage{minted}
+
+% --- Hyperlinks ---------------------------------------------------------------
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks = true,
+  linkcolor  = primaryblue,
+  urlcolor   = accentblue,
+}
+
+% --- Header & footer ----------------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{fontawesome5}
+
+% ==============================================================================
+%  FARVEDEFINITIONER
+% ==============================================================================
+\definecolor{primaryblue}{HTML}{1A3A5C}
+\definecolor{accentblue}{HTML}{2E86C1}
+\definecolor{lightblue}{HTML}{D6EAF8}
+\definecolor{darkgray}{HTML}{555555}
+\definecolor{lightgray}{HTML}{F4F6F7}
+\definecolor{successgreen}{HTML}{1E8449}
+\definecolor{lightgreen}{HTML}{D5F5E3}
+\definecolor{warnorange}{HTML}{E67E22}
+\definecolor{lightyellow}{HTML}{FEF9E7}
+\definecolor{codebg}{HTML}{1E1E2E}
+\definecolor{siemensblue}{HTML}{009999}
+
+% ==============================================================================
+%  MINTED OPSAETNING
+% ==============================================================================
+\setminted{
+  style        = monokai,
+  fontsize     = \small,
+  linenos      = true,
+  numbersep    = 6pt,
+  breaklines   = true,
+  tabsize      = 4,
+}
+
+% ==============================================================================
+%  TCOLORBOX STILE
+% ==============================================================================
+
+% Python kode-boks med moerk baggrund
+\tcbset{
+  pythonbox/.style={
+    enhanced,
+    colback         = codebg,
+    colframe        = siemensblue,
+    coltitle        = white,
+    fonttitle       = \bfseries\small,
+    arc             = 3pt,
+    boxrule         = 1.5pt,
+    top             = 2pt,
+    bottom          = 2pt,
+    left            = 0pt,
+    right           = 0pt,
+    title style     = {fill=siemensblue, top=3pt, bottom=3pt},
+    attach boxed title to top left={xshift=8pt, yshift=-\tcboxedtitleheight/2},
+    boxed title style={
+      colback=siemensblue,
+      colframe=siemensblue,
+      arc=2pt,
+      boxrule=0pt,
+    },
+  },
+  % Blaa info-boks
+  infobox/.style={
+    enhanced,
+    colback   = lightblue,
+    colframe  = accentblue,
+    coltitle  = white,
+    fonttitle = \bfseries,
+    arc       = 3pt,
+    boxrule   = 1pt,
+    title style={fill=accentblue},
+  },
+  % Groen tip-boks
+  tipbox/.style={
+    enhanced,
+    colback   = lightgreen,
+    colframe  = successgreen,
+    coltitle  = white,
+    fonttitle = \bfseries,
+    arc       = 3pt,
+    boxrule   = 1pt,
+    title style={fill=successgreen},
+  },
+  % Orange advarsel-boks
+  warnbox/.style={
+    enhanced,
+    colback   = lightyellow,
+    colframe  = warnorange,
+    coltitle  = white,
+    fonttitle = \bfseries,
+    arc       = 3pt,
+    boxrule   = 1pt,
+    title style={fill=warnorange},
+  },
+}
+
+% ==============================================================================
+%  HEADER & FOOTER
+% ==============================================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{darkgray}{\small\textit{Skrive til Siemens PLC}}}
+\fancyhead[R]{\textcolor{darkgray}{\small\textit{AAMS | aso}}}
+\fancyhead[C]{\textcolor{siemensblue}{\rule[-2pt]{0pt}{12pt}\small\faIndustry}}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\headrule}{{\color{siemensblue}\hrule width\headwidth height 1pt}}
+\fancyfoot[C]{\textcolor{darkgray}{\small\thepage}}
+\fancyfoot[R]{\textcolor{darkgray}{\small\today}}
+
+% ==============================================================================
+%  SEKTIONSFORMATERING
+% ==============================================================================
+\titleformat{\section}
+  {\color{primaryblue}\Large\bfseries}
+  {\color{siemensblue}\thesection\hspace{6pt}\textcolor{siemensblue}{|}\hspace{6pt}}
+  {0pt}{}[{\color{siemensblue}\titlerule[1pt]}]
+
+\titleformat{\subsection}
+  {\color{primaryblue}\large\bfseries}
+  {\color{accentblue}\thesubsection\hspace{6pt}}
+  {0pt}{}
+
+\titlespacing{\section}{0pt}{18pt}{8pt}
+\titlespacing{\subsection}{0pt}{12pt}{4pt}
+
+% ==============================================================================
+%  DOKUMENT START
+% ==============================================================================
+\begin{document}
+
+% -----------------------------------------------------------------------------
+%  FORSIDE
+% -----------------------------------------------------------------------------
+\begin{titlepage}
+\thispagestyle{empty}
+
+% Fancy top-banner med TikZ
+\begin{tikzpicture}[remember picture, overlay]
+  % Oeverste farvede banner
+  \fill[primaryblue]
+    (current page.north west) rectangle
+    ([yshift=-4.5cm] current page.north east);
+
+  % Siemens-groent dekorativt baand
+  \fill[siemensblue]
+    ([yshift=-4.5cm] current page.north west) rectangle
+    ([yshift=-5.0cm] current page.north east);
+
+  % Tyndt accentstribe
+  \fill[accentblue]
+    ([yshift=-5.0cm] current page.north west) rectangle
+    ([yshift=-5.15cm] current page.north east);
+
+  % Gear-ikon (dekorativt) - hoejre side af banner
+  \node[anchor=east, xshift=-1.5cm, yshift=-2.3cm]
+    at (current page.north east)
+    {\textcolor{white!20!primaryblue}{\fontsize{90}{90}\selectfont\faIndustry}};
+
+  % Skole-tekst oeverst i banner
+  \node[anchor=north west, xshift=2cm, yshift=-0.7cm]
+    at (current page.north west)
+    {\textcolor{white!70!primaryblue}\large\bfseries AAMS --- Automationsteknolog};
+
+  % Fag-tekst
+  \node[anchor=north west, xshift=2cm, yshift=-1.3cm]
+    at (current page.north west)
+    {\textcolor{white!60!primaryblue}\normalsize Teknologi og Projektudvikling $\cdot$ 2.\ Semester};
+
+  % Hoved-titel
+  \node[anchor=north west, xshift=2cm, yshift=-2.2cm]
+    at (current page.north west)
+    {\textcolor{white}{\fontsize{28}{34}\selectfont\bfseries Skrive til Siemens PLC}};
+
+  % Undertitel
+  \node[anchor=north west, xshift=2.1cm, yshift=-3.7cm]
+    at (current page.north west)
+    {\textcolor{white!80!siemensblue}\large\itshape Write commands med Python \texttt{snap7}};
+
+  % Bundlinje - forfatter, dato
+  \fill[lightgray]
+    ([yshift=3.5cm] current page.south west) rectangle
+    ([yshift=2.0cm] current page.south east);
+  \fill[accentblue]
+    ([yshift=3.5cm] current page.south west) rectangle
+    ([yshift=3.35cm] current page.south east);
+
+  \node[anchor=west, xshift=2cm, yshift=2.8cm]
+    at (current page.south west)
+    {\textcolor{primaryblue}{\faUserCircle\quad\textbf{Forfatter:} aso
+     \quad\textcolor{darkgray}{|}\quad
+     \faCalendar\quad\textbf{Dato:} \today
+     \quad\textcolor{darkgray}{|}\quad
+     \faUniversity\quad\textbf{Skole:} AAMS}};
+\end{tikzpicture}
+
+\vspace*{5.5cm}
+
+% Midterdel - indrammet laeringsmaalsboks
+\begin{center}
+\begin{tcolorbox}[
+  enhanced,
+  width=13cm,
+  colback=lightgray,
+  colframe=primaryblue,
+  arc=5pt,
+  boxrule=1.5pt,
+  title={\faInfoCircle\quad Laeringsmaal},
+  coltitle=white,
+  fonttitle=\bfseries,
+  title style={fill=primaryblue},
+]
+\begin{itemize}[leftmargin=1.2em, itemsep=4pt]
+  \item[\textcolor{siemensblue}{\faCheckCircle}]
+    Skrive Bool, Int og Real til en Data Block via \texttt{db\_write}
+  \item[\textcolor{siemensblue}{\faCheckCircle}]
+    Laese og skrive fysiske indgange (\%I), udgange (\%Q) og memory bits (\%M)
+    med \texttt{read\_area} og \texttt{write\_area}
+  \item[\textcolor{siemensblue}{\faCheckCircle}]
+    Forstaae forskellen paa \texttt{S7AreaPE}, \texttt{S7AreaPA} og \texttt{S7AreaMK}
+  \item[\textcolor{siemensblue}{\faCheckCircle}]
+    Implementere robust fejlhaandtering med \texttt{try/except/finally}
+\end{itemize}
+\end{tcolorbox}
+\end{center}
+
+\end{titlepage}
+
+% -----------------------------------------------------------------------------
+%  INDHOLDSFORTEGNELSE
+% -----------------------------------------------------------------------------
+\newpage
+\thispagestyle{fancy}
+\tableofcontents
+\newpage
+
+% ==============================================================================
+\section{Introduktion}
+% ==============================================================================
+
+I dag 04 laerte vi at laese data fra en Siemens PLC via Data Blocks.
+I dag 05 udvider vi med \textbf{write commands} --- vi skriver vaerdier
+tilbage til PLC'en og arbejder desuden med PLC'ens fysiske I/O-omraader
+(\%I, \%Q, \%M) ved hjaelp af \texttt{read\_area} og \texttt{write\_area}.
+
+\begin{tcolorbox}[infobox, title={\faInfoCircle\quad Laes foer du skriver}]
+Naar du skriver til en Data Block, skal du \textbf{altid laese det aktuelle
+bytearray foerst}. Ellers risikerer du at overskrive bits i samme byte,
+der styrer andre variable.\\[4pt]
+Eksempel: Bool DBX0.0 og DBX0.1 deler samme byte (byte 0). Laes hele byten,
+aendr kun det oenskede bit, skriv byten tilbage.
+\end{tcolorbox}
+
+\clearpage
+% ==============================================================================
+\section{Skriv til Data Block (db\_write)}
+% ==============================================================================
+
+Med \texttt{set\_bool}, \texttt{set\_int}, \texttt{set\_real} modificerer
+vi et bytearray lokalt og sender det derefter til PLC'en med \texttt{db\_write}.
+
+\begin{center}
+\begin{tabular}{lcccp{4.5cm}}
+\toprule
+\textbf{Datatype} & \textbf{Offset} & \textbf{Stroerrelse} & \textbf{Funktion} & \textbf{TIA Portal navn} \\
+\midrule
+Bool & 0 & 1 byte & \texttt{set\_bool} & DB1.DBX0.0 \\
+Int  & 2 & 2 bytes & \texttt{set\_int}  & DB1.DBW2 \\
+Real & 4 & 4 bytes & \texttt{set\_real} & DB1.DBD4 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{tcolorbox}[pythonbox, title={\faPython\quad Kode 1 --- Skriv Bool, Int og Real til DB1}]
+\begin{minted}{python}
+import snap7
+from snap7.util import get_bool, get_int, get_real
+
+# ====== PLC opsaetning ==========
+PLC_IP      = "192.168.0.1"
+RACK        = 0
+SLOT        = 1
+DB_NUMBER   = 1
+BOOL_OFFSET = 0;  BOOL_SIZE = 1
+INT_OFFSET  = 2;  INT_SIZE  = 2
+REAL_OFFSET = 4;  REAL_SIZE = 4
+
+# ====== PLC forbindelse =========
+client = snap7.client.Client()
+client.connect(PLC_IP, RACK, SLOT)
+
+# ====== Laes input ===============
+raw_bool = client.db_read(DB_NUMBER, BOOL_OFFSET, BOOL_SIZE)
+raw_int  = client.db_read(DB_NUMBER, INT_OFFSET, INT_SIZE)
+raw_real = client.db_read(DB_NUMBER, REAL_OFFSET, REAL_SIZE)
+
+# ====== Logik ===================
+set_bool(raw_bool, 0, 0, True)   # saet DBX0.0 til True
+set_int(raw_int, 0, 123)          # saet DBW2 til 123
+set_real(raw_real, 0, 123.45)     # saet DBD4 til 123.45
+
+# ====== Skriv output ============
+client.db_write(DB_NUMBER, BOOL_OFFSET, raw_bool)
+client.db_write(DB_NUMBER, INT_OFFSET, raw_int)
+client.db_write(DB_NUMBER, REAL_OFFSET, raw_real)
+
+print("Bool:", get_bool(client.db_read(DB_NUMBER, BOOL_OFFSET, BOOL_SIZE), 0, 0))
+print("Int:", get_int(client.db_read(DB_NUMBER, INT_OFFSET, INT_SIZE), 0))
+print("Real:", round(get_real(client.db_read(DB_NUMBER, REAL_OFFSET, REAL_SIZE), 0), 2))
+
+# ====== Disconnect og destroy ===
+client.disconnect()
+client.destroy()
+\end{minted}
+\end{tcolorbox}
+
+\clearpage
+% ==============================================================================
+\section{Fysiske indgange og udgange (\%I, \%Q, \%M)}
+% ==============================================================================
+
+Ud over Data Blocks kan vi med \texttt{read\_area} og \texttt{write\_area}
+tilgaa PLC'ens fysiske I/O-omraader direkte.
+
+\begin{tcolorbox}[infobox, title={\faInfoCircle\quad Omraade-konstanter i snap7}]
+\begin{tabular}{lll}
+\textbf{Konstant} & \textbf{Omraade} & \textbf{Eksempel} \\
+\texttt{S7AreaPE} & Fysiske indgange & \%I0.0 \\
+\texttt{S7AreaPA} & Fysiske udgange  & \%Q0.0 \\
+\texttt{S7AreaMK} & Memory bits      & \%M0.0 \\
+\texttt{S7AreaDB} & Data Block       & DB1 \\
+\end{tabular}
+\end{tcolorbox}
+
+\subsection{Laes fysisk indgang (\%I)}
+
+\begin{tcolorbox}[pythonbox, title={\faPython\quad Kode 2 --- Laes fysisk indgang \%I0.0}]
+\begin{minted}{python}
+import snap7
+from snap7.util import get_bool
+from snap7.type import Area  # PE = fysiske indgange
+
+# ====== PLC opsaetning ==========
+PLC_IP   = "192.168.0.1"
+RACK     = 0
+SLOT     = 1
+AREA     = Area.PE
+I_OFFSET = 0;  I_SIZE = 1
+
+# ====== PLC forbindelse =========
+client = snap7.client.Client()
+client.connect(PLC_IP, RACK, SLOT)
+
+# ====== Laes input ===============
+i_bytes_raw = client.read_area(AREA, 0, I_OFFSET, I_SIZE)
+
+# ====== Logik ===================
+S1 = get_bool(i_bytes_raw, 0, 0)  # I0.0
+print(f"S1 (I0.0): {S1}")
+
+# ====== Disconnect og destroy ===
+client.disconnect()
+client.destroy()
+\end{minted}
+\end{tcolorbox}
+
+\subsection{Laes og skriv fysisk udgang (\%Q)}
+
+\begin{tcolorbox}[pythonbox, title={\faPython\quad Kode 3 --- Skriv til fysisk udgang \%Q0.0}]
+\begin{minted}{python}
+import snap7
+from snap7.util import get_bool, set_bool
+from snap7.type import Area  # PA = fysiske udgange
+
+# ====== PLC opsaetning ==========
+PLC_IP   = "192.168.0.1"
+RACK     = 0
+SLOT     = 1
+AREA     = Area.PA
+Q_OFFSET = 0;  Q_SIZE = 1
+
+# ====== PLC forbindelse =========
+client = snap7.client.Client()
+client.connect(PLC_IP, RACK, SLOT)
+
+# ====== Laes input ===============
+q_bytes_raw = client.read_area(AREA, 0, Q_OFFSET, Q_SIZE)
+Q1_foer = get_bool(q_bytes_raw, 0, 0)
+print(f"Q1 foer: {Q1_foer}")
+
+# ====== Logik ===================
+set_bool(q_bytes_raw, 0, 0, True)   # saet Q0.0 til True
+
+# ====== Skriv output ============
+client.write_area(AREA, 0, Q_OFFSET, q_bytes_raw)
+Q1_efter = get_bool(client.read_area(AREA, 0, Q_OFFSET, Q_SIZE), 0, 0)
+print(f"Q1 efter: {Q1_efter}")
+
+# ====== Disconnect og destroy ===
+client.disconnect()
+client.destroy()
+\end{minted}
+\end{tcolorbox}
+
+\subsection{Laes og skriv memory bits (\%M)}
+
+\begin{tcolorbox}[pythonbox, title={\faPython\quad Kode 4 --- Laes og skriv memory bit \%M0.0}]
+\begin{minted}{python}
+import snap7
+from snap7.util import get_bool, set_bool
+from snap7.type import Area  # MK = memory bits
+
+# ====== PLC opsaetning ==========
+PLC_IP   = "192.168.0.1"
+RACK     = 0
+SLOT     = 1
+AREA     = Area.MK
+M_OFFSET = 0;  M_SIZE = 1
+
+# ====== PLC forbindelse =========
+client = snap7.client.Client()
+client.connect(PLC_IP, RACK, SLOT)
+
+# ====== Laes input ===============
+m_bytes_raw = client.read_area(AREA, 0, M_OFFSET, M_SIZE)
+M0_foer = get_bool(m_bytes_raw, 0, 0)
+print(f"M0.0 foer: {M0_foer}")
+
+# ====== Logik ===================
+set_bool(m_bytes_raw, 0, 0, True)   # saet M0.0 til True
+
+# ====== Skriv output ============
+client.write_area(AREA, 0, M_OFFSET, m_bytes_raw)
+M0_efter = get_bool(client.read_area(AREA, 0, M_OFFSET, M_SIZE), 0, 0)
+print(f"M0.0 efter: {M0_efter}")
+
+# ====== Disconnect og destroy ===
+client.disconnect()
+client.destroy()
+\end{minted}
+\end{tcolorbox}
+
+\clearpage
+% ==============================================================================
+\section{Fejlhaandtering (try / except / finally)}
+% ==============================================================================
+
+Brug \texttt{try/except/finally} til at sikre at forbindelsen
+\emph{altid} lukkes --- ogsaa hvis der opstaaar en fejl undervejs.
+Med \texttt{client.get\_connected()} kan vi tjekke forbindelsen foer vi
+kalder disconnect.
+
+\begin{tcolorbox}[pythonbox, title={\faPython\quad Kode 5 --- Robust fejlhaandtering}]
+\begin{minted}{python}
+import snap7
+from snap7.util import get_bool, set_bool
+from snap7.type import Area
+
+# ====== PLC opsaetning ==========
+PLC_IP   = "192.168.0.1"
+RACK     = 0
+SLOT     = 1
+AREA     = Area.PA
+Q_OFFSET = 0;  Q_SIZE = 1
+
+try:
+    # ====== PLC forbindelse =========
+    client = snap7.client.Client()
+    client.connect(PLC_IP, RACK, SLOT)
+
+    # ====== Laes input ===============
+    q_bytes_raw = client.read_area(AREA, 0, Q_OFFSET, Q_SIZE)
+
+    # ====== Logik ===================
+    set_bool(q_bytes_raw, 0, 0, True)
+    print("Alt gik godt!")
+
+    # ====== Skriv output ============
+    client.write_area(AREA, 0, Q_OFFSET, q_bytes_raw)
+
+except snap7.exceptions.Snap7Exception as e:
+    print(f"Snap7 fejl: {e}")
+except Exception as e:
+    print(f"Uventet fejl: {e}")
+
+finally:
+    # ====== Disconnect og destroy ===
+    if client.get_connected():
+        client.disconnect()
+        print("Forbindelsen er lukket.")
+    client.destroy()
+    print("Ressourcer frigivet.")
+\end{minted}
+\end{tcolorbox}
+
+\begin{tcolorbox}[infobox, title={\faInfoCircle\quad try / except / finally forklaret}]
+\begin{description}[leftmargin=2.2cm, style=nextline]
+  \item[\texttt{try}]     Kode der \textit{kan} fejle koeres her.
+  \item[\texttt{except}]  Fanger specifikke fejl ---
+    \texttt{Snap7Exception} for PLC-fejl, \texttt{Exception} som fallback.
+  \item[\texttt{finally}] Koeres \textbf{altid} uanset fejl.
+    \texttt{get\_connected()} bruges til at tjekke forbindelsen foer disconnect.
+\end{description}
+\end{tcolorbox}
+
+% ==============================================================================
+\section{Oversigt over write-funktioner}
+% ==============================================================================
+
+\begin{center}
+\begin{tabular}{lp{5.5cm}l}
+\toprule
+\textbf{Funktion} & \textbf{Beskrivelse} & \textbf{Modul} \\
+\midrule
+\texttt{set\_bool(data, byte, bit, val)} & Saetter en Bool i bytearray & \texttt{snap7.util} \\
+\texttt{set\_int(data, byte, val)}       & Saetter en Int i bytearray  & \texttt{snap7.util} \\
+\texttt{set\_real(data, byte, val)}      & Saetter en Real i bytearray & \texttt{snap7.util} \\
+\texttt{set\_word(data, byte, val)}      & Saetter en Word i bytearray & \texttt{snap7.util} \\
+\texttt{client.db\_write(db, off, data)} & Skriver bytearray til DB    & \texttt{snap7} \\
+\texttt{client.write\_area(area, db, off, data)} & Skriver til I/O-omraade & \texttt{snap7} \\
+\texttt{client.get\_connected()}         & Returnerer True hvis forbundet & \texttt{snap7} \\
+\texttt{S7AreaPE}                        & Fysiske indgange (\%I)      & \texttt{snap7.type} \\
+\texttt{S7AreaPA}                        & Fysiske udgange (\%Q)       & \texttt{snap7.type} \\
+\texttt{S7AreaMK}                        & Memory bits (\%M)           & \texttt{snap7.type} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ==============================================================================
+\section{Oevelse}
+% ==============================================================================
+
+\begin{tcolorbox}[tipbox, title={\faTasks\quad Oevelsesopgaver}]
+\begin{enumerate}[leftmargin=1.5em, itemsep=6pt]
+  \item Skriv en Bool, Int og Real til \texttt{DB1} og laes dem tilbage for at verificere.
+  \item Laes den fysiske indgang \texttt{I0.0} og udskriv dens tilstand.
+  \item Skriv til den fysiske udgang \texttt{Q0.0} --- taend og slaek den.
+  \item Laes og skriv en memory bit \texttt{M0.0}.
+  \item Omskriv et af eksemplerne med \texttt{try/except/finally} og brug
+        \texttt{client.get\_connected()} i \texttt{finally}-blokken.
+  \item \textbf{Ekstra:} Laes knap \texttt{I0.0} og styr lampe \texttt{Q0.0}
+        baseret paa knappens tilstand (if/else).
+\end{enumerate}
+\end{tcolorbox}
+
+\end{document}

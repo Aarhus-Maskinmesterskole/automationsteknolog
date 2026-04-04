@@ -1,0 +1,699 @@
+% +==============================================================+
+% |  Python Matplotlib Visualisering                             |
+% |  Forfatter : aso                                             |
+% |  Skole     : AAMS                                            |
+% +==============================================================+
+
+\documentclass[12pt, a4paper]{article}
+
+% --- Kodning & sprog ----------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[danish]{babel}
+
+% --- Layout -------------------------------------------------------------------
+\usepackage{geometry}
+\geometry{top=2.5cm, bottom=2.5cm, left=3cm, right=3cm, headheight=15pt}
+
+% --- Typografi ----------------------------------------------------------------
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{parskip}
+
+% --- Grafik & farver ----------------------------------------------------------
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+% --- Bokse & kode-highlighting ------------------------------------------------
+\usepackage[most]{tcolorbox}
+\usepackage{minted}
+
+% --- Hyperlinks ---------------------------------------------------------------
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks = true,
+  linkcolor  = primaryblue,
+  urlcolor   = accentblue,
+}
+
+% --- Header & footer ----------------------------------------------------------
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{fontawesome5}
+
+% ==============================================================================
+%  FARVEDEFINITIONER
+% ==============================================================================
+\definecolor{primaryblue}{HTML}{1A3A5C}
+\definecolor{accentblue}{HTML}{2E86C1}
+\definecolor{lightblue}{HTML}{D6EAF8}
+\definecolor{darkgray}{HTML}{555555}
+\definecolor{lightgray}{HTML}{F4F6F7}
+\definecolor{successgreen}{HTML}{1E8449}
+\definecolor{lightgreen}{HTML}{D5F5E3}
+\definecolor{warnorange}{HTML}{E67E22}
+\definecolor{lightyellow}{HTML}{FEF9E7}
+\definecolor{codebg}{HTML}{1E1E2E}
+\definecolor{siemensblue}{HTML}{009999}
+
+% ==============================================================================
+%  MINTED OPSAETNING
+% ==============================================================================
+\setminted{
+  style      = monokai,
+  fontsize   = \small,
+  linenos    = true,
+  numbersep  = 6pt,
+  breaklines = true,
+  tabsize    = 4,
+}
+
+% ==============================================================================
+%  TCOLORBOX STILE
+% ==============================================================================
+\tcbset{
+  pythonbox/.style={
+    enhanced,
+    colback         = codebg,
+    colframe        = siemensblue,
+    coltitle        = white,
+    fonttitle       = \bfseries\small,
+    arc             = 3pt,
+    boxrule         = 1.5pt,
+    top             = 2pt,
+    bottom          = 2pt,
+    left            = 0pt,
+    right           = 0pt,
+    title style     = {fill=siemensblue, top=3pt, bottom=3pt},
+    attach boxed title to top left={xshift=8pt, yshift=-\tcboxedtitleheight/2},
+    boxed title style={
+      colback=siemensblue,
+      colframe=siemensblue,
+      arc=2pt,
+      boxrule=0pt,
+    },
+  },
+  infobox/.style={
+    enhanced,
+    colback   = lightblue,
+    colframe  = accentblue,
+    coltitle  = white,
+    fonttitle = \bfseries,
+    arc       = 3pt,
+    boxrule   = 1pt,
+    title style={fill=accentblue},
+  },
+  tipbox/.style={
+    enhanced,
+    colback   = lightgreen,
+    colframe  = successgreen,
+    coltitle  = white,
+    fonttitle = \bfseries,
+    arc       = 3pt,
+    boxrule   = 1pt,
+    title style={fill=successgreen},
+  },
+  warnbox/.style={
+    enhanced,
+    colback   = lightyellow,
+    colframe  = warnorange,
+    coltitle  = white,
+    fonttitle = \bfseries,
+    arc       = 3pt,
+    boxrule   = 1pt,
+    title style={fill=warnorange},
+  },
+}
+
+% ==============================================================================
+%  HEADER & FOOTER
+% ==============================================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{darkgray}{\small\textit{Python Matplotlib Visualisering}}}
+\fancyhead[R]{\textcolor{darkgray}{\small\textit{AAMS | aso}}}
+\fancyhead[C]{\textcolor{siemensblue}{\rule[-2pt]{0pt}{12pt}\small\faChartLine}}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\headrule}{{\color{siemensblue}\hrule width\headwidth height 1pt}}
+\fancyfoot[C]{\textcolor{darkgray}{\small\thepage}}
+\fancyfoot[R]{\textcolor{darkgray}{\small\today}}
+
+% ==============================================================================
+%  SEKTIONSFORMATERING
+% ==============================================================================
+\titleformat{\section}
+  {\color{primaryblue}\Large\bfseries}
+  {\color{siemensblue}\thesection\hspace{6pt}\textcolor{siemensblue}{|}\hspace{6pt}}
+  {0pt}{}[{\color{siemensblue}\titlerule[1pt]}]
+
+\titleformat{\subsection}
+  {\color{primaryblue}\large\bfseries}
+  {\color{accentblue}\thesubsection\hspace{6pt}}
+  {0pt}{}
+
+\titlespacing{\section}{0pt}{18pt}{8pt}
+\titlespacing{\subsection}{0pt}{12pt}{4pt}
+
+% ==============================================================================
+%  DOKUMENT START
+% ==============================================================================
+\begin{document}
+
+% -----------------------------------------------------------------------------
+%  FORSIDE
+% -----------------------------------------------------------------------------
+\begin{titlepage}
+\thispagestyle{empty}
+
+\begin{tikzpicture}[remember picture, overlay]
+  % Oeverste farvede banner
+  \fill[primaryblue]
+    (current page.north west) rectangle
+    ([yshift=-4.5cm] current page.north east);
+
+  % Siemens-groent dekorativt baand
+  \fill[siemensblue]
+    ([yshift=-4.5cm] current page.north west) rectangle
+    ([yshift=-5.0cm] current page.north east);
+
+  % Tyndt accentstribe
+  \fill[accentblue]
+    ([yshift=-5.0cm] current page.north west) rectangle
+    ([yshift=-5.15cm] current page.north east);
+
+  % Dekorativt ikon - hoejre side
+  \node[anchor=east, xshift=-1.5cm, yshift=-2.3cm]
+    at (current page.north east)
+    {\textcolor{white!20!primaryblue}{\fontsize{90}{90}\selectfont\faChartBar}};
+
+  % Skole-tekst
+  \node[anchor=north west, xshift=2cm, yshift=-0.7cm]
+    at (current page.north west)
+    {\textcolor{white!70!primaryblue}\large\bfseries AAMS --- Automationsteknolog};
+
+  % Fag-tekst
+  \node[anchor=north west, xshift=2cm, yshift=-1.3cm]
+    at (current page.north west)
+    {\textcolor{white!60!primaryblue}\normalsize Teknologi og Projektudvikling $\cdot$ 2.\ Semester};
+
+  % Hoved-titel
+  \node[anchor=north west, xshift=2cm, yshift=-2.2cm]
+    at (current page.north west)
+    {\textcolor{white}{\fontsize{26}{32}\selectfont\bfseries Python Matplotlib Visualisering}};
+
+  % Undertitel
+  \node[anchor=north west, xshift=2.1cm, yshift=-3.7cm]
+    at (current page.north west)
+    {\textcolor{white!80!siemensblue}\large\itshape
+      Statiske plots fra CSV og live-visualisering med \texttt{plt.ion()}};
+
+  % Bundlinje
+  \fill[lightgray]
+    ([yshift=3.5cm] current page.south west) rectangle
+    ([yshift=2.0cm] current page.south east);
+  \fill[accentblue]
+    ([yshift=3.5cm] current page.south west) rectangle
+    ([yshift=3.35cm] current page.south east);
+
+  \node[anchor=west, xshift=2cm, yshift=2.8cm]
+    at (current page.south west)
+    {\textcolor{primaryblue}{\faUserCircle\quad\textbf{Forfatter:} aso
+     \quad\textcolor{darkgray}{|}\quad
+     \faCalendar\quad\textbf{Dato:} \today
+     \quad\textcolor{darkgray}{|}\quad
+     \faUniversity\quad\textbf{Skole:} AAMS}};
+\end{tikzpicture}
+
+\vspace*{5.5cm}
+
+\begin{center}
+\begin{tcolorbox}[
+  enhanced,
+  width=13cm,
+  colback=lightgray,
+  colframe=primaryblue,
+  arc=5pt,
+  boxrule=1.5pt,
+  title={\faInfoCircle\quad Læringsmål},
+  coltitle=white,
+  fonttitle=\bfseries,
+  title style={fill=primaryblue},
+]
+\begin{itemize}[leftmargin=1.2em, itemsep=4pt]
+  \item[\textcolor{siemensblue}{\faCheckCircle}]
+    Indlaese en CSV-fil med Pandas og visualisere data som linjeplot
+  \item[\textcolor{siemensblue}{\faCheckCircle}]
+    Lave et statisk plot over tankniveaudata fra Emulate3D
+  \item[\textcolor{siemensblue}{\faCheckCircle}]
+    Bruge \texttt{plt.ion()} til live-opdaterende graf under køretid
+  \item[\textcolor{siemensblue}{\faCheckCircle}]
+    Beregne glidende gennemsnit med \texttt{.rolling().mean()}
+  \item[\textcolor{siemensblue}{\faCheckCircle}]
+    Annotere og eksportere grafer til dokumentation
+\end{itemize}
+\end{tcolorbox}
+\end{center}
+
+\end{titlepage}
+
+% -----------------------------------------------------------------------------
+%  INDHOLDSFORTEGNELSE
+% -----------------------------------------------------------------------------
+\newpage
+\thispagestyle{fancy}
+\tableofcontents
+\newpage
+
+% ==============================================================================
+\section{Introduktion til Matplotlib}
+% ==============================================================================
+
+\texttt{matplotlib.pyplot} er det centrale Python-bibliotek til visualisering.
+Det bruges til at oprette alt fra simple linjeplots til komplekse figursammenstillinger.
+
+\begin{tcolorbox}[infobox, title={\faInfoCircle\quad To visningsmåder}]
+\begin{description}[leftmargin=2.8cm, style=nextline]
+  \item[\textbf{Statisk}]
+    Alle datapunkter er tilgængelige på forhånd (fra CSV-fil eller liste).
+    Plottet bygges og vises med \texttt{plt.show()} når alt er klar.
+  \item[\textbf{Dynamisk}]
+    Data ankommer løbende (fra PLC, sensor eller løkke).
+    \texttt{plt.ion()} aktiverer interaktiv tilstand ---
+    grafen opdateres i realtid uden at blokere koden.
+\end{description}
+\end{tcolorbox}
+
+\begin{tcolorbox}[pythonbox, title={\faPython\quad Kode 0 --- Enkelt introduktionsplot}]
+\begin{minted}{python}
+import matplotlib.pyplot as plt
+
+x = [0, 1, 2, 3, 4, 5]
+y = [10, 25, 18, 30, 22, 35]
+
+plt.plot(x, y, color="royalblue", linewidth=2, label="Måling")
+plt.title("Simpelt linjeplot")
+plt.xlabel("Tid (s)")
+plt.ylabel("Værdi")
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()
+\end{minted}
+\end{tcolorbox}
+
+\begin{center}
+\begin{tabular}{lp{8cm}}
+\toprule
+\textbf{Funktion} & \textbf{Beskrivelse} \\
+\midrule
+\texttt{plt.plot(x, y)} & Tegn linjeplot \\
+\texttt{plt.title("...")} & Titel på figuren \\
+\texttt{plt.xlabel/ylabel} & Aksetekster \\
+\texttt{plt.grid(True)} & Vis gitter \\
+\texttt{plt.legend()} & Vis signaturforklaring \\
+\texttt{plt.tight\_layout()} & Undgå overlappende tekst \\
+\texttt{plt.show()} & Vis figuren (blokerenede) \\
+\bottomrule
+\end{tabular}
+\end{center}
+\clearpage
+% ==============================================================================
+\section{Statisk plot fra CSV (Emulate3D tankdata)}
+% ==============================================================================
+
+En typisk CSV-logfil fra Emulate3D indeholder tidsstempler og måleværdier.
+Vi indlæser den med Pandas og visualiserer den med Matplotlib.
+
+\subsection{Eksempel CSV-struktur}
+
+\begin{tcolorbox}[infobox, title={\faInfoCircle\quad Eksempel: tankniveau\_log.csv}]
+\ttfamily\small
+\begin{tabular}{ll}
+Tidsstempel & Tankniveau \\
+2024-06-01 12:00:00 & 45.2 \\
+2024-06-01 12:00:01 & 47.8 \\
+2024-06-01 12:00:02 & 50.1 \\
+2024-06-01 12:00:03 & 49.4 \\
+\end{tabular}\\[4pt]
+\normalfont\small
+Filen er oprettet i Dag07 ved brug af \texttt{csv.writer} og \texttt{datetime.now()}.
+\end{tcolorbox}
+
+\subsection{Indlæs og plot}
+
+\begin{tcolorbox}[pythonbox, title={\faPython\quad Kode 1 --- Statisk plot af tankniveau fra CSV}]
+\begin{minted}{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Indlaes CSV-filen
+df = pd.read_csv("tankniveau_log.csv")
+
+# Konverter tidsstempel til datetime hvis det er en streng
+df["Tidsstempel"] = pd.to_datetime(df["Tidsstempel"])
+
+# Plot
+plt.figure(figsize=(10, 5))
+plt.plot(df["Tidsstempel"], df["Tankniveau"],
+         color="royalblue", linewidth=2, label="Tankniveau")
+
+plt.title("Tankniveau over tid (Emulate3D)")
+plt.xlabel("Tidsstempel")
+plt.ylabel("Tankniveau (%)")
+plt.ylim(0, 100)
+plt.grid(True)
+plt.legend()
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig("tankniveau_statisk.png", dpi=300)
+plt.show()
+\end{minted}
+\end{tcolorbox}
+
+\begin{tcolorbox}[tipbox, title={\faLightbulb\quad Tip --- \texttt{pd.to\_datetime()}}]
+Pandas læsser tidsstempler som tekst som standard. Kald
+\texttt{pd.to\_datetime()} for at omveksle dem til rigtige datetime-værdier
+--- det giver korrekt formatering på x-aksen og muliggør tidsberegninger.
+\end{tcolorbox}
+
+\subsection{Glidende gennemsnit ovenpå rå data}
+
+\begin{tcolorbox}[pythonbox, title={\faPython\quad Kode 2 --- Rå data + glidende gennemsnit}]
+\begin{minted}{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv("tankniveau_log.csv")
+df["Tidsstempel"] = pd.to_datetime(df["Tidsstempel"])
+
+# Beregn glidende gennemsnit med vindue paa 5 maelinger
+df["Glidende"] = df["Tankniveau"].rolling(window=5, min_periods=1).mean()
+
+plt.figure(figsize=(10, 5))
+plt.plot(df["Tidsstempel"], df["Tankniveau"],
+         color="steelblue", alpha=0.5, linewidth=1, label="Rå data")
+plt.plot(df["Tidsstempel"], df["Glidende"],
+         color="darkorange", linewidth=2, linestyle="--",
+         label="Glidende gns. (n=5)")
+
+plt.title("Tankniveau med glidende gennemsnit")
+plt.xlabel("Tidsstempel")
+plt.ylabel("Tankniveau (%)")
+plt.ylim(0, 100)
+plt.grid(True)
+plt.legend()
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig("tankniveau_rolling.png", dpi=300)
+plt.show()
+\end{minted}
+\end{tcolorbox}
+
+\subsection{Annotering og græenselinjer}
+
+\begin{tcolorbox}[pythonbox, title={\faPython\quad Kode 3 --- Annotation og tarskellinjer}]
+\begin{minted}{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv("tankniveau_log.csv")
+df["Tidsstempel"] = pd.to_datetime(df["Tidsstempel"])
+
+fig, ax = plt.subplots(figsize=(10, 5))
+ax.plot(df["Tidsstempel"], df["Tankniveau"],
+        color="royalblue", linewidth=2, label="Tankniveau")
+
+# Markeer maksimum
+idx_max = df["Tankniveau"].idxmax()
+ax.annotate(
+    f'Max: {df["Tankniveau"][idx_max]:.1f}%',
+    xy=(df["Tidsstempel"][idx_max], df["Tankniveau"][idx_max]),
+    xytext=(10, 10), textcoords="offset points",
+    arrowprops=dict(arrowstyle="->", color="black"),
+    fontsize=9
+)
+
+# Graenselinjer for setpoint og alarm
+ax.axhline(y=80, color="orange", linestyle="--", linewidth=1.5,
+           label="Setpoint (80%)")
+ax.axhline(y=20, color="red", linestyle=":",  linewidth=1.5,
+           label="Alarm (20%)")
+
+ax.set_title("Tankniveau med setpoint og alarm")
+ax.set_xlabel("Tidsstempel")
+ax.set_ylabel("Tankniveau (%)")
+ax.set_ylim(0, 100)
+ax.grid(True)
+ax.legend()
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig("tankniveau_annoteret.png", dpi=300)
+plt.show()
+\end{minted}
+\end{tcolorbox}
+\clearpage
+% ==============================================================================
+\section{Live-plot med \texttt{plt.ion()}}
+% ==============================================================================
+
+\texttt{plt.ion()} (interactive on) aktiverer Matplotlibs interaktive tilstand.
+Det betyder at grafen opdateres løbende mens koden kører --- perfekt til
+realtidsvisning af PLC-data eller simulerede forløb.
+
+\begin{tcolorbox}[infobox, title={\faInfoCircle\quad Hvordan virker \texttt{plt.ion()}?}]
+\begin{description}[leftmargin=3.2cm, style=nextline]
+  \item[\texttt{plt.ion()}]   Aktiverer interaktiv tilstand (kældes een gang ved start).
+  \item[\texttt{plt.pause(n)}] Opdaterer grafen og venter \textit{n} sekunder ---
+                               erstatter \texttt{time.sleep()} i løkken.
+  \item[\texttt{ax.cla()}]    Rydder aksen før næste tegning (undgår ophobning).
+  \item[\texttt{plt.ioff()}]  Deaktiverer interaktiv tilstand når løkken stopper.
+  \item[\texttt{plt.show()}]  Holder vinduet åbent efter løkken.
+\end{description}
+\end{tcolorbox}
+
+\subsection{Simpelt live-plot fra en liste}
+
+\begin{tcolorbox}[pythonbox, title={\faPython\quad Kode 4 --- Live-plot med simulerede værdier}]
+\begin{minted}{python}
+import matplotlib.pyplot as plt
+import random
+import time
+
+# Aktiver interaktiv tilstand
+plt.ion()
+fig, ax = plt.subplots(figsize=(9, 4))
+
+x_data = []
+y_data = []
+
+for i in range(50):
+    x_data.append(i)
+    y_data.append(random.uniform(40, 90))  # Simuleret tankniveau
+
+    ax.cla()                               # Ryd aksen
+    ax.plot(x_data, y_data, color="royalblue", linewidth=2)
+    ax.set_title("Live tankniveau (simuleret)")
+    ax.set_xlabel("Måling nr.")
+    ax.set_ylabel("Tankniveau (%)")
+    ax.set_ylim(0, 100)
+    ax.grid(True)
+
+    plt.pause(0.1)                         # Opdater og vent 0.1 sek.
+
+plt.ioff()
+plt.show()
+\end{minted}
+\end{tcolorbox}
+
+\subsection{Live-plot med PLC-data via snap7}
+
+\begin{tcolorbox}[pythonbox, title={\faPython\quad Kode 5 --- Live-plot fra PLC (snap7 + plt.ion())}]
+\begin{minted}{python}
+import matplotlib.pyplot as plt
+import snap7
+from snap7.util import get_real
+from datetime import datetime
+
+# ====== PLC opsaetning ==========
+PLC_IP      = "192.168.0.1"
+RACK        = 0
+SLOT        = 1
+DB_NUMBER   = 1
+TANK_OFFSET = 0
+TANK_SIZE   = 4
+
+# ====== PLC forbindelse =========
+client = snap7.client.Client()
+client.connect(PLC_IP, RACK, SLOT)
+
+# ====== Live-plot opsaetning ====
+plt.ion()
+fig, ax = plt.subplots(figsize=(10, 5))
+
+timestamps = []
+niveauer   = []
+
+try:
+    while True:
+        # ====== Laes input ===============
+        raw    = client.db_read(DB_NUMBER, TANK_OFFSET, TANK_SIZE)
+
+        # ====== Logik ===================
+        niveau = round(get_real(raw, 0), 2)
+        ts     = datetime.now().strftime("%H:%M:%S")
+        timestamps.append(ts)
+        niveauer.append(niveau)
+
+        # Behold kun de seneste 60 maelinger
+        if len(timestamps) > 60:
+            timestamps.pop(0)
+            niveauer.pop(0)
+
+        # ====== Opdater graf ============
+        ax.cla()
+        ax.plot(timestamps, niveauer, color="royalblue", linewidth=2)
+        ax.axhline(y=80, color="orange", linestyle="--", label="Setpoint")
+        ax.axhline(y=20, color="red",    linestyle=":",  label="Alarm")
+        ax.set_title("Live tankniveau fra PLC")
+        ax.set_xlabel("Tid")
+        ax.set_ylabel("Tankniveau (%)")
+        ax.set_ylim(0, 100)
+        ax.legend()
+        ax.grid(True)
+        plt.xticks(rotation=45)
+        plt.tight_layout()
+
+        plt.pause(1)   # Opdater hvert sekund
+
+except KeyboardInterrupt:
+    print("Stoppet af bruger.")
+
+finally:
+    # ====== Disconnect og destroy ===
+    plt.ioff()
+    plt.show()
+    if client.get_connected():
+        client.disconnect()
+    client.destroy()
+\end{minted}
+\end{tcolorbox}
+
+\begin{tcolorbox}[warnbox, title={\faExclamationTriangle\quad OBS --- Vinduesstyring}]
+På nogle systemer kræver \texttt{plt.ion()} et interaktivt backend som
+\texttt{TkAgg} eller \texttt{Qt5Agg}. Hvis vinduet ikke opdateres, afprøv:
+\begin{minted}[linenos=false]{python}
+import matplotlib
+matplotlib.use("TkAgg")   # foer import af pyplot
+import matplotlib.pyplot as plt
+\end{minted}
+\end{tcolorbox}
+
+% ==============================================================================
+\section{Eksport af grafer}
+% ==============================================================================
+
+Grafer kan gemmes som billedfil med \texttt{plt.savefig()}. Kald det
+\textbf{før} \texttt{plt.show()} --- ellers gemmes en tom figur.
+
+\begin{tcolorbox}[pythonbox, title={\faPython\quad Kode 6 --- Gem graf i PNG og PDF}]
+\begin{minted}{python}
+import matplotlib.pyplot as plt
+import pandas as pd
+from datetime import datetime
+
+df = pd.read_csv("tankniveau_log.csv")
+df["Tidsstempel"] = pd.to_datetime(df["Tidsstempel"])
+
+plt.figure(figsize=(10, 5))
+plt.plot(df["Tidsstempel"], df["Tankniveau"],
+         color="royalblue", linewidth=2)
+plt.title("Tankniveau --- eksporteret graf")
+plt.xlabel("Tidsstempel")
+plt.ylabel("Tankniveau (%)")
+plt.grid(True)
+plt.tight_layout()
+
+# Gem med tidsstempel i filnavnet
+ts       = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+plt.savefig(f"{ts}_tankniveau.png", dpi=300)   # Hoej oplosning
+plt.savefig(f"{ts}_tankniveau.pdf")            # Vektorgrafik
+plt.show()
+\end{minted}
+\end{tcolorbox}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Format} & \textbf{Fordel} & \textbf{Typisk brug} \\
+\midrule
+\texttt{.png} & Simpelt billedformat, bred støtte & Rapporter, slides \\
+\texttt{.pdf} & Vektorgrafik, skalerer uden tab   & Dokumentation, print \\
+\texttt{.svg} & Vektorgrafik til web               & HTML-sider \\
+\texttt{.jpg} & Lille filstørelse                  & Preview, deling \\
+\bottomrule
+\end{tabular}
+\end{center}
+\clearpage
+% ==============================================================================
+\section{Oversigt over pyplot-funktioner}
+% ==============================================================================
+
+\begin{center}
+\begin{tabular}{lp{7cm}}
+\toprule
+\textbf{Funktion} & \textbf{Beskrivelse} \\
+\midrule
+\texttt{plt.ion()} & Aktiver interaktiv (live) tilstand \\
+\texttt{plt.ioff()} & Deaktiver interaktiv tilstand \\
+\texttt{plt.pause(n)} & Opdater graf + vent $n$ sekunder \\
+\texttt{ax.cla()} & Ryd aksens indhold \\
+\texttt{plt.plot(x, y)} & Linjeplot \\
+\texttt{plt.axhline(y=n)} & Vandret linje ved værdi $n$ \\
+\texttt{plt.axvline(x=n)} & Lodret linje ved værdi $n$ \\
+\texttt{plt.annotate(...)} & Tekst og pil ved et datapunkt \\
+\texttt{plt.savefig(f, dpi=300)} & Gem figur som billedfil \\
+\texttt{pd.to\_datetime()} & Konverter streng til datetime \\
+\texttt{.rolling(window=n).mean()} & Glidende gennemsnit \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ==============================================================================
+\section{Øvelser}
+% ==============================================================================
+
+\begin{tcolorbox}[tipbox, title={\faTasks\quad Øvelsesopgaver}]
+\begin{enumerate}[leftmargin=1.5em, itemsep=8pt]
+
+  \item \textbf{Statisk plot fra CSV}\\
+    Indlæs din CSV-logfil fra Dag07 (tankniveau med tidsstempler) og lav et
+    statisk linjeplot med titler, aksetekster og gitter.
+
+  \item \textbf{Glidende gennemsnit}\\
+    Tilføj et glidende gennemsnit (\texttt{window=5}) til plottet fra
+    øvelse 1. Vis bade rå data og glidende gennemsnit i samme graf.
+
+  \item \textbf{Annotation og græenselinjer}\\
+    Marker maksimum-værdien med en pil og tilføj vandrette linjer for
+    setpoint (80\%) og alarm (20\%) til plottet.
+
+  \item \textbf{Live-plot med simulerede data}\\
+    Brug \texttt{plt.ion()} og en for-løkke med \texttt{random.uniform()}
+    til at lave et live-opdaterende plot.
+
+  \item \textbf{Live-plot fra PLC}\\
+    Udvid Kode 5 til også at vise det glidende gennemsnit i live-grafen
+    og gem det endelige plot som PNG nar løkken stopper.
+
+  \item \textbf{Eksport}\\
+    Gem alle dine grafer som både \texttt{.png} (300 dpi) og \texttt{.pdf}
+    med et tidsstempel i filnavnet.
+
+\end{enumerate}
+\end{tcolorbox}
+
+\end{document}
