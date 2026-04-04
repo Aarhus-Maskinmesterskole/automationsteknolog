@@ -11,14 +11,13 @@ Formålet: du skal lære at **sætte coils og registre** i ModRSSIM (server) fra
 3. Indstil:
 
    * **IP:** `127.0.0.1` (eller din lokale LAN-adresse)
-   * **Port:** `502` (brug ikke 502 på Windows)
+   * **Port:** `502` (standard Modbus TCP-port) 
    * **Slave ID:** `1` (typisk standard)
-4. Tryk **Start Server**.
-5. Opret lidt testdata:
+4. Opret lidt testdata:
 
    * **Coils**: adresser `0–7` sat til `0`.
    * **Holding Registers**: adresser `0–3` sat til `0`.
-6. Husk at ModRSSIM viser "menneskeadresser" (00001, 40001).
+5. Husk at ModRSSIM viser "menneskeadresser" (00001, 40001).
    I Node-RED skriver vi dem 0-baseret (altså coil 0 ↔ 00001).
 
 ---
@@ -44,7 +43,7 @@ Formålet: du skal lære at **sætte coils og registre** i ModRSSIM (server) fra
 4. Dobbeltklik på **modbus write**:
 
    * **Server**: `127.0.0.1`
-   * **Port**: `1502`
+   * **Port**: `502`
    * **Slave ID**: `1`
    * **Function**: `Coil (FC5)`
    * **Address**: `0`
@@ -86,7 +85,7 @@ Formålet: du skal lære at **sætte coils og registre** i ModRSSIM (server) fra
    * **Address:** `0`
    * **Quantity:** `1`
 3. Tilføj en **Inject** med payload-type **number**, fx `1234`.
-4. Deploy, klik, og HR[0] i ModRSSIM skal nu vise `1234`.
+4. Deploy, klik, og adresse 40001 i ModRSSIM skal nu vise `1234`.
 
 Vil du skrive flere ad gangen:
 

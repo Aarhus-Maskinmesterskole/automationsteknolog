@@ -6,6 +6,14 @@ Denne mappe indeholder undervisningsmateriale pr. undervisningsdag.
 
 ---
 
+## Aktuel plan
+
+- [MODULPLAN.md](MODULPLAN.md) - aktuel modulplan for faget, organiseret efter website-strukturen
+
+Den dagopdelte struktur nedenfor er fortsat arbejdsmappe for opgaver og øvelser, men den didaktiske progression for faget følger nu modulplanen og websitet.
+
+---
+
 ## 🗂️ Dage (oversigt)
 
 - [Dag01 – Netværk og IP-basic](Dag01%20-%20Netv%C3%A6rk%20og%20IP-basic/README.md)
