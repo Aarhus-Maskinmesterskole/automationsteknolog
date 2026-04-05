@@ -1,0 +1,16 @@
+\babel@toc {danish}{}\relax 
+\contentsline {section}{\numberline {1}Introduktion}{2}{section.1}%
+\contentsline {section}{\numberline {2}Venstre side --- design og specifikation}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Requirements --- kravspecifikation}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}System Design --- systemdesign}{3}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Architecture Design --- arkitekturdesign}{3}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Module Design --- moduldesign}{4}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Coding --- implementering}{4}{subsection.2.5}%
+\contentsline {section}{\numberline {3}Højre side --- test og verifikation}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Unit Testing --- modultest}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Integration Testing --- integrationstest}{5}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}System Testing --- systemtest}{5}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Acceptance Testing --- accepttest}{5}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Koblinger i modellen}{6}{section.4}%
+\contentsline {section}{\numberline {5}Et konkret eksempel}{6}{section.5}%
+\contentsline {section}{\numberline {6}Opsummering}{6}{section.6}%
