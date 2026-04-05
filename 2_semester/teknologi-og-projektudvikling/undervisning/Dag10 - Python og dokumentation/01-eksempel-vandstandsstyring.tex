@@ -778,7 +778,7 @@ finally:
 \section{Testdokumentation}
 % ==============================================================================
 
-\subsection{Factory Acceptance Test (FAT)}
+\subsection{Factory Acceptance Test (FAT)}\label{sec:fat}
 
 FAT udføres på labben, inden systemet evt.\ flyttes til driftsmiljøet.
 Her \textbf{verificeres} kravene ét for ét mod deres acceptkriterier.
@@ -846,7 +846,7 @@ Alle intervaller skal ligge under 1{,}5\,s.
 \end{tabular}
 \end{center}
 
-\subsection{Accepttest (UAT)}
+\subsection{Accepttest (UAT)}\label{sec:accepttest}
 
 \begin{tcolorbox}[defbox, title={\faUserCircle\quad Accepttest --- brugerens perspektiv}]
 Accepttesten \textbf{validerer}, at den færdige løsning fungerer som tiltænkt i
@@ -940,9 +940,9 @@ Architecture Design   & DB-adresser, dataflow              & Tabel i afsnit 3.2 
 Module Design         & State machine, flowchart           & Afsnit 4 \\
 Coding                & Python-script med docstrings       & Afsnit 5 \\
 Unit Test             & \textit{Ikke vist --- test enkelt-funktioner isoleret} & --- \\
-Integration Test      & Factory Acceptance Test: PLC $\leftrightarrow$ Python & Tabel i afsnit~6.1\\
-System Test           & Fuld sekvens: IDLE$\to$FILL$\to$ALARM$\to$RESET & Afsnit 6.1 \\
-Acceptance Test       & UAT: validering af brug og helhed  & Afsnit 6.2 \\
+Integration Test      & Factory Acceptance Test: PLC $\leftrightarrow$ Python & Tabel i afsnit~\ref{sec:fat}\\
+System Test           & Fuld sekvens: IDLE$\to$FILL$\to$ALARM$\to$RESET & Afsnit~\ref{sec:fat} \\
+Acceptance Test       & Validering af brug og helhed & Se accepttestafsnittet \\
 \bottomrule
 \end{tabular}
 \end{center}
