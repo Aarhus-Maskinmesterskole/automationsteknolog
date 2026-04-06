@@ -1,27 +1,27 @@
 # Python-filer til Dag08
 
-Filerne i denne mappe matcher kodeblokkene i `.md`-opgaverne `01` til `09`.
+Denne mappe er reference til læreren eller til eleverne bagefter.
 
-## Modbus-bibliotek
+`.md`-filerne i hovedmappen er selve opgaverne.
 
-Brug MicroPython-biblioteket i mappen `micropython-modbus-develop/umodbus`.
+`.py`-filerne her er løsningsforslag og testfiler.
 
-Kopiér `umodbus` til ESP32 sådan:
+## Indhold
 
-```bash
-mpremote u0 mkdir :lib
-mpremote u0 cp -r micropython-modbus-develop/umodbus :lib/
-```
+* `01` til `09` matcher de enkelte delopgaver
+* `umodbus` er MicroPython-biblioteket der skal kopieres til ESP32
+* `lcd_api.py` og `i2c_lcd.py` bruges til LCD-opgaven
 
-## LCD-opgaven
+## Brug af mappen
 
-Til LCD-opgaven skal du også kopiere disse to filer til ESP32:
+Tanken er:
 
-```bash
-mpremote u0 cp lcd_api.py :lcd_api.py
-mpremote u0 cp i2c_lcd.py :i2c_lcd.py
-```
+* Eleverne læser først opgavebeskrivelsen i `.md`
+* De skriver derefter selv løsningen
+* De bruger kun `python`-mappen som støtte eller facit bagefter
 
 ## Bemærk
 
-Brug `micropython-modbus-develop`, ikke desktop-biblioteket `uModbus` fra PyPI/GitHub til almindelig Python.
+MicroPython-imports som `machine`, `network`, `dht` og `neopixel` kan godt blive markeret som fejl i VS Code på pc'en.
+
+Det er normalt. De moduler findes på ESP32 med MicroPython-firmware.

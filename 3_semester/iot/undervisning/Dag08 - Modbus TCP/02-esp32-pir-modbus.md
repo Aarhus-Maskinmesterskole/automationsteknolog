@@ -1,53 +1,34 @@
 # Opgave 2: ESP32 + PIR som Modbus TCP server
 
-Mål: læs bevægelse i Node-RED.
+## Mål
 
-## Adresser
+Læs en PIR-sensor på ESP32 og gør sensorens status tilgængelig via Modbus TCP.
 
-* Holding register `0` = `0` eller `1`
+## Hardware
 
-## main.py
+* ESP32
+* PIR sensor
+* GPIO `14`
 
-```python
-from machine import Pin
-import network
-import time
-from umodbus.tcp import ModbusTCP
+## Du skal
 
-SSID = "DIT_WIFI_NAVN"
-PASS = "DIT_WIFI_PASSWORD"
+1. Forbinde ESP32 til WiFi.
+2. Oprette en Modbus TCP server på port `502`.
+3. Oprette et holding register på adresse `0`.
+4. Skrive sensorens aktuelle værdi til registeret.
 
-wlan = network.WLAN(network.STA_IF)
-wlan.active(True)
-if not wlan.isconnected():
-    wlan.connect(SSID, PASS)
-    while not wlan.isconnected():
-        time.sleep_ms(200)
+## Modbus-adresse
 
-ip = wlan.ifconfig()[0]
-print("IP:", ip)
-
-pir = Pin(14, Pin.IN)
-
-mb = ModbusTCP()
-mb.bind(local_ip=ip, local_port=502)
-mb.setup_registers({
-    "HREGS": {
-        "PIR": {"register": 0, "len": 1, "val": 0},
-    }
-})
-
-while True:
-    mb.set_hreg(0, pir.value())
-    mb.process()
-    time.sleep_ms(50)
-```
+* Holding register `0` = PIR status
 
 ## Test i Node-RED
 
-* `modbus read`
+* Brug `modbus read`
 * Function = `Read Holding Registers (FC3)`
 * Address = `0`
 * Quantity = `1`
 
-`0` betyder ingen bevægelse. `1` betyder bevægelse.
+## Godkendt når
+
+* Du kan læse `0` når der ikke er bevægelse
+* Du kan læse `1` når der er bevægelse
